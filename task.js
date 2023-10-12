@@ -91,11 +91,11 @@ function get_bonus_prediction_points(prediction, bonus) {
 }
 
 window.onload = function() {
-    if ((!PROLIFIC_PID || PROLIFIC_PID.length === 0 )) {
-        window.alert("ERROR: Prolific ID missing from URL. Please verify the URL on Prolific’s website.");
-        return;
-    }
-    add_results("PROLIFIC_PID", 0, PROLIFIC_PID, 0);
+    // if ((!PROLIFIC_PID || PROLIFIC_PID.length === 0 )) {
+    //     window.alert("ERROR: Prolific ID missing from URL. Please verify the URL on Prolific’s website.");
+    //     return;
+    // }
+    // add_results("PROLIFIC_PID", 0, PROLIFIC_PID, 0);
     substitute_constants();
     preload_images(
         "img/astronaut.png",
