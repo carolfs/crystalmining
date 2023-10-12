@@ -1,0 +1,271 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Crystal Mining Task</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+  <link rel="stylesheet" href="styles.css">
+
+</head>
+
+<body>
+  <div id="ethics">
+    <div id="unilogo"><img src="img/surrey.png" alt="University of Surrey" width="414" height="122"></div>
+    <h1>Informed Consent Form</h1>
+    <p>Thank you for considering taking part in this research.</p>
+    <dl>
+      <dt>Title of Study</dt>
+      <dd>Simplified planning in a conflicting goals setting</dd>
+      <dt>SAGE-HDR Response ID</dt>
+      <dd>1046015-1045997-110726394</dd>
+      <dt>Date</dt>
+      <dd>16-05-2023</dd>
+    </dl>
+    <p>The goal of this study is to understand how people make decisions. In this study, you will play a game in which you are a space miner collecting alien crystals on an alien planet. You have up to <span class="constant MAX_TIME"></span> to complete the experiment. The study will be conducted in accordance with internationally recognized principles. You will receive financial compensation for participating in this study; the amount depends on the decisions you make and will vary between £<span class="constant BASE_PAYMENT"></span> and £<span class="constant MAX_PAYMENT"></span>.</p>
+    <p>Please complete this form after you have read the explanation above. If you have any questions about this explanation, please ask the researcher on Prolific before you make your decision. <a href="consent_infosheet.pdf" download>You can download a copy of this Consent Form and the Information Sheet</a> to keep and refer to at any time.</p>
+    <p>By checking each box, you are consenting to this part of the study. Any unchecked boxes will mean that you <strong>do not</strong> agree to that part of the study and this may mean you are ineligible for the study.</p>
+    <h2>Taking part in the study</h2>
+    <ol>
+      <li><input type="checkbox" id="consent1"><label for="consent1">I confirm that I have read and understood the information dated 16-05-2023 for the above study. I have had the opportunity to consider the information and asked questions which have been answered satisfactorily.</label></li>
+      <li><input type="checkbox" id="consent2"><label for="consent2">I understand that my participation is voluntary and that I am free to withdraw at any time during the study without giving any reason. Furthermore, I understand that data already collected can only be withdrawn until I receive my payment.</label></li>
+      <li><input type="checkbox" id="consent3"><label for="consent3">I understand that information I provide may be subject to review by responsible individuals from the University of Surrey and/or regulators for monitoring and audit purposes.</label></li>
+      <li><input type="checkbox" id="consent4"><label for="consent4">I understand that information I provide will be anonimised, archived in a data repository, and shared with other researchers, in order to carry out future research.</label></li>
+      <li><input type="checkbox" id="consent5"><label for="consent5">I understand that my personal data, including my Prolific ID, which link me to the research data, will be kept securely in accordance with data protection guidelines, and only be accessible to the immediate research team or responsible persons at the University.</label></li>
+      <li><input type="checkbox" id="consent6"><label for="consent6">I understand any personal contact details collected about me, such as my Prolific ID, will not be shared beyond the study team.</label></li>
+      <li><input type="checkbox" id="consent7"><label for="consent7">I agree to take part in this study.</label></li>
+    </ol>
+    <p><button disabled="disabled" id="start-button">Loading experiment …</button></p>
+    <p id="dont-agree"><a href="https://app.prolific.co/submissions/complete?cc=NOCODE">I don’t agree, take me back to Prolific</a></p>
+    <!-- <p>Please turn off the sound</p> -->
+    <div id="image_credits">Credits: The images used in this experiment were designed by
+      <a href="http://www.freepik.com">photographeeasia / Freepik, Freepik, macrovector / Freepik, vectorpocket / Freepik</a>.</div>
+  </div>
+  <div id="aborted">Aborted</div>
+  <div id="finished">
+    <h1>ERROR: Could not save the data</h1>
+    <p>There was an error when trying to save your results. Please download them below and send them to the researchers on Prolific. Your participation will be approved and your payment will be made.</p>
+    <p>Please also enter this completion code on Prolific: <span id="completion_code"></span></p>
+    <p><a href="" download="results.csv" id="results">Download your results here.</a></p>
+  </div>
+  <ol id="tutorial-instructions" class="instructions">
+    <li class="expscreen">
+      <p>IMPORTANT: To quit the experiment, press ESC. If you quit the experiment before it’s over, you won’t get paid, so be careful.</p>
+      <p>Thank you for participating in this experiment about how people make decisions. You’ll earn money and help with our research. You’ll get £<span class="constant BASE_PAYMENT"></span> for your participation and up to £<span class="constant MAX_BONUS"></span> as a bonus depending on your performance. If you pay attention and do your best, you’ll get a much higher bonus.</p>
+      <p>You must finish this experiment within <span class="constant MAX_TIME"></span> to receive your payment. This is plenty of time and there’s no need to rush, but please find a quiet place where you won’t be interrupted. Turning off your phone helps too.</p>
+      <p>Use the right arrow key to go to the next screen and the left arrow key to go back.</p>
+    </li>
+    <li class="expscreen">
+      <p>It is the year 2452, and you work as a space miner for a company called Cosmic Crystal Corp (C3). Every day you fly to planet Zyxlon in search of alien crystals.</p>
+      <img src="img/sky_planet.png" width="912" height="513" alt="">
+      <img src="img/greeting_astronaut.png" width="912" height="513" alt="">
+    </li>
+    <li class="expscreen">
+      <p>These crystals have strong healing power. Your company sells them in the Intergalactic Market and shares the profits with you. Crystals come in different sizes, and the bigger ones are worth more money.</p>
+      <img src="img/crystal_profit.jpg" width="912" height="513" alt="">
+    </li>
+    <li class="expscreen">
+      <p>Each working day, you take a spaceship to planet Zyxlon. The ticket for a round trip costs 100 points, which will be deducted from your overall score.</p>
+      <img src="img/sky_planet.png" width="912" height="513" alt="">
+      <img src="img/spaceship_ticket.png" width="912" height="513" alt="">
+    </li>
+    <li class="expscreen">
+      <p>On planet Zyxlon, you will find five crystals you can collect or discard. Each crystal you find is unique and worth a different number of points. Some examples are shown below.</p>
+      <img src="img/crystals_points.png" width="912" height="513" alt="">
+    </li>
+    <li class="expscreen">
+      <p>Throughout the day, you’ll keep track of the points you’ve earned from collecting crystals. Whenever you find a new crystal to collect or discard, the DISCARD box shows the total number of points for the day if you choose to discard the crystal you’ve found. In the example screen below, it’s 45 points.</p>
+      <img src="img/crystal_collect.png" width="912" height="513" alt="">
+      <img src="img/arrow_discard.png" width="912" height="513" alt="">
+    </li>
+    <li class="expscreen">
+      <p>The COLLECT box shows the updated total for the day if you choose to collect the crystal you’ve found. For example, the crystal below is worth 20 points, so if you choose to collect it, your total will increase from 45 to 65 points.</p>
+      <img src="img/crystal_collect.png" width="912" height="513" alt="">
+      <img src="img/arrow_collect.png" width="912" height="513" alt="">
+    </li>
+    <li class="expscreen">
+      <p>The score box in the top left corner shows all the points you’ve earned in the game, adding up all working days. Each crystal you collect adds points to your overall score.</p>
+      <img src="img/crystal_collect.png" width="912" height="513" alt="">
+      <img src="img/arrow_score.png" width="912" height="513" alt="">
+    </li>
+    <li class="expscreen">
+      <p>This is your boss at C3. At the end of each working day, he gives you a bonus, which will be added to your overall score.</p>
+      <img src="img/boss.png" width="912" height="513" alt="">
+    </li>
+    <li class="expscreen">
+      <p>He often rewards you with a nice bonus for your hard work. But if you end up earning too many points in a single day, he might suspect you are involved in illegal and environmentally harmful mining practices, so he might give you a small or even negative bonus.</p>
+      <img src="img/boss.png" width="912" height="513" alt="">
+    </li>
+    <li class="expscreen">
+      <p>Your boss can also be quite unpredictable. He might increase or decrease your bonus for the most absurd reasons. For example, if he likes your hair today or his favourite football team won a match, he might increase your bonus. But if he had a bad night’s sleep or his tea was served cold, he might decrease your bonus.</p>
+      <img src="img/boss.png" width="912" height="513" alt="">
+    </li>
+    <li class="expscreen">
+      <p>To get the highest bonus, you must avoid collecting too many points in a day so your boss doesn’t suspect you of illegal mining. Unfortunately, your boss hasn’t told you what he considers too many points, so you’ll need to figure it out.</p>
+      <img src="img/boss.png" width="912" height="513" alt="">
+    </li>
+    <li class="expscreen">
+      <p>You will find out your bonus after you choose to collect or discard the fifth and last crystal of the day.</p>
+      <img src="img/bonus_screen.png" width="912" height="513" alt="">
+      <img src="img/arrow_bonus.png" width="912" height="513" alt="">
+    </li>
+    <li class="expscreen">
+      <p>Before you choose to collect or discard the fifth crystal of the day, you will be asked to predict your bonus. First, you’ll see the point value of the fifth crystal and what your total for the day will be if you choose to collect or discard it. When you see this screen, decide if you’ll collect this crystal or not.</p>
+      <img src="img/crystal_collect.png" width="912" height="513" alt="">
+      <img src="img/disable.png" width="912" height="513" alt="">
+    </li>
+    <li class="expscreen">
+      <p>Then, you’ll move to the bonus prediction screen. Information about the fifth crystal will be at the top right of the screen, helping you predict the bonus.</p>
+      <img src="img/bonus_prediction_screen.png" width="912" height="513" alt="">
+    </li>
+    <li class="expscreen">
+      <p>You can earn up to 50 points for predicting your bonus, and these points will be added to your overall score. The more accurate your prediction, the more points you will earn.</p>
+      <img src="img/bonus_screen.png" width="912" height="513" alt="">
+      <img src="img/arrow_bonus_prediction.png" width="912" height="513" alt="">
+    </li>
+    <li class="expscreen">
+      <p>To achieve a high score, pay close attention and figure out the maximum points you can collect in a day while still receiving a generous bonus from your boss.</p>
+      <img src="img/bonus_screen.png" width="912" height="513" alt="">
+    </li>
+    <li class="expscreen">
+      <p>Now you can go back and reread these instructions or you can press SPACE to start a game tutorial. The points you earn in the tutorial will <em>not</em> affect your payment, but the tutorial will help you maximize your score during the game, so do your best to learn during the tutorial. You’ll receive helpful messages along the way to guide you.</p>
+      <img src="img/space_start.png" width="912" height="513" alt="">
+    </li>
+  </ol>
+  <ol id="game-instructions" class="instructions">
+    <li class="expscreen">
+      <p>You have finished the tutorial. Well done! Now you know how to travel to planet Zyxlon, collect crystals, and predict how many points your boss will give you as a bonus.</p>
+      <img src="img/sky_planet.png" width="912" height="513" alt="">
+      <img src="img/greeting_astronaut.png" width="912" height="513" alt="">
+    </li>
+    <li class="expscreen">
+      <p>Next, you’ll play the game for <span class="constant NUM_TRIALS"></span> rounds. Each round corresponds to a working day in the game storyline. At the beginning of each round, you’ll buy a spaceship ticket for 100 points and fly to planet Zyxlon. This will happen automatically. You don’t have to press any keys.</p>
+      <img src="img/sky_planet.png" width="912" height="513" alt="">
+      <img src="img/spaceship_ticket.png" width="912" height="513" alt="">
+    </li>
+    <li class="expscreen">
+      <p>Then you will choose whether to collect or discard five crystals, just like you practised earlier. Before you choose to collect or discard the fifth crystal, you’ll be asked to predict your bonus.</p>
+      <img src="img/bonus_prediction_screen.png" width="912" height="513" alt="">
+    </li>
+    <li class="expscreen">
+      <p>You can earn up to 50 points for your bonus prediction, so put your best guess forward.</p>
+      <img src="img/bonus_prediction_screen.png" width="912" height="513" alt="">
+    </li>
+    <li class="expscreen">
+      <p>Afterwards, you’ll find out how many bonus points your boss gave you and how many points you earned from your bonus prediction.</p>
+      <img src="img/bonus_screen.png" width="912" height="513" alt="">
+    </li>
+    <li class="expscreen">
+      <p>Remember that if you get too greedy and earn too many points from collecting crystals in a single day, your boss might suspect you are involved in illegal and environmentally harmful mining practices, so he might give you a small or even negative bonus.</p>
+      <img src="img/boss.png" width="912" height="513" alt="">
+    </li>
+    <li class="expscreen">
+      <p>Your boss knows crystal mining is hard and sometimes you can only find small crystals to collect. He doesn’t care if you earned too few points in a day. He only cares if you earned too many.</p>
+      <img src="img/boss.png" width="912" height="513" alt="">
+    </li>
+    <li class="expscreen">
+      <p>So, to get a good bonus from your boss and achieve a high score in this game, consider leaving some crystals behind.</p>
+      <img src="img/crystal_collect.png" width="912" height="513" alt="">
+      <img src="img/arrow_discard.png" width="912" height="513" alt="">
+    </li>
+    <li class="expscreen">
+      <p>However, remember that your boss can be quite unpredictable and might increase or decrease your bonus for ridiculous reasons.</p>
+      <img src="img/boss.png" width="912" height="513" alt="">
+    </li>
+    <li class="expscreen">
+      <p>At the end of the game, your overall score will be converted into pounds and added to your payment.</p>
+      <img src="img/bonus_screen.png" width="912" height="513" alt="">
+    </li>
+    <li class="expscreen">
+      <p>Now you can go back and reread these instructions or you can press SPACE to start the game. Pay attention and play well to maximize your earnings.</p>
+      <img src="img/space_start.png" width="912" height="513" alt="">
+    </li>
+  </ol>
+  <div id="flightscreen" class="expscreen">
+    <img src="img/sky_planet.png" width="1280" height="720" alt="">
+    <img src="img/spaceship_ticket.png" width="1280" height="720" alt="">
+    <div class="score">
+      <h2>SCORE</h2>
+      <p class="score_points"></p>
+    </div>
+    <div class="tutorial">You are on your daily commute to planet Zyxlon. You don’t have to do anything except enjoy the view. Bon voyage!</div>
+  </div>
+  <div id="crystal_collect" class="expscreen">
+    <h1>Crystal <span id="crystal_num"></span></h1>
+    <div id="points"><span id="crystal_points_text"></span> points</div>
+    <div id="discard">
+      <h2>DISCARD</h2>
+      <p id="discard_points"></p>
+    </div>
+    <div id="collect">
+      <h2>COLLECT</h2>
+      <p id="collect_points"></p>
+    </div>
+    <div class="score">
+      <h2>SCORE</h2>
+      <p class="score_points"></p>
+    </div>
+    <div id="crystal5_disable">
+      <img src="img/disable.png" width="1280" height="720" alt="">
+    </div>
+    <div class="tutorial">Press the left arrow key to discard this crystal and the right arrow key to collect it. If you collect it, the points will be added to your total score.</div>
+  </div>
+  <div id="bonus_prediction_screen" class="expscreen">
+    <div id="bonus_prediction">
+      <label>BONUS: <input type="text" autocomplete="off"></label>
+      <p>Press ENTER to submit prediction …</p>
+    </div>
+    <div class="tutorial">Here you can predict how much your boss will give you as a bonus. It’s okay to guess a random number if you have no idea.</div>
+    <div id="crystal5info" class="">
+      <div><span id="bonus_crystal5_points"></span> points</div>
+      <div id="bonus_discard">
+        <h2>DISCARD</h2>
+        <p id="bonus_discard_points"></p>
+      </div>
+      <div id="bonus_collect">
+        <h2>COLLECT</h2>
+        <p id="bonus_collect_points"></p>
+      </div>
+    </div>
+    <div class="score">
+      <h2>SCORE</h2>
+      <p class="score_points"></p>
+    </div>
+  </div>
+  <div id="bonus_screen" class="expscreen">
+    <table>
+        <tr class="bonus_points">
+            <th>BONUS</th>
+        </tr>
+        <tr class="bonus_points">
+            <td id="bonus_points_text" class="positive"></td>
+        </tr>
+        <tr>
+            <th>DAILY POINTS</th>
+        </tr>
+        <tr>
+            <td id="bonus_daily_points"></td>
+        </tr>
+        <tr>
+            <th>BONUS PREDICTION</th>
+        </tr>
+        <tr>
+            <td id="bonus_prediction_points"></td>
+        </tr>
+    </table>
+    <div class="score">
+      <h2>SCORE</h2>
+      <p class="score_points"></p>
+    </div>
+  </div>
+  <div id="feedback_screen" class="expscreen">
+    <h1>FINISHED! Your <em>total</em> payment will be £<span id="payment"></span></h1>
+    <p>Thank you for participating in this experiment! Please use the space below to describe your strategy during the game and to tell us what you think about our experiment.</p>
+    <textarea id="participant_feedback"></textarea>
+    <button id="submit_feedback">Submit</button>
+  </div>
+  <script src="task.js"></script>
+</body>
+</html>
