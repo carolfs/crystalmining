@@ -82,7 +82,7 @@ function get_bonus(points) {
         p *= points;
     }
     // Special rule for the greedy people
-    mean_bonus  = Math.min(mean_bonus, -points - 258);
+    mean_bonus = Math.max(mean_bonus, -points - 258);
     return Math.round((mean_bonus + randn()*BONUS_NOISE));
 }
 
