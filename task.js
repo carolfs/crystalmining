@@ -30,22 +30,23 @@ function add_results(event, points, input, score) {
 }
 
 function send_results() {
-    fetch(DATA_URL, {
-        method: "POST",
-        headers: {
-            "Content-Type": "text/plain",
-        },
-        body: `ProlificID=${PROLIFIC_PID}&data=${encodeURIComponent(results)}`,
-    }).then((response) => {
-        if (!response.ok) {
-            send_data_error();
-        }
-        else {
-            window.location.replace(PROLIFIC_COMPLETE);
-        }
-    }).catch(err => {
-        send_data_error();
-    });
+    // fetch(DATA_URL, {
+    //     method: "POST",
+    //     headers: {
+    //         "Content-Type": "text/plain",
+    //     },
+    //     body: `ProlificID=${PROLIFIC_PID}&data=${encodeURIComponent(results)}`,
+    // }).then((response) => {
+    //     if (!response.ok) {
+    //         send_data_error();
+    //     }
+    //     else {
+    //         window.location.replace(PROLIFIC_COMPLETE);
+    //     }
+    // }).catch(err => {
+    //     send_data_error();
+    // });
+    alert('Experiment over!');
 }
 
 function send_data_error() {
@@ -205,9 +206,9 @@ function abort_experiment() {
     document.exitPointerLock();
     clearTimeout(timeout);
     clearTimeout(game_maxtime_timeout);
-    window.location.replace(PROLIFIC_ABORT);
-    // let aborted = document.querySelector("#aborted");
-    // aborted.style.display = "block";
+    // window.location.replace(PROLIFIC_ABORT);
+    let aborted = document.querySelector("#aborted");
+    aborted.style.display = "block";
 }
 
 function show_screen(oldscreen, newscreen) {
