@@ -134,18 +134,18 @@ window.onload = function() {
     start_button.innerHTML = "I AGREE, START THE EXPERIMENT";
     start_button.removeAttribute("disabled");
     start_button.onclick = function() {
-        // Check if all checkboxes are checked
-        let checked = true;
-        for (let checkbox of document.querySelectorAll("input[type=checkbox]")) {
-            if (!checkbox.checked) {
-                checked = false;
-                break;
-            }
-        }
-        if (!checked) {
-            window.alert("Please check each box if you wish to take part in this study.");
-            return;
-        }
+        // // Check if all checkboxes are checked
+        // let checked = true;
+        // for (let checkbox of document.querySelectorAll("input[type=checkbox]")) {
+        //     if (!checkbox.checked) {
+        //         checked = false;
+        //         break;
+        //     }
+        // }
+        // if (!checked) {
+        //     window.alert("Please check each box if you wish to take part in this study.");
+        //     return;
+        // }
         document.documentElement.requestFullscreen();
     }
     document.onfullscreenchange = start_experiment;
