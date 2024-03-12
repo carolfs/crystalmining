@@ -8,7 +8,7 @@ const CRYSTAL_CAT = [10,  25, 40, 55, 70];
 const TUTORIAL_TRIALS = 5;
 const FLIGHT_COST = 100;
 const BONUS_NOISE = 20.; // Maybe increase this to 30
-const NUM_TRIALS = 2;//50; TODO: increase to 50
+const NUM_TRIALS = 50; // TODO: increase to 50
 const POINT_VALUE = 0.001674361;
 const URLPARAMS = new URLSearchParams(window.location.search);
 
@@ -23,12 +23,7 @@ function add_results(event, points, input, score) {
 
 function send_results() {
     document.getElementById("finished").style.display = "block";
-    var link = document.createElement("a");
-    link.download = "results.csv";
-    link.href = 'data:text/plain;charset=utf-8,'.concat(
-        encodeURIComponent(results)
-    );
-    link.click();
+    document.getElementById("results").value = results;
 }
 
 // Preload images
@@ -123,13 +118,13 @@ function start_experiment() {
     document.body.requestPointerLock();
     document.querySelector("#ethics").remove();
     document.body.className = "running";
-    // run_instructions(
-    //     null,
-    //     document.querySelector("#tutorial-instructions"),
-    //     function(last_page) {
-    //         run_tutorial(last_page);
-    //     });
-    run_trials(null, false, show_feedback);
+    run_instructions(
+        null,
+        document.querySelector("#tutorial-instructions"),
+        function(last_page) {
+            run_tutorial(last_page);
+        });
+    // run_trials(null, false, show_feedback);
     // show_feedback(100);
     game_maxtime_timeout = setTimeout(game_maxtime_exceeded, MAX_MINUTES*60*1000);
 }

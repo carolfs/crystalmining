@@ -326,7 +326,7 @@ textarea {
     font-size: 30px
 }
 
-#ethics {
+#ethics, #finished {
     max-width: 60em;
     margin: 2em auto;
     font-size: 16px
@@ -383,4 +383,8 @@ dd {
     display: inline-block;
     width: 2em;
     text-align: right;
+}
+
+summary {
+    display: list-item;
 }
