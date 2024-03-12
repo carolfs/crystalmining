@@ -8,20 +8,12 @@ const CRYSTAL_CAT = [10,  25, 40, 55, 70];
 const TUTORIAL_TRIALS = 5;
 const FLIGHT_COST = 100;
 const BONUS_NOISE = 20.; // Maybe increase this to 30
-const NUM_TRIALS = 50;
+const NUM_TRIALS = 2;//50; TODO: increase to 50
 const POINT_VALUE = 0.001674361;
 const URLPARAMS = new URLSearchParams(window.location.search);
-const PROLIFIC_PID = URLPARAMS.get("PROLIFIC_PID");
-const COMPLETION_CODE = "C1CP8FM7";
-const PROLIFIC_COMPLETE = `https://app.prolific.co/submissions/complete?cc=${COMPLETION_CODE}`;
-const PROLIFIC_ABORT = "https://app.prolific.co/submissions/complete?cc=NOCODE";
-const DATA_URL = "/savedata";
 
 var start_time = null;
 
-// var results = 'data:text/plain;charset=utf-8,'.concat(
-//     encodeURIComponent(`time,event,points,input,score\n`)
-// );
 var results = "time,event,points,input,score\n";
 
 function add_results(event, points, input, score) {
@@ -30,28 +22,13 @@ function add_results(event, points, input, score) {
 }
 
 function send_results() {
-    // fetch(DATA_URL, {
-    //     method: "POST",
-    //     headers: {
-    //         "Content-Type": "text/plain",
-    //     },
-    //     body: `ProlificID=${PROLIFIC_PID}&data=${encodeURIComponent(results)}`,
-    // }).then((response) => {
-    //     if (!response.ok) {
-    //         send_data_error();
-    //     }
-    //     else {
-    //         window.location.replace(PROLIFIC_COMPLETE);
-    //     }
-    // }).catch(err => {
-    //     send_data_error();
-    // });
-    alert('Experiment over!');
-}
-
-function send_data_error() {
-    document.getElementById("completion_code").innerHTML = COMPLETION_CODE;
     document.getElementById("finished").style.display = "block";
+    var link = document.createElement("a");
+    link.download = "results.csv";
+    link.href = 'data:text/plain;charset=utf-8,'.concat(
+        encodeURIComponent(results)
+    );
+    link.click();
 }
 
 // Preload images
@@ -92,11 +69,6 @@ function get_bonus_prediction_points(prediction, bonus) {
 }
 
 window.onload = function() {
-    // if ((!PROLIFIC_PID || PROLIFIC_PID.length === 0 )) {
-    //     window.alert("ERROR: Prolific ID missing from URL. Please verify the URL on Prolific’s website.");
-    //     return;
-    // }
-    // add_results("PROLIFIC_PID", 0, PROLIFIC_PID, 0);
     substitute_constants();
     preload_images(
         "img/astronaut.png",
@@ -132,21 +104,9 @@ window.onload = function() {
         "img/spaceship_ticket.png",
     );
     let start_button = document.querySelector("#start-button");
-    start_button.innerHTML = "I AGREE, START THE EXPERIMENT";
+    start_button.innerHTML = "START";
     start_button.removeAttribute("disabled");
     start_button.onclick = function() {
-        // // Check if all checkboxes are checked
-        // let checked = true;
-        // for (let checkbox of document.querySelectorAll("input[type=checkbox]")) {
-        //     if (!checkbox.checked) {
-        //         checked = false;
-        //         break;
-        //     }
-        // }
-        // if (!checked) {
-        //     window.alert("Please check each box if you wish to take part in this study.");
-        //     return;
-        // }
         document.documentElement.requestFullscreen();
     }
     document.onfullscreenchange = start_experiment;
@@ -163,13 +123,13 @@ function start_experiment() {
     document.body.requestPointerLock();
     document.querySelector("#ethics").remove();
     document.body.className = "running";
-    run_instructions(
-        null,
-        document.querySelector("#tutorial-instructions"),
-        function(last_page) {
-            run_tutorial(last_page);
-        });
-    // run_trials(null, false, show_feedback);
+    // run_instructions(
+    //     null,
+    //     document.querySelector("#tutorial-instructions"),
+    //     function(last_page) {
+    //         run_tutorial(last_page);
+    //     });
+    run_trials(null, false, show_feedback);
     // show_feedback(100);
     game_maxtime_timeout = setTimeout(game_maxtime_exceeded, MAX_MINUTES*60*1000);
 }
@@ -206,7 +166,6 @@ function abort_experiment() {
     document.exitPointerLock();
     clearTimeout(timeout);
     clearTimeout(game_maxtime_timeout);
-    // window.location.replace(PROLIFIC_ABORT);
     let aborted = document.querySelector("#aborted");
     aborted.style.display = "block";
 }
@@ -276,6 +235,7 @@ const collect_points = document.querySelector("#collect_points");
 const score_points = document.querySelectorAll(".score_points");
 const crystal5_disable = document.querySelector("#crystal5_disable");
 const bonus_prediction_screen = document.querySelector("#bonus_prediction_screen");
+const current_bonus_prediction = document.querySelector("#current_bonus_prediction");
 const bonus_crystal5_points = document.querySelector("#bonus_crystal5_points");
 const bonus_discard_points = document.querySelector("#bonus_discard_points");
 const bonus_collect_points = document.querySelector("#bonus_collect_points");
@@ -311,9 +271,6 @@ function finish_experiment() {
     document.onkeydown = null;
     document.querySelector("#feedback_screen").style.display = "none";
     document.body.className = "finished";
-    document.querySelector("#results").href = 'data:text/plain;charset=utf-8,'.concat(
-        encodeURIComponent(results)
-    );
     send_results();
 }
 
@@ -430,23 +387,21 @@ function run_trials(oldscreen, tutorial, endfunction) {
         bonus_crystal5_points.innerHTML = crystal_val.toString();
         bonus_discard_points.innerHTML = dailyscore.toString();
         bonus_collect_points.innerHTML = (dailyscore + crystal_val).toString();
-        bonus_input.value = "";
+        bonus_input.value = Math.trunc(Math.random() * 200 - 100);
+        current_bonus_prediction.innerHTML = `${bonus_input.value}`;
         show_screen(crystalscreen, bonus_prediction_screen);
         bonus_input.focus();
         document.onkeydown = function(event) {
-            if (event.key == 'Enter') {
+            if (event.key == 'ArrowLeft' || event.key == 'ArrowRight') {
+                current_bonus_prediction.innerHTML = `${bonus_input.value}`;
+            }
+            else if (event.key == ' ') {
                 bonus_prediction = Number(bonus_input.value);
-                if (isNaN(bonus_prediction)) {
-                    bonus_input.value = "";
-                    bonus_input.focus();
-                }
-                else {
-                    bonus_predicted = true;
-                    crystal5info.classList.remove(`crystal${crystal_cat}`);
-                    add_results("bonus_prediction", 0, bonus_prediction, score);
-                    show_screen(bonus_prediction_screen, crystalscreen);
-                    run_crystals();
-                }
+                bonus_predicted = true;
+                crystal5info.classList.remove(`crystal${crystal_cat}`);
+                add_results("bonus_prediction", 0, bonus_prediction, score);
+                show_screen(bonus_prediction_screen, crystalscreen);
+                run_crystals();
             }
         }
     }

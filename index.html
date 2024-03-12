@@ -13,21 +13,15 @@
 
 <body>
   <div id="ethics">
-    <div id="unilogo"><img src="img/surrey.png" alt="University of Surrey" width="414" height="122"></div>
-    <h1>Crystal Mining Task</h1>
-    <p>Thank you for considering taking part in this research.</p>
-    <p>The goal of this study is to understand how people make decisions. In this study, you will play a game in which you are a space miner collecting alien crystals on an alien planet. You have up to <span class="constant MAX_TIME"></span> to complete the experiment. The study will be conducted in accordance with internationally recognized principles. You will receive financial compensation for participating in this study; the amount depends on the decisions you make and will vary between £<span class="constant BASE_PAYMENT"></span> and £<span class="constant MAX_PAYMENT"></span>.</p>
     <p><button disabled="disabled" id="start-button">Loading experiment …</button></p>
-    <!-- <p>Please turn off the sound</p> -->
     <div id="image_credits">Credits: The images used in this experiment were designed by
       <a href="http://www.freepik.com">photographeeasia / Freepik, Freepik, macrovector / Freepik, vectorpocket / Freepik</a>.</div>
   </div>
   <div id="aborted">Aborted</div>
   <div id="finished">
-    <h1>ERROR: Could not save the data</h1>
-    <p>There was an error when trying to save your results. Please download them below and send them to the researchers on Prolific. Your participation will be approved and your payment will be made.</p>
-    <p>Please also enter this completion code on Prolific: <span id="completion_code"></span></p>
-    <p><a href="" download="results.csv" id="results">Download your results here.</a></p>
+    <h1>FINISHED</h1>
+    <p>Please tell the researcher that you have finished the experiment.</p>
+    <p><a href="" download="results.csv" id="results">Download the results here.</a></p>
   </div>
   <ol id="tutorial-instructions" class="instructions">
     <li class="expscreen">
@@ -193,10 +187,10 @@
   </div>
   <div id="bonus_prediction_screen" class="expscreen">
     <div id="bonus_prediction">
-      <label>BONUS: <input type="text" autocomplete="off"></label>
-      <p>Press ENTER to submit prediction …</p>
+      <label>BONUS: <span id="current_bonus_prediction"></span><input type="range" min="-100" max="100" value="0"></label>
+      <p>Press SPACE to submit prediction …</p>
     </div>
-    <div class="tutorial">Here you can predict how much your boss will give you as a bonus. It’s okay to guess a random number if you have no idea.</div>
+    <div class="tutorial">Here you can predict how much your boss will give you as a bonus by pressing the left and right arrow keys. It’s okay to guess a random number if you have no idea.</div>
     <div id="crystal5info" class="">
       <div><span id="bonus_crystal5_points"></span> points</div>
       <div id="bonus_discard">
@@ -240,7 +234,7 @@
     </div>
   </div>
   <div id="feedback_screen" class="expscreen">
-    <h1>FINISHED! Your <em>total</em> payment will be £<span id="payment"></span></h1>
+    <h1>FINISHED! Your payment will be £<span id="payment"></span></h1>
     <p>Thank you for participating in this experiment! Please use the space below to describe your strategy during the game and to tell us what you think about our experiment.</p>
     <textarea id="participant_feedback"></textarea>
     <button id="submit_feedback">Submit</button>
