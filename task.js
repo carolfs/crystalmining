@@ -7,8 +7,8 @@ const MAX_TIME = `${MAX_MINUTES} minutes`;
 const CRYSTAL_CAT = [10,  25, 40, 55, 70];
 const TUTORIAL_TRIALS = 5;
 const FLIGHT_COST = 100;
-const BONUS_NOISE = 20.; // Maybe increase this to 30
-const NUM_TRIALS = 50; // TODO: increase to 50
+const BONUS_NOISE = 30.;
+const NUM_TRIALS = 50;
 const POINT_VALUE = 0.001674361;
 const URLPARAMS = new URLSearchParams(window.location.search);
 
@@ -126,7 +126,7 @@ function start_experiment() {
         });
     // run_trials(null, false, show_feedback);
     // show_feedback(100);
-    game_maxtime_timeout = setTimeout(game_maxtime_exceeded, MAX_MINUTES*60*1000);
+    // game_maxtime_timeout = setTimeout(game_maxtime_exceeded, MAX_MINUTES*60*1000);
 }
 
 function substitute_constants() {
