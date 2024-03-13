@@ -8,7 +8,7 @@ const CRYSTAL_CAT = [10,  25, 40, 55, 70];
 const TUTORIAL_TRIALS = 5;
 const FLIGHT_COST = 100;
 const BONUS_NOISE = 30.;
-const NUM_TRIALS = 50;
+const NUM_TRIALS = 1; // TODO: change this to 50
 const POINT_VALUE = 0.001674361;
 const URLPARAMS = new URLSearchParams(window.location.search);
 
@@ -66,37 +66,37 @@ function get_bonus_prediction_points(prediction, bonus) {
 window.onload = function() {
     substitute_constants();
     preload_images(
-        "img/astronaut.png",
-        "img/crystals.jpg",
-        "img/planet.png",
-        "img/spaceship.png",
-        "img/ticket.png",
-        "img/page_first.png",
-        "img/page_last.png",
-        "img/page_middle.png",
-        "img/greeting_astronaut.png",
-        "img/sky.png",
-        "img/sky_planet.png",
-        "img/crystal_profit.jpg",
-        "img/arrow_bonus.png",
-        "img/arrow_bonus_prediction.png",
-        "img/arrow_collect.png",
-        "img/arrow_discard.png",
-        "img/arrow_score.png",
-        "img/bonus_prediction_screen.png",
-        "img/bonus_screen.png",
-        "img/boss.png",
-        "img/crystal1.jpg",
-        "img/crystal2.jpg",
-        "img/crystal3.jpg",
-        "img/crystal4.jpg",
-        "img/crystal5.jpg",
-        "img/crystal6.jpg",
-        "img/crystal_collect.png",
-        "img/crystals_points.png",
-        "img/disable.png",
-        "img/space_start.png",
-        "img/spaceship_ticket.png",
+        "/img/astronaut.png",
+        "/img/crystals.jpg",
+        "/img/planet.png",
+        "/img/spaceship.png",
+        "/img/ticket.png",
+        "/img/page_first.png",
+        "/img/page_last.png",
+        "/img/page_middle.png",
+        "/img/greeting_astronaut.png",
+        "/img/sky.png",
+        "/img/sky_planet.png",
+        "/img/crystal_profit.jpg",
+        "/img/arrow_bonus.png",
+        "/img/arrow_bonus_prediction.png",
+        "/img/arrow_collect.png",
+        "/img/arrow_discard.png",
+        "/img/arrow_score.png",
+        "/img/bonus_prediction_screen.png",
+        "/img/bonus_screen.png",
+        "/img/boss.png",
+        "/img/crystal1.jpg",
+        "/img/crystal2.jpg",
+        "/img/crystal3.jpg",
+        "/img/crystal4.jpg",
+        "/img/crystal5.jpg",
+        "/img/crystal6.jpg",
+        "/img/crystal_collect.png",
+        "/img/crystals_points.png",
+        "/img/disable.png",
+        "/img/space_start.png",
+        "/img/spaceship_ticket.png",
     );
     let start_button = document.querySelector("#start-button");
     start_button.innerHTML = "START";
@@ -118,13 +118,14 @@ function start_experiment() {
     document.body.requestPointerLock();
     document.querySelector("#ethics").remove();
     document.body.className = "running";
-    run_instructions(
-        null,
-        document.querySelector("#tutorial-instructions"),
-        function(last_page) {
-            run_tutorial(last_page);
-        });
-    // run_trials(null, false, show_feedback);
+    // run_instructions(
+    //     null,
+    //     document.querySelector("#tutorial-instructions"),
+    //     function(last_page) {
+    //         run_tutorial(last_page);
+    //     });
+    // TODO: turn on instructions instead
+    run_trials(null, false, show_feedback);
     // show_feedback(100);
     // game_maxtime_timeout = setTimeout(game_maxtime_exceeded, MAX_MINUTES*60*1000);
 }
