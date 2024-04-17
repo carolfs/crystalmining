@@ -45,21 +45,27 @@ body.finished {
 .instructions li {
     color: #fff;
     padding: 38px 50px;
-    font-size: 27px
+    font-size: 27px;
 }
 
-.instructions img#page_previous {
+.instructions img.page_previous {
     position: absolute;
     left: 20px;
     bottom: 20px;
     cursor: pointer;
+    width: 52px;
+    height: 60px;
+    content: url("/crystalmining/img/page_previous.png")
 }
 
-.instructions img#page_next {
+.instructions img.page_next {
     position: absolute;
     right: 20px;
     bottom: 20px;
     cursor: pointer;
+    width: 52px;
+    height: 60px;
+    content: url("/crystalmining/img/page_next.png")
 }
 
 .instructions img.instructions_illustration {

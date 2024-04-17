@@ -189,21 +189,19 @@ function run_instructions(oldscreen, instructions, endfunction) {
     for(let i = 0; i < pages.length; i++) {
         if (i > 0) {
             let prev_arrow = document.createElement("img");
-            prev_arrow.src = "/crystalmining/img/page_previous.png";
-            prev_arrow.id = "page_previous";
+            prev_arrow.classList = "page_previous";
             prev_arrow.onclick = function() {
                 if (i == 1 && !start_time) start_time = Date.now();
-                add_results("instructions", 0, "next", 0);
+                add_results("instructions", 0, "previous", 0);
                 show_screen(pages[i], pages[i - 1]);
             }
             pages[i].appendChild(prev_arrow);
         }
         if (i < pages.length - 1) {
             let prev_arrow = document.createElement("img");
-            prev_arrow.src = "/crystalmining/img/page_next.png";
-            prev_arrow.id = "page_next";
+            prev_arrow.classList = "page_next";
             prev_arrow.onclick = function() {
-                add_results("instructions", 0, "previous", 0);
+                add_results("instructions", 0, "next", 0);
                 show_screen(pages[i], pages[i + 1]);
             }
             pages[i].appendChild(prev_arrow);
