@@ -80,9 +80,8 @@ window.onload = function() {
         "/crystalmining/img/planet.png",
         "/crystalmining/img/spaceship.png",
         "/crystalmining/img/ticket.png",
-        "/crystalmining/img/page_first.png",
-        "/crystalmining/img/page_last.png",
-        "/crystalmining/img/page_middle.png",
+        "/crystalmining/img/page_next.png",
+        "/crystalmining/img/page_previous.png",
         "/crystalmining/img/greeting_astronaut.png",
         "/crystalmining/img/sky.png",
         "/crystalmining/img/sky_planet.png",
@@ -186,33 +185,56 @@ function show_screen(oldscreen, newscreen) {
 
 function run_instructions(oldscreen, instructions, endfunction) {
     let pages = instructions.children;
-    let current_page = 0;
-    document.onkeydown = function(event) {
-        if (event.key == 'ArrowRight') {
-            if (current_page >= 0 && current_page + 1 < pages.length) {
-                current_page += 1;
-                if (current_page == 1 && !start_time) start_time = Date.now();
+    // Add the arrows for navigation
+    for(let i = 0; i < pages.length; i++) {
+        if (i > 0) {
+            let prev_arrow = document.createElement("img");
+            prev_arrow.src = "/crystalmining/img/page_previous.png";
+            prev_arrow.id = "page_previous";
+            prev_arrow.onclick = function() {
+                if (i == 1 && !start_time) start_time = Date.now();
                 add_results("instructions", 0, "next", 0);
-                show_screen(pages[current_page - 1], pages[current_page]);
+                show_screen(pages[i], pages[i - 1]);
             }
+            pages[i].appendChild(prev_arrow);
         }
-        else if (event.key == 'ArrowLeft') {
-            if (current_page > 0) {
-                current_page -= 1;
+        if (i < pages.length - 1) {
+            let prev_arrow = document.createElement("img");
+            prev_arrow.src = "/crystalmining/img/page_next.png";
+            prev_arrow.id = "page_next";
+            prev_arrow.onclick = function() {
                 add_results("instructions", 0, "previous", 0);
-                show_screen(pages[current_page + 1], pages[current_page]);
+                show_screen(pages[i], pages[i + 1]);
             }
-        }
-        else if (event.key == ' ') {
-            if (current_page + 1 == pages.length) {
-                document.onkeydown = null;
-                add_results("instructions", 0, "finish", 0);
-                endfunction(pages[current_page]);
-            }
+            pages[i].appendChild(prev_arrow);
         }
     }
+    // document.onkeydown = function(event) {
+    //     if (event.key == 'ArrowRight') {
+    //         if (current_page >= 0 && current_page + 1 < pages.length) {
+    //             current_page += 1;
+    //             if (current_page == 1 && !start_time) start_time = Date.now();
+    //             add_results("instructions", 0, "next", 0);
+    //             show_screen(pages[current_page - 1], pages[current_page]);
+    //         }
+    //     }
+    //     else if (event.key == 'ArrowLeft') {
+    //         if (current_page > 0) {
+    //             current_page -= 1;
+    //             add_results("instructions", 0, "previous", 0);
+    //             show_screen(pages[current_page + 1], pages[current_page]);
+    //         }
+    //     }
+    //     else if (event.key == ' ') {
+    //         if (current_page + 1 == pages.length) {
+    //             document.onkeydown = null;
+    //             add_results("instructions", 0, "finish", 0);
+    //             endfunction(pages[current_page]);
+    //         }
+    //     }
+    // }
     add_results("instructions", 0, null, 0);
-    show_screen(oldscreen, pages[current_page]);
+    show_screen(oldscreen, pages[0]);
 }
 
 function get_crystal_points() {
