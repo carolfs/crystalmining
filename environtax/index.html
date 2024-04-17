@@ -26,112 +26,143 @@
       <textarea id="results"></textarea>
     </details>
   </div>
-  <ol id="quiz-instructions" class="instructions">
+  <ol id="tutorial-instructions" class="instructions">
     <li class="expscreen">
       <p>IMPORTANT: To quit the experiment, press ESC. If you quit the experiment before it’s over, you won’t get paid, so be careful.</p>
       <p>Thank you for participating in this experiment about how people make decisions. You’ll earn money and help with our research. You’ll get £<span class="constant BASE_PAYMENT"></span> for your participation and up to £<span class="constant MAX_BONUS"></span> as a bonus depending on your performance. If you pay attention and do your best, you’ll get a much higher bonus.</p>
       <p>You must finish this experiment within <span class="constant MAX_TIME"></span> to receive your payment. This is plenty of time and there’s no need to rush, but please find a quiet place where you won’t be interrupted. Turning off your phone helps too.</p>
-      <p>Click the right arrow to go to the next screen and the left arrow to go back.</p>
+      <p>When navigating these screens, you can click the right arrow to go to the next screen and the left arrow to go back to the previous screen. Please read the game instructions carefully as you will later need to complete a quiz on them.</p>
     </li>
-    <li class="expscreen">
+    <!-- <li class="expscreen">
       <p>It is the year 2452, and you work as a space miner for a company called Cosmic Crystal Corp (C3). Every day you fly to planet Zyxlon in search of alien crystals.</p>
       <img src="/crystalmining/img/sky_planet.png" width="912" height="513" alt="">
       <img src="/crystalmining/img/greeting_astronaut.png" width="912" height="513" alt="">
+    </li> -->
+    <li class="expscreen">
+      <p>It is the year 2452. As an employee of the renowned Cosmic Crystal Corp (C3), your mission is to fly every day to planet Zyxlon to collect the most valuable and powerful healing crystals in the galaxy.</p>
     </li>
     <li class="expscreen">
-      <p>These crystals have strong healing power. Your company sells them in the Intergalactic Market and shares the profits with you. Crystals come in different sizes, and the bigger ones are worth more money.</p>
-      <img src="/crystalmining/img/crystal_profit.jpg" width="912" height="513" alt="">
+      <p>These crystals, coveted across the universe for their extraordinary healing properties, are sold on the
+        Intergalactic Market, and C3 shares the profits with you.</p>
     </li>
+    
     <li class="expscreen">
-      <p>Each working day, you take a spaceship to planet Zyxlon. The ticket for a round trip costs 100 points, which will be deducted from your overall score.</p>
-      <img src="/crystalmining/img/sky_planet.png" width="912" height="513" alt="">
-      <img src="/crystalmining/img/spaceship_ticket.png" width="912" height="513" alt="">
+      <p>Each working day, you’ll board your state-of-the-art spaceship, the Celestial Cruiser X9, and set course for
+        Zyxlon.</p>
     </li>
+    
     <li class="expscreen">
-      <p>On planet Zyxlon, you will find five crystals you can collect or discard. Each crystal you find is unique and worth a different number of points. Some examples are shown below.</p>
-      <img src="/crystalmining/img/crystals_points.png" width="912" height="513" alt="">
+      <p>On your quest, you’ll encounter five unique crystals each day. Some crystals are small and delicate, emitting a
+        soft, soothing glow, while others are massive and radiant, their facets reflecting the light of nearby stars.</p>
     </li>
+    
     <li class="expscreen">
-      <p>Throughout the day, you’ll keep track of the points you’ve earned from collecting crystals. Whenever you find a new crystal to collect or discard, the DISCARD box shows the total number of points for the day if you choose to discard the crystal you’ve found. In the example screen below, it’s 45 points.</p>
-      <img src="/crystalmining/img/crystal_collect.png" width="912" height="513" alt="">
-      <img src="/crystalmining/img/arrow_discard.png" width="912" height="513" alt="">
+      <p>Each crystal is worth a different number of points depending on their size and properties. You must choose which
+        crystals to collect and which to discard.</p>
     </li>
+    
     <li class="expscreen">
-      <p>The COLLECT box shows the updated total for the day if you choose to collect the crystal you’ve found. For example, the crystal below is worth 20 points, so if you choose to collect it, your total will increase from 45 to 65 points.</p>
-      <img src="/crystalmining/img/crystal_collect.png" width="912" height="513" alt="">
-      <img src="/crystalmining/img/arrow_collect.png" width="912" height="513" alt="">
+      <p>Throughout the day, you’ll use your high-tech scanning device to keep track of the points you’ve earned from
+        collecting crystals. The DISCARD box displays the total points you’ll have if you choose to discard the current
+        crystal. In the example screen below, it’s 45 points.</p>
     </li>
+    
     <li class="expscreen">
-      <p>The score box in the top left corner shows all the points you’ve earned in the game, adding up all working days. Each crystal you collect adds points to your overall score.</p>
-      <img src="/crystalmining/img/crystal_collect.png" width="912" height="513" alt="">
-      <img src="/crystalmining/img/arrow_score.png" width="912" height="513" alt="">
+      <p>The COLLECT box shows your updated total if you decide to add the crystal to your collection. Your overall score,
+        displayed in the top left corner of your helmet’s heads-up display, represents your cumulative points across all
+        working days.</p>
     </li>
+    
     <li class="expscreen">
-      <p>Unfortunately, crystal mining is harmful to the environment. To mitigate the harm, the Intergalactic Environmental Protection Agency (IEPA) has determined that every miner must pay taxes at the end of each working day. Your local tax officer, shown below, is responsible for calculating your taxes.</p>
-      <img src="/crystalmining/img/boss.png" width="912" height="513" alt="">
+      <p>However, crystal mining is not without its challenges. The Intergalactic Environmental Protection Agency (IEPA) has
+        long been concerned about the impact of mining on the delicate ecosystems of Zyxlon.</p>
     </li>
+    
     <li class="expscreen">
-      <p>He determines how much you must pay in taxes depending on how many crystal points you collected. The more crystal points you collect, the more you will have to pay in taxes.</p>
-      <img src="/crystalmining/img/boss.png" width="912" height="513" alt="">
+      <p>To mitigate this harm, all miners are required to pay daily taxes based on the number of crystal points they’ve
+        collected. Your local tax officer, a quirky and unpredictable character, is responsible for calculating taxes for
+        all the miners at C3.</p>
     </li>
+    
     <li class="expscreen">
-      <p>The tax office can also be quite unpredictable. He might increase or decrease your taxes for the most absurd reasons. For example, if he likes your hair today or his favourite football team won a match, he might decrease your taxes. But if he had a bad night’s sleep or his tea was served cold, he might increase your taxes.</p>
-      <img src="/crystalmining/img/boss.png" width="912" height="513" alt="">
+      <p>While the general principle is that the more crystal points you collect, the higher your taxes will be, there is
+        some variation in how the tax officer applies this rule. His methods are not entirely transparent, and he seems to
+        enjoy adding a bit of randomness to the process, keeping miners on their toes.</p>
     </li>
+    
     <li class="expscreen">
-      <p>To avoid paying too much in taxes, you must avoid collecting too many crystal points in a day. Unfortunately, you don’t know how taxes calculations are performed, so you’ll need to figure it out.</p>
-      <img src="/crystalmining/img/boss.png" width="912" height="513" alt="">
+      <p>You might find that your taxes are lower than expected on a day when you’ve collected a particularly large haul of
+        crystals, while your colleague, with a similar collection, may end up paying more. The tax officer’s moods and whims
+        can influence the tax rates, but only to a certain degree.</p>
     </li>
+    
     <li class="expscreen">
-      <p>You will find out your tax payment after you choose to collect or discard the fifth and last crystal of the day.</p>
-      <img src="/crystalmining/img/bonus_screen.png" width="912" height="513" alt="">
-      <img src="/crystalmining/img/arrow_bonus.png" width="912" height="513" alt="">
+      <p>After a long day of crystal hunting, you’ll have the chance to participate in the tax prediction mini-game, a
+        favorite pastime among the miners of C3.</p>
     </li>
+    
     <li class="expscreen">
-      <p>Before you choose to collect or discard the fifth crystal of the day, you will be asked to predict your bonus. Because the tax payments can be somewhat unpredictable, the miners at C3 have created a tax guessing game, where each miner can guess their or their colleague’s tax payments for extra points.</p>
-      <img src="/crystalmining/img/crystal_collect.png" width="912" height="513" alt="">
-      <img src="/crystalmining/img/disable.png" width="912" height="513" alt="">
+      <p>The tax prediction mini-game was born out of the shared experience of navigating the unpredictable tax system on
+        planet Zyxlon. They reasoned that if they were going to be subject to the tax officer’s somewhat unpredictable
+        decisions, they might as well make a game out of it.</p>
     </li>
+    
     <li class="expscreen">
-      <p>First, you’ll see the point value of the fifth crystal and what your total for the day will be if you choose to collect or discard it. When you see this screen, decide if you’ll collect this crystal or not.</p>
-      <img src="/crystalmining/img/crystal_collect.png" width="912" height="513" alt="">
-      <img src="/crystalmining/img/disable.png" width="912" height="513" alt="">
+      <p>The tax prediction mini-game also serves a practical purpose, as it encourages miners to develop a better
+        understanding of how the tax system works and make more informed decisions about their own mining strategies.</p>
     </li>
+    
     <li class="expscreen">
-      <p>Then, you’ll move to the tax prediction screen. Information about the fifth crystal will be at the top right of the screen, helping you predict the tax payment.</p>
-      <img src="/crystalmining/img/bonus_prediction_screen.png" width="912" height="513" alt="">
+      <p>Using your knowledge of the crystal market and tax calculations, you’ll try to predict your own taxes and those of
+        your colleagues. The more accurate your predictions are, the more points you’ll earn, up to 10 points per
+        prediction.</p>
     </li>
+    
     <li class="expscreen">
-      <p>You can earn up to 10 points for predicting your taxes, and these points will be added to your overall score. The more accurate your prediction, the more points you will earn.</p>
-      <img src="/crystalmining/img/bonus_screen.png" width="912" height="513" alt="">
-      <img src="/crystalmining/img/arrow_bonus_prediction.png" width="912" height="513" alt="">
+      <p>Before you choose to collect or discard the fifth crystal of the day, you will be asked to predict your tax
+        payment.</p>
     </li>
+    
     <li class="expscreen">
-      <p>You can also earn up to 10 points for predicting a colleague’s taxes, and these points will be added to your overall score. The more accurate your prediction, the more points you will earn.</p>
-      <img src="/crystalmining/img/bonus_prediction_screen.png" width="912" height="513" alt="">
+      <p>To do this, you’ll see the point value of the fifth crystal and what your total for the day will be if you choose
+        to collect or discard it. When you see this screen, decide if you’ll collect this crystal or not.</p>
     </li>
+    
     <li class="expscreen">
-      <p>To achieve a high score, pay close attention and figure out the maximum crystal points you can collect in a day while still paying a reasonable amount in taxes.</p>
-      <img src="/crystalmining/img/bonus_screen.png" width="912" height="513" alt="">
+      <p>Then, you’ll move to the tax prediction screen. Information about the fifth crystal will be at the top right of the
+        screen, helping you predict the tax payment.</p>
     </li>
+    
     <li class="expscreen">
-      <p>It is also helpful to pay attention to how many crystal points your colleagues collect and how much they pay in taxes. This can help you hone your strategy.</p>
-      <img src="/crystalmining/img/bonus_screen.png" width="912" height="513" alt="">
+      <p>You can earn up to 10 points for predicting your taxes, and these points will be added to your overall score. The
+        more accurate your prediction, the more points you will earn.</p>
     </li>
+    
     <li class="expscreen">
-      <p>Now you can go back and reread these instructions or you can click the button below to start a quiz on these instructions. Make sure you have carefully read and understood these instructions before starting the quiz.</p>
-      <img src="/crystalmining/img/space_start.png" width="912" height="513" alt="">
+      <p>Next, you can also earn up to 10 points for predicting a colleague’s tax payment based on their crystal collection,
+        and these points will be added to your overall score.</p>
+    </li>
+    
+    <li class="expscreen">
+      <p>To become the ultimate space miner and maximize your score, you’ll need to find the perfect balance between
+        collecting valuable crystals and avoiding excessive taxes.</p>
+    </li>
+    
+    <li class="expscreen">
+      <p>Study the patterns of your colleagues’ crystal collections and tax payments, and use this knowledge to refine your
+        strategy. The key to success is to collect as many points as possible while keeping your taxes manageable, a
+        delicate balance that requires skill, intuition, and a bit of cosmic luck.</p>
     </li>
   </ol>
-  <ol id="tutorial-instructions" class="instructions">
+  <ol id="quiz-instructions" class="instructions">
     <li class="expscreen">
-      <p>You have finished the quiz. Now you can click the button below to start a game tutorial. The points you earn in the tutorial will <em>not</em> affect your payment, but the tutorial will help you maximize your score during the game, so do your best to learn during the tutorial. You’ll receive helpful messages along the way to guide you.</p>
+      <p>You have finished the tutorial. Now you can start a quiz on these instructions. Make sure you have carefully read and understood these instructions before starting the quiz.</p>
       <img src="/crystalmining/img/space_start.png" width="912" height="513" alt="">
     </li>
   </ol>
   <ol id="game-instructions" class="instructions">
     <li class="expscreen">
-      <p>You have finished the tutorial. Well done! Now you know how to travel to planet Zyxlon, collect crystals, and predict how many points your boss will give you as a bonus.</p>
+      <p>You have finished the quiz. Well done! Now you know how to travel to planet Zyxlon, collect crystals, and predict how many points your boss will give you as a bonus.</p>
       <img src="/crystalmining/img/sky_planet.png" width="912" height="513" alt="">
       <img src="/crystalmining/img/greeting_astronaut.png" width="912" height="513" alt="">
     </li>

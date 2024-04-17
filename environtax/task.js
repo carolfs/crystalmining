@@ -5,12 +5,22 @@ const MAX_BONUS = 6;
 const MAX_MINUTES = 75;
 const MAX_TIME = `${MAX_MINUTES} minutes`;
 const CRYSTAL_CAT = [10,  25, 40, 55, 70];
-const TUTORIAL_TRIALS = 3;
-const FLIGHT_COST = 100; // TODO: change
+const TUTORIAL_TRIALS = 5;
+const FLIGHT_COST = 100; // TODO: change this to base tax
 const ENVTAX_NOISE = 10.;
 const NUM_TRIALS = 50;
 const POINT_VALUE = 0.001674361; // TODO: change
 const URLPARAMS = new URLSearchParams(window.location.search);
+const MINER_NAMES = ['Skye Aurora', 'Skylar Astro', 'River Galaxia', 'Arlo Weston', 'Tanner Vega',
+    'Sasha Celeste', 'Gideon Vega', 'Jaden Orion', 'Raven Solstice', 'Indigo Astro',
+    'Tycho Pulsar', 'Zane Orion', 'Thalia Pulsar', 'Carina Galaxia', 'Rene Andromeda',
+    'Soren Quasar', 'Arden Cosmic', 'Sasha Quasar', 'Sirius Solaris', 'Calypso Nebula',
+    'Lyra Astoria', 'Rowan Eclipse', 'Remy Nova', 'Bodhi Nova', 'Andromeda Zephyr', 'Jace Novak',
+    'Aura Solaris', 'Ryder Kline', 'Astra Celeste', 'Vega Celestia', 'Cameron Galaxy',
+    'Maddox Raines', 'Lyra Quasar', 'Orion Flux', 'Cosmo Zenith', 'Stella Andromeda',
+    'Luna Eclipse', 'Noel Aurora', 'Quinn Pulsar', 'Nova Starling', 'Rigel Orion', 'Blake Sirius',
+    'Phoenix Nebula', 'Elio Nebula', 'Caspian Blaze', 'Skye Celestia', 'Avery Solstice',
+    'Shiloh Cosmo', 'Seren Cosmos', 'Frankie Zenith'];
 
 var start_time = null;
 
