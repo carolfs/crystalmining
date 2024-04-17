@@ -78,6 +78,14 @@ body.finished {
     border: #666 solid 1px
 }
 
+.instructions button.start {
+    margin: 200px auto 0 auto;
+    color: black;
+    font-size: 250%;
+    display: block;
+    padding: 20px;
+}
+
 .score {
     position: absolute;
     top: 20px;

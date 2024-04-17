@@ -188,49 +188,32 @@ function run_instructions(oldscreen, instructions, endfunction) {
     // Add the arrows for navigation
     for(let i = 0; i < pages.length; i++) {
         if (i > 0) {
-            let prev_arrow = document.createElement("img");
-            prev_arrow.classList = "page_previous";
-            prev_arrow.onclick = function() {
+            let arrow = document.createElement("img");
+            arrow.classList = "page_previous";
+            arrow.onclick = function() {
                 if (i == 1 && !start_time) start_time = Date.now();
                 add_results("instructions", 0, "previous", 0);
                 show_screen(pages[i], pages[i - 1]);
             }
-            pages[i].appendChild(prev_arrow);
+            pages[i].appendChild(arrow);
         }
         if (i < pages.length - 1) {
-            let prev_arrow = document.createElement("img");
-            prev_arrow.classList = "page_next";
-            prev_arrow.onclick = function() {
+            let arrow = document.createElement("img");
+            arrow.classList = "page_next";
+            arrow.onclick = function() {
                 add_results("instructions", 0, "next", 0);
                 show_screen(pages[i], pages[i + 1]);
             }
-            pages[i].appendChild(prev_arrow);
+            pages[i].appendChild(arrow);
+        }
+        else {
+            let button = pages[i].querySelector("button");
+            button.onclick = function() {
+                add_results("instructions", 0, "finish", 0);
+                endfunction(pages[i]);
+            }
         }
     }
-    // document.onkeydown = function(event) {
-    //     if (event.key == 'ArrowRight') {
-    //         if (current_page >= 0 && current_page + 1 < pages.length) {
-    //             current_page += 1;
-    //             if (current_page == 1 && !start_time) start_time = Date.now();
-    //             add_results("instructions", 0, "next", 0);
-    //             show_screen(pages[current_page - 1], pages[current_page]);
-    //         }
-    //     }
-    //     else if (event.key == 'ArrowLeft') {
-    //         if (current_page > 0) {
-    //             current_page -= 1;
-    //             add_results("instructions", 0, "previous", 0);
-    //             show_screen(pages[current_page + 1], pages[current_page]);
-    //         }
-    //     }
-    //     else if (event.key == ' ') {
-    //         if (current_page + 1 == pages.length) {
-    //             document.onkeydown = null;
-    //             add_results("instructions", 0, "finish", 0);
-    //             endfunction(pages[current_page]);
-    //         }
-    //     }
-    // }
     add_results("instructions", 0, null, 0);
     show_screen(oldscreen, pages[0]);
 }
