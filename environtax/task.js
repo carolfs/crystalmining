@@ -6,7 +6,7 @@ const MAX_MINUTES = 75;
 const MAX_TIME = `${MAX_MINUTES} minutes`;
 const CRYSTAL_CAT = [10,  25, 40, 55, 70];
 const TUTORIAL_TRIALS = 5;
-const FLIGHT_COST = 100; // TODO: change this to base tax
+const BASE_TAX = 15; // TODO: change this to a better number
 const ENVTAX_NOISE = 10.;
 const NUM_TRIALS = 50;
 const POINT_VALUE = 0.001674361; // TODO: change
@@ -65,7 +65,7 @@ function get_envtax(points) {
         mean_envtax += envtaxcoefs[i]*p;
         p *= points;
     }
-    return Math.round((mean_envtax + randn()*ENVTAX_NOISE));
+    return Math.round((mean_envtax + randn()*ENVTAX_NOISE)) - BASE_TAX;
 }
 
 function get_envtax_prediction_points(prediction, envtax) {
@@ -310,7 +310,7 @@ function run_trials(oldscreen, tutorial, endfunction) {
     let crystal_num;
     let crystal_val;
     let crystal_cat;
-    let score = FLIGHT_COST;
+    let score = 0;
     let dailyscore = 0;
     let envtax_predicted;
     let envtax_prediction;
@@ -325,7 +325,6 @@ function run_trials(oldscreen, tutorial, endfunction) {
     function run_flight(oldscreen) {
         crystal_num = 1;
         dailyscore = 0;
-        score -= FLIGHT_COST;
         envtax_predicted = false;
         while (true) {
             for (let i = 0; i < 5; i++) {
@@ -389,27 +388,25 @@ function run_trials(oldscreen, tutorial, endfunction) {
                 run_envtax_screen();
             }
         }
-        if (crystal_num < 5 || envtax_predicted) {
-            collect.onclick = function() {
+        collect.onclick = function() {
+            if (crystal_num < 5 || envtax_predicted) {
                 score += crystal_val;
                 dailyscore += crystal_val;
                 add_results("crystal", crystal_val, "collect", score);
                 advancecrystal();
             }
-            discard.onclick = function() {
+        }
+        discard.onclick = function() {
+            if (crystal_num < 5 || envtax_predicted) {
                 add_results("crystal", crystal_val, "discard", score);
                 advancecrystal();
             }
         }
-        else {
-            document.onkeydown = function(event) {
-                if (event.key == ' ') {
-                    // Move to envtax prediction
-                    crystal5_disable.style.display = "none";
-                    if (tutorial) crystal_tutorial_message.style.display = "block";
-                    run_envtax_prediction();
-                }
-            }
+        crystal5_disable.querySelector("button").onclick = function() {
+            // Move to envtax prediction
+            crystal5_disable.style.display = "none";
+            if (tutorial) crystal_tutorial_message.style.display = "block";
+            run_envtax_prediction();
         }
     }
     function run_envtax_prediction() {
@@ -425,7 +422,7 @@ function run_trials(oldscreen, tutorial, endfunction) {
             current_envtax_prediction.innerHTML = `${envtax_input.value}`;
         }
         envtax_prediction_screen.querySelector(".predict").onclick = function() {
-            envtax_prediction = Number(envtax_input.value);
+            envtax_prediction = -Number(envtax_input.value);
             envtax_predicted = true;
             crystal5info.classList.remove(`crystal${crystal_cat}`);
             add_results("envtax_prediction", 0, envtax_prediction, score);
@@ -441,20 +438,12 @@ function run_trials(oldscreen, tutorial, endfunction) {
         update_score(score);
         envtax_daily_points.innerHTML = dailyscore.toString();
         envtax_prediction_points.innerHTML = prediction_points.toString();
-        let envtaxclass = (envtax >= 0) ? "positive" : "negative";
-        envtax_points.classList.add(envtaxclass);
-        if (envtax >= 0) {
-            envtax_points.innerHTML = `+${envtax}`;
-        }
-        else {
-            envtax_points.innerHTML = `${envtax}`;
-        }
+        envtax_points.innerHTML = `${-envtax}`;
         add_results("envtax", envtax, null, score);
         add_results("envtax_prediction_points", prediction_points, null, score);
         show_screen(crystalscreen, envtax_screen);
         set_game_timeout(function() {
             trial += 1;
-            envtax_points.classList.remove(envtaxclass);
             if (trial < num_trials) {
                 run_flight(envtax_screen);
             }
