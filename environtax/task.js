@@ -11,16 +11,6 @@ const ENVTAX_NOISE = 10.;
 const NUM_TRIALS = 50;
 const POINT_VALUE = 0.001674361; // TODO: change
 const URLPARAMS = new URLSearchParams(window.location.search);
-const MINER_NAMES = ['Skye Aurora', 'Skylar Astro', 'River Galaxia', 'Arlo Weston', 'Tanner Vega',
-    'Sasha Celeste', 'Gideon Vega', 'Jaden Orion', 'Raven Solstice', 'Indigo Astro',
-    'Tycho Pulsar', 'Zane Orion', 'Thalia Pulsar', 'Carina Galaxia', 'Rene Andromeda',
-    'Soren Quasar', 'Arden Cosmic', 'Sasha Quasar', 'Sirius Solaris', 'Calypso Nebula',
-    'Lyra Astoria', 'Rowan Eclipse', 'Remy Nova', 'Bodhi Nova', 'Andromeda Zephyr', 'Jace Novak',
-    'Aura Solaris', 'Ryder Kline', 'Astra Celeste', 'Vega Celestia', 'Cameron Galaxy',
-    'Maddox Raines', 'Lyra Quasar', 'Orion Flux', 'Cosmo Zenith', 'Stella Andromeda',
-    'Luna Eclipse', 'Noel Aurora', 'Quinn Pulsar', 'Nova Starling', 'Rigel Orion', 'Blake Sirius',
-    'Phoenix Nebula', 'Elio Nebula', 'Caspian Blaze', 'Skye Celestia', 'Avery Solstice',
-    'Shiloh Cosmo', 'Seren Cosmos', 'Frankie Zenith'];
 
 var start_time = null;
 
@@ -93,13 +83,23 @@ window.onload = function() {
         "/crystalmining/img/arrow_score.png",
         "/crystalmining/img/envtax_prediction_screen.png",
         "/crystalmining/img/envtax_screen.png",
-        "/crystalmining/img/boss.png",
+        "/crystalmining/img/taxofficer.png",
         "/crystalmining/img/crystal1.jpg",
         "/crystalmining/img/crystal2.jpg",
         "/crystalmining/img/crystal3.jpg",
         "/crystalmining/img/crystal4.jpg",
         "/crystalmining/img/crystal5.jpg",
         "/crystalmining/img/crystal6.jpg",
+        "/crystalmining/img/miner1.png",
+        "/crystalmining/img/miner2.png",
+        "/crystalmining/img/miner3.png",
+        "/crystalmining/img/miner4.png",
+        "/crystalmining/img/miner5.png",
+        "/crystalmining/img/miner6.png",
+        "/crystalmining/img/miner7.png",
+        "/crystalmining/img/miner8.png",
+        "/crystalmining/img/miner9.png",
+        "/crystalmining/img/miner10.png",
         "/crystalmining/img/crystal_collect.png",
         "/crystalmining/img/crystal_points.png",
         "/crystalmining/img/crystals_unique.png",
@@ -425,32 +425,41 @@ function run_trials(oldscreen, tutorial, endfunction) {
             envtax_prediction = -Number(envtax_input.value);
             envtax_predicted = true;
             crystal5info.classList.remove(`crystal${crystal_cat}`);
-            add_results("envtax_prediction", 0, envtax_prediction, score);
+            add_results("own_envtax_prediction", 0, envtax_prediction, score);
             show_screen(envtax_prediction_screen, crystalscreen);
             run_crystals();
         }
     }
     function run_envtax_screen() {
         let envtax = get_envtax(dailyscore);
-        let prediction_points = get_envtax_prediction_points(envtax_prediction, envtax);
         score += envtax;
-        score += prediction_points;
         update_score(score);
         envtax_daily_points.innerHTML = dailyscore.toString();
-        envtax_prediction_points.innerHTML = prediction_points.toString();
         envtax_points.innerHTML = `${-envtax}`;
         add_results("envtax", envtax, null, score);
-        add_results("envtax_prediction_points", prediction_points, null, score);
         show_screen(crystalscreen, envtax_screen);
+        let continue_button = envtax_screen.querySelector("button");
+        continue_button.style.display = "none";
         set_game_timeout(function() {
-            trial += 1;
-            if (trial < num_trials) {
-                run_flight(envtax_screen);
+            continue_button.onclick = function() {
+                trial += 1;
+                if (trial < num_trials) {
+                    run_flight(envtax_screen);
+                }
+                else {
+                    endfunction(score);
+                }
             }
-            else {
-                endfunction(score);
-            }
+            continue_button.style.display = "block";
         }, 4500);
+    }
+    function run_envtax_prediction_results(envtax) {
+        let prediction_points = get_envtax_prediction_points(envtax_prediction, envtax);
+        score += prediction_points;
+        update_score(score);
+        envtax_prediction_points.innerHTML = prediction_points.toString();
+        add_results("own_envtax_prediction_points", prediction_points, null, score);
+        show_screen(envtax_screen, envtax_prediction_results_screen);
     }
     run_flight(oldscreen);
 }
