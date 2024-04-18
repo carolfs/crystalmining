@@ -26,7 +26,8 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    display: none
+    display: none;
+    user-select: none
 }
 
 body {
@@ -86,6 +87,15 @@ body.finished {
     padding: 20px;
 }
 
+button.predict {
+    margin: 0 auto;
+    color: black;
+    font-size: 300%;
+    display: block;
+    padding: 10px;
+    height: auto;
+}
+
 .score {
     position: absolute;
     top: 20px;
@@ -125,10 +135,14 @@ body.finished {
     text-align: center
 }
 
+#discard, #collect {
+    cursor: pointer
+}
+
 #discard,
 #collect,
-#bonus_discard,
-#bonus_collect {
+#envtax_discard,
+#envtax_collect {
     position: absolute;
     top: 440px;
     left: 580px;
@@ -141,15 +155,15 @@ body.finished {
 }
 
 #collect,
-#bonus_collect {
+#envtax_collect {
     left: 850px;
     background-color: #9f9
 }
 
 #discard h2,
 #collect h2,
-#bonus_discard h2,
-#bonus_collect h2 {
+#envtax_discard h2,
+#envtax_collect h2 {
     font-size: 25px;
     line-height: 35px;
     text-align: center;
@@ -159,8 +173,8 @@ body.finished {
 
 #discard p,
 #collect p,
-#bonus_discard p,
-#bonus_collect p {
+#envtax_discard p,
+#envtax_collect p {
     font-size: 60px;
     line-height: 70px;
     text-align: center;
@@ -173,41 +187,41 @@ div#crystal_collect {
 }
 
 .crystal1 {
-    background-image: url(img/crystal1.jpg)
+    background-image: url(/crystalmining/img/crystal1.jpg)
 }
 
 .crystal2 {
-    background-image: url(img/crystal2.jpg)
+    background-image: url(/crystalmining/img/crystal2.jpg)
 }
 
 .crystal3 {
-    background-image: url(img/crystal3.jpg)
+    background-image: url(/crystalmining/img/crystal3.jpg)
 }
 
 .crystal4 {
-    background-image: url(img/crystal4.jpg)
+    background-image: url(/crystalmining/img/crystal4.jpg)
 }
 
 .crystal5 {
-    background-image: url(img/crystal5.jpg)
+    background-image: url(/crystalmining/img/crystal5.jpg)
 }
 
 .crystal6 {
-    background-image: url(img/crystal6.jpg)
+    background-image: url(/crystalmining/img/crystal6.jpg)
 }
 
-#bonus_screen {
-    background-image: url(img/boss.png);
+#envtax_screen {
+    background-image: url(/crystalmining/img/boss.png);
     background-repeat: no-repeat;
     background-position: -5% 50%;
     background-size: 60%
 }
 
-#bonus_screen table {
+#envtax_screen table {
     margin: 120px 0 0 750px
 }
 
-#bonus_screen th {
+#envtax_screen th {
     color: #50938a;
     background-color: #dee7e5;
     text-align: center;
@@ -216,11 +230,11 @@ div#crystal_collect {
     padding: 10px
 }
 
-#bonus_screen tr.bonus_points th {
+#envtax_screen tr.envtax_points th {
     font-size: 40px
 }
 
-#bonus_screen td {
+#envtax_screen td {
     background-color: #b3cac7;
     color: #50938a;
     text-align: center;
@@ -229,16 +243,16 @@ div#crystal_collect {
     padding: 10px
 }
 
-#bonus_screen tr.bonus_points td {
+#envtax_screen tr.envtax_points td {
     font-size: 80px;
     font-weight: 700
 }
 
-#bonus_screen .positive {
+#envtax_screen .positive {
     color: #0c0
 }
 
-#bonus_screen .negative {
+#envtax_screen .negative {
     color: red
 }
 
@@ -257,8 +271,8 @@ input {
     opacity: .4
 }
 
-#crystal5info #bonus_discard,
-#crystal5info #bonus_collect {
+#crystal5info #envtax_discard,
+#crystal5info #envtax_collect {
     display: inline-block;
     position: relative;
     left: auto;
@@ -266,26 +280,26 @@ input {
     margin-top: 20px
 }
 
-#bonus_prediction {
+#envtax_prediction {
     margin: 300px 0 0 0;
     text-align: center
 }
 
-#bonus_prediction label {
+#envtax_prediction label {
     font-size: 80px
 }
 
-#bonus_prediction input {
-    width: 300px;
-    font-weight: 400;
-    padding-left: 20px
+#envtax_prediction input {
+    width: 900px;
+    display: block;
+    margin: 20px auto
 }
 
-#bonus_prediction input:focus-visible {
+#envtax_prediction input:focus-visible {
     outline: none;
 }
 
-#bonus_prediction p {
+#envtax_prediction p {
     margin-top: 50px;
     font-size: 50px
 }
@@ -308,7 +322,15 @@ input {
 #crystal5_disable img {
     position: absolute;
     top: 0;
-    left: 0
+    left: 0;
+    z-index: 0;
+}
+
+#crystal5_disable button {
+    position: relative;
+    margin: 0 auto;
+    top: 230px;
+    z-index: 5;
 }
 
 .tutorial {
@@ -323,7 +345,8 @@ input {
 
 #feedback_screen {
     padding: 40px;
-    font-size: 24px
+    font-size: 24px;
+    user-select: contain;
 }
 
 #feedback_screen h1 {
@@ -398,7 +421,7 @@ dd {
     font-size: 12px
 }
 
-#current_bonus_prediction {
+#current_envtax_prediction {
     display: inline-block;
     width: 2em;
     text-align: right;

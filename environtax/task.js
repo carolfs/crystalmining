@@ -101,10 +101,12 @@ window.onload = function() {
         "/crystalmining/img/crystal5.jpg",
         "/crystalmining/img/crystal6.jpg",
         "/crystalmining/img/crystal_collect.png",
-        "/crystalmining/img/crystals_points.png",
-        "/crystalmining/img/disable.png",
+        "/crystalmining/img/crystal_points.png",
+        "/crystalmining/img/crystals_unique.png",
+        "/crystalmining/img/disable_mining.png",
         "/crystalmining/img/space_start.png",
-        "/crystalmining/img/spaceship_ticket.png",
+        "/crystalmining/img/spaceship_flying.png",
+        "/crystalmining/img/zyxlon.jpg",
     );
     let start_button = document.querySelector("#start-button");
     start_button.innerHTML = "START";
@@ -127,13 +129,13 @@ function start_experiment() {
     document.addEventListener("contextmenu", event => event.preventDefault());
     document.querySelector("#ethics").remove();
     document.body.className = "running";
-    run_instructions(
-        null,
-        document.querySelector("#tutorial-instructions"),
-        function(last_page) {
-            run_tutorial(last_page);
-        });
-    // run_trials(null, false, show_feedback);
+    // run_instructions(
+    //     null,
+    //     document.querySelector("#tutorial-instructions"),
+    //     function(last_page) {
+    //         run_tutorial(last_page);
+    //     });
+    run_trials(null, false, show_feedback);
     // show_feedback(100);
     // game_maxtime_timeout = setTimeout(game_maxtime_exceeded, MAX_MINUTES*60*1000);
 }
@@ -244,6 +246,8 @@ const crystal5_disable = document.querySelector("#crystal5_disable");
 const envtax_prediction_screen = document.querySelector("#envtax_prediction_screen");
 const current_envtax_prediction = document.querySelector("#current_envtax_prediction");
 const envtax_crystal5_points = document.querySelector("#envtax_crystal5_points");
+const discard = document.querySelector("#discard");
+const collect = document.querySelector("#collect");
 const envtax_discard_points = document.querySelector("#envtax_discard_points");
 const envtax_collect_points = document.querySelector("#envtax_collect_points");
 const crystal5info = document.querySelector("#crystal5info");
@@ -357,44 +361,54 @@ function run_trials(oldscreen, tutorial, endfunction) {
             crystal_points.innerHTML = crystal_val.toString();
             discard_points.innerHTML = dailyscore.toString();
             collect_points.innerHTML = (dailyscore + crystal_val).toString();
+
             show_screen(flightscreen, crystalscreen);
         }
-        document.onkeydown = function(event) {
-            if ((crystal_num < 5 || envtax_predicted) && (event.key == 'ArrowRight' || event.key == 'ArrowLeft')) {
-                if (event.key == 'ArrowRight') {
-                    score += crystal_val;
-                    dailyscore += crystal_val;
-                }
-                add_results("crystal", crystal_val, event.key == 'ArrowRight' ? "collect" : "discard", score);
-                if (crystal_num < 5) {
-                    crystal_num += 1;
-                    crystal_num_display.innerHTML = crystal_num.toString();
-                    crystalscreen.classList.remove(`crystal${crystal_cat}`);
-                    crystal_val = get_crystal_points();
-                    crystalscreen.classList.remove(`crystal${crystal_cat}`);
-                    crystal_cat = get_crystal_cat(crystal_val);
-                    crystalscreen.classList.add(`crystal${crystal_cat}`);
-                    crystal_num_display.innerHTML = crystal_num.toString();
-                    crystal_points.innerHTML = crystal_val.toString();
-                    discard_points.innerHTML = dailyscore.toString();
-                    collect_points.innerHTML = (dailyscore + crystal_val).toString();
-                    update_score(score);
-                    if (crystal_num == 5) {
-                        crystal5_disable.style.display = "block";
-                        if (tutorial) crystal_tutorial_message.style.display = "none";
-                    }
-                }
-                else {
-                    crystalscreen.classList.remove(`crystal${crystal_cat}`);
-                    document.onkeydown = null;
-                    run_envtax_screen();
+        function advancecrystal() {
+            if (crystal_num < 5) {
+                crystal_num += 1;
+                crystal_num_display.innerHTML = crystal_num.toString();
+                crystalscreen.classList.remove(`crystal${crystal_cat}`);
+                crystal_val = get_crystal_points();
+                crystalscreen.classList.remove(`crystal${crystal_cat}`);
+                crystal_cat = get_crystal_cat(crystal_val);
+                crystalscreen.classList.add(`crystal${crystal_cat}`);
+                crystal_num_display.innerHTML = crystal_num.toString();
+                crystal_points.innerHTML = crystal_val.toString();
+                discard_points.innerHTML = dailyscore.toString();
+                collect_points.innerHTML = (dailyscore + crystal_val).toString();
+                update_score(score);
+                if (crystal_num == 5) {
+                    crystal5_disable.style.display = "block";
+                    if (tutorial) crystal_tutorial_message.style.display = "none";
                 }
             }
-            else if (crystal_num == 5 && !envtax_predicted && event.key == ' ') {
-                // Move to envtax prediction
-                crystal5_disable.style.display = "none";
-                if (tutorial) crystal_tutorial_message.style.display = "block";
-                run_envtax_prediction();
+            else {
+                crystalscreen.classList.remove(`crystal${crystal_cat}`);
+                document.onkeydown = null;
+                run_envtax_screen();
+            }
+        }
+        if (crystal_num < 5 || envtax_predicted) {
+            collect.onclick = function() {
+                score += crystal_val;
+                dailyscore += crystal_val;
+                add_results("crystal", crystal_val, "collect", score);
+                advancecrystal();
+            }
+            discard.onclick = function() {
+                add_results("crystal", crystal_val, "discard", score);
+                advancecrystal();
+            }
+        }
+        else {
+            document.onkeydown = function(event) {
+                if (event.key == ' ') {
+                    // Move to envtax prediction
+                    crystal5_disable.style.display = "none";
+                    if (tutorial) crystal_tutorial_message.style.display = "block";
+                    run_envtax_prediction();
+                }
             }
         }
     }
@@ -403,22 +417,20 @@ function run_trials(oldscreen, tutorial, endfunction) {
         envtax_crystal5_points.innerHTML = crystal_val.toString();
         envtax_discard_points.innerHTML = dailyscore.toString();
         envtax_collect_points.innerHTML = (dailyscore + crystal_val).toString();
-        envtax_input.value = Math.trunc(Math.random() * 200 - 100);
+        envtax_input.value = Math.trunc(Math.random() * 300);
         current_envtax_prediction.innerHTML = `${envtax_input.value}`;
         show_screen(crystalscreen, envtax_prediction_screen);
         envtax_input.focus();
-        document.onkeydown = function(event) {
-            if (event.key == 'ArrowLeft' || event.key == 'ArrowRight') {
-                current_envtax_prediction.innerHTML = `${envtax_input.value}`;
-            }
-            else if (event.key == ' ') {
-                envtax_prediction = Number(envtax_input.value);
-                envtax_predicted = true;
-                crystal5info.classList.remove(`crystal${crystal_cat}`);
-                add_results("envtax_prediction", 0, envtax_prediction, score);
-                show_screen(envtax_prediction_screen, crystalscreen);
-                run_crystals();
-            }
+        envtax_input.oninput = function() {
+            current_envtax_prediction.innerHTML = `${envtax_input.value}`;
+        }
+        envtax_prediction_screen.querySelector(".predict").onclick = function() {
+            envtax_prediction = Number(envtax_input.value);
+            envtax_predicted = true;
+            crystal5info.classList.remove(`crystal${crystal_cat}`);
+            add_results("envtax_prediction", 0, envtax_prediction, score);
+            show_screen(envtax_prediction_screen, crystalscreen);
+            run_crystals();
         }
     }
     function run_envtax_screen() {
