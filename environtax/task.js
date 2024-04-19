@@ -7,8 +7,8 @@ const MAX_TIME = `${MAX_MINUTES} minutes`;
 const CRYSTAL_CAT = [10,  25, 40, 55, 70];
 const TUTORIAL_TRIALS = 5;
 const BASE_TAX = 15; // TODO: change this to a better number
-const ENVTAX_NOISE = 10.;
-const NUM_TRIALS = 50;
+const ENVTAX_NOISE = 50.;
+const NUM_TRIALS = 1;
 const POINT_VALUE = 0.001674361; // TODO: change
 const URLPARAMS = new URLSearchParams(window.location.search);
 
@@ -65,7 +65,7 @@ function get_envtax_prediction_points(prediction, envtax) {
 window.onload = function() {
     substitute_constants();
     preload_images(
-        "/crystalmining/img/astronaut.png",
+        "/crystalmining/img/astronaut_small.png",
         "/crystalmining/img/crystals.jpg",
         "/crystalmining/img/planet.png",
         "/crystalmining/img/spaceship.png",
@@ -107,6 +107,13 @@ window.onload = function() {
         "/crystalmining/img/space_start.png",
         "/crystalmining/img/spaceship_flying.png",
         "/crystalmining/img/zyxlon.jpg",
+        "/crystalmining/img/own_tax_prediction.png",
+        "/crystalmining/img/crystal5_predict_taxes.png",
+        "/crystalmining/img/colleague_tax_prediction.png",
+        "/crystalmining/img/own_tax_prediction_results.png",
+        "/crystalmining/img/tax_outcome.png",
+        "/crystalmining/img/mini_game.png",
+        "/crystalmining/img/colleague_tax_prediction_results.png",
     );
     let start_button = document.querySelector("#start-button");
     start_button.innerHTML = "START";
@@ -129,13 +136,13 @@ function start_experiment() {
     document.addEventListener("contextmenu", event => event.preventDefault());
     document.querySelector("#ethics").remove();
     document.body.className = "running";
-    // run_instructions(
-    //     null,
-    //     document.querySelector("#tutorial-instructions"),
-    //     function(last_page) {
-    //         run_tutorial(last_page);
-    //     });
-    run_trials(null, false, show_feedback);
+    run_instructions(
+        null,
+        document.querySelector("#tutorial-instructions"),
+        function(last_page) {
+            run_tutorial(last_page);
+        });
+    // run_trials(null, false, show_feedback);
     // show_feedback(100);
     // game_maxtime_timeout = setTimeout(game_maxtime_exceeded, MAX_MINUTES*60*1000);
 }
@@ -244,6 +251,8 @@ const collect_points = document.querySelector("#collect_points");
 const score_points = document.querySelectorAll(".score_points");
 const crystal5_disable = document.querySelector("#crystal5_disable");
 const envtax_prediction_screen = document.querySelector("#envtax_prediction_screen");
+const envtax_prediction_results_screen = document.querySelector("#envtax_prediction_results");
+const colleague_prediction_screen = document.querySelector("#colleague_prediction_screen");
 const current_envtax_prediction = document.querySelector("#current_envtax_prediction");
 const envtax_crystal5_points = document.querySelector("#envtax_crystal5_points");
 const discard = document.querySelector("#discard");
@@ -254,7 +263,6 @@ const crystal5info = document.querySelector("#crystal5info");
 const envtax_input = document.querySelector("#envtax_prediction input");
 const envtax_screen = document.querySelector("#envtax_screen");
 const envtax_points = document.querySelector("#envtax_points_text");
-const envtax_daily_points = document.querySelector("#envtax_daily_points");
 const envtax_prediction_points = document.querySelector("#envtax_prediction_points");
 const crystal_tutorial_message = document.querySelector("#crystal_collect .tutorial");
 const flight_tutorial_message = document.querySelector("#flightscreen .tutorial");
@@ -268,7 +276,7 @@ function update_score(score) {
 function run_tutorial(oldscreen) {
     run_trials(oldscreen, true, function(score) {
         run_instructions(
-            envtax_screen,
+            envtax_prediction_results_screen,
             document.querySelector("#game-instructions"),
             function(last_page) {
                 run_trials(last_page, false, show_feedback);
@@ -297,7 +305,7 @@ function show_feedback(score) {
         payment = BASE_PAYMENT + MAX_BONUS;
     payment_text.innerHTML = payment.toFixed(2);
     add_results("payment", payment, null, score);
-    show_screen(envtax_screen, feedback_screen);
+    show_screen(envtax_prediction_results_screen, feedback_screen);
     document.onfullscreenchange = finish_experiment;
     submit_button.onclick = function() {
         document.exitFullscreen();
@@ -406,10 +414,10 @@ function run_trials(oldscreen, tutorial, endfunction) {
             // Move to envtax prediction
             crystal5_disable.style.display = "none";
             if (tutorial) crystal_tutorial_message.style.display = "block";
-            run_envtax_prediction();
+            run_own_envtax_prediction();
         }
     }
-    function run_envtax_prediction() {
+    function run_own_envtax_prediction() {
         crystal5info.classList.add(`crystal${crystal_cat}`);
         envtax_crystal5_points.innerHTML = crystal_val.toString();
         envtax_discard_points.innerHTML = dailyscore.toString();
@@ -434,7 +442,6 @@ function run_trials(oldscreen, tutorial, endfunction) {
         let envtax = get_envtax(dailyscore);
         score += envtax;
         update_score(score);
-        envtax_daily_points.innerHTML = dailyscore.toString();
         envtax_points.innerHTML = `${-envtax}`;
         add_results("envtax", envtax, null, score);
         show_screen(crystalscreen, envtax_screen);
@@ -442,24 +449,107 @@ function run_trials(oldscreen, tutorial, endfunction) {
         continue_button.style.display = "none";
         set_game_timeout(function() {
             continue_button.onclick = function() {
-                trial += 1;
-                if (trial < num_trials) {
-                    run_flight(envtax_screen);
-                }
-                else {
-                    endfunction(score);
-                }
+                run_own_envtax_prediction_results(envtax);
             }
             continue_button.style.display = "block";
-        }, 4500);
+        }, 2000);
     }
-    function run_envtax_prediction_results(envtax) {
+    function run_own_envtax_prediction_results(envtax) {
         let prediction_points = get_envtax_prediction_points(envtax_prediction, envtax);
         score += prediction_points;
         update_score(score);
         envtax_prediction_points.innerHTML = prediction_points.toString();
         add_results("own_envtax_prediction_points", prediction_points, null, score);
+        envtax_prediction_results_screen.querySelector("#crystal_score_predresults").innerHTML = dailyscore.toString();
+        envtax_prediction_results_screen.querySelector("#tax_payment_predresults").innerHTML = (-envtax).toString();
+        envtax_prediction_results_screen.querySelector("#prediction_predresults").innerHTML = (-envtax_prediction).toString();
+        envtax_prediction_results_screen.querySelector("#envtax_prediction_points").innerHTML = prediction_points.toString();
+        if (tutorial) {
+            envtax_prediction_results_screen.querySelector("#whos_taxes").innerHTML = "your";
+        }
+        let total = (dailyscore + envtax);
+        let totalstr;
+        if (total >= 0) {
+            totalstr = total.toString();
+        }
+        else {
+            totalstr = `&minus;${-total}`;
+        }
+        envtax_prediction_results_screen.querySelector("#total_predresults").innerHTML = totalstr;
+        envtax_prediction_results_screen.classList.add("own_taxes_prediction");
         show_screen(envtax_screen, envtax_prediction_results_screen);
+        let continue_button = envtax_prediction_results_screen.querySelector("button");
+        continue_button.onclick = function() {
+            envtax_prediction_results_screen.classList.remove("own_taxes_prediction");
+            run_colleague_envtax_prediction();
+        }
+        continue_button.style.display = "block";
+    }
+    function run_colleague_envtax_prediction() {
+        let colleague_crystalscore;
+        if (Math.random() < 0.9) {
+            colleague_crystalscore = Math.trunc(Math.random() * 150);
+        }
+        else {
+            colleague_crystalscore = 150 + Math.trunc(Math.random() * 100);
+        }
+        colleague_prediction_screen.querySelector("#colleague_crystal_score").innerHTML = colleague_crystalscore.toString();
+        let taxpredictioninput = colleague_prediction_screen.querySelector("input");
+        let taxpredictiondisplay = colleague_prediction_screen.querySelector("#colleague_envtax_prediction");
+        let minerno = Math.trunc(Math.random() * 10) + 1;
+        colleague_prediction_screen.classList.add(`colleague_taxes_prediction${minerno}`);
+        taxpredictioninput.value = Math.trunc(Math.random() * 300);
+        taxpredictiondisplay.innerHTML = `${taxpredictioninput.value}`;
+        show_screen(envtax_prediction_results_screen, colleague_prediction_screen);
+        taxpredictioninput.focus();
+        taxpredictioninput.oninput = function() {
+            taxpredictiondisplay.innerHTML = `${taxpredictioninput.value}`;
+        }
+        colleague_prediction_screen.querySelector(".predict").onclick = function() {
+            add_results("colleague_crystalscore", 0, colleague_crystalscore, score);
+            add_results("colleague_envtax_prediction", 0, -Number(taxpredictioninput.value), score);
+            colleague_prediction_screen.classList.remove(`colleague_taxes_prediction${minerno}`);
+            run_colleague_envtax_prediction_results(colleague_crystalscore, -Number(taxpredictioninput.value), minerno);
+        }
+    }
+    function run_colleague_envtax_prediction_results(colleague_crystalscore, envtax_prediction, minerno) {
+        let colleague_envtax = get_envtax(colleague_crystalscore);
+        let prediction_points = get_envtax_prediction_points(envtax_prediction, colleague_envtax);
+        score += prediction_points;
+        update_score(score);
+        envtax_prediction_points.innerHTML = prediction_points.toString();
+        add_results("colleague_envtax_prediction_points", prediction_points, null, score);
+        envtax_prediction_results_screen.querySelector("#crystal_score_predresults").innerHTML = colleague_crystalscore.toString();
+        envtax_prediction_results_screen.querySelector("#tax_payment_predresults").innerHTML = (-colleague_envtax).toString();
+        envtax_prediction_results_screen.querySelector("#prediction_predresults").innerHTML = (-envtax_prediction).toString();
+        envtax_prediction_results_screen.querySelector("#envtax_prediction_points").innerHTML = prediction_points.toString();
+        envtax_prediction_results_screen.classList.add(`colleague_taxes_prediction${minerno}`);
+        if (tutorial) {
+            envtax_prediction_results_screen.querySelector("#whos_taxes").innerHTML = "your colleague’s";
+        }
+        let total = (colleague_crystalscore + colleague_envtax);
+        let totalstr;
+        if (total >= 0) {
+            totalstr = total.toString();
+        }
+        else {
+            totalstr = `&minus;${-total}`;
+        }
+        envtax_prediction_results_screen.querySelector("#total_predresults").innerHTML = totalstr;
+        show_screen(colleague_prediction_screen, envtax_prediction_results_screen);
+        
+        let continue_button = envtax_prediction_results_screen.querySelector("button");
+        continue_button.onclick = function() {
+            envtax_prediction_results_screen.classList.remove(`colleague_taxes_prediction${minerno}`);
+            trial += 1;
+            if (trial < num_trials) {
+                run_flight(envtax_prediction_results_screen);
+            }
+            else {
+                endfunction(score);
+            }
+        }
+        continue_button.style.display = "block";
     }
     run_flight(oldscreen);
 }
