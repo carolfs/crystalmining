@@ -458,12 +458,14 @@ function run_trials(oldscreen, tutorial, endfunction) {
         let prediction_points = get_envtax_prediction_points(envtax_prediction, envtax);
         score += prediction_points;
         update_score(score);
-        envtax_prediction_points.innerHTML = prediction_points.toString();
+        if (prediction_points != 1)
+            envtax_prediction_points.innerHTML = `${prediction_points} points`;
+        else
+        envtax_prediction_points.innerHTML = '1 point';
         add_results("own_envtax_prediction_points", prediction_points, null, score);
         envtax_prediction_results_screen.querySelector("#crystal_score_predresults").innerHTML = dailyscore.toString();
         envtax_prediction_results_screen.querySelector("#tax_payment_predresults").innerHTML = (-envtax).toString();
         envtax_prediction_results_screen.querySelector("#prediction_predresults").innerHTML = (-envtax_prediction).toString();
-        envtax_prediction_results_screen.querySelector("#envtax_prediction_points").innerHTML = prediction_points.toString();
         if (tutorial) {
             envtax_prediction_results_screen.querySelector("#whos_taxes").innerHTML = "your";
         }
