@@ -558,3 +558,60 @@ summary {
     padding: 10px 15px;
     border: 1px solid black;
 }
+
+#quiz > ol > li {
+    padding: 100px;
+    font-size: 180%;
+}
+
+#quiz > ol> li> ol {
+    margin-top: 20px;
+}
+
+#quiz > ol> li> ol > li {
+    cursor: pointer;
+    border: 1px solid #0000;
+    padding: 5px 10px;
+    list-style-position: inside;
+    margin: 0 0 0 -20px;
+}
+
+#quiz > ol> li> ol > li:hover {
+    border: 1px solid #fff;
+}
+
+.answer-correct {
+    font-size: 40px;
+    height: 60px;
+    position: absolute;
+    bottom: 50px;
+    left: 500px;
+    padding-left: 80px;
+    background: url("/crystalmining/img/quiz_correct.png") no-repeat 5px 0%;
+}
+
+.answer-wrong {
+    font-size: 40px;
+    height: 60px;
+    position: absolute;
+    bottom: 50px;
+    left: 50px;
+    padding-left: 80px;
+    background: url("/crystalmining/img/quiz_incorrect.png") no-repeat 5px 0%;
+}
+
+.highlight-answer {
+    border: 1px solid #fff;
+    color: black;
+    background-color: #99ff99;
+}
+
+.continue-link {
+    color: #ffee99;
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.continue-link:hover {
+    color: #ff9933;
+}

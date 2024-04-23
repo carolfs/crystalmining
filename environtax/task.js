@@ -1,15 +1,15 @@
 // Settings
 
-const BASE_PAYMENT = 6;
+const BASE_PAYMENT = 4; // Predicting the experiment will take 40 minutes
 const MAX_BONUS = 6;
 const MAX_MINUTES = 75;
 const MAX_TIME = `${MAX_MINUTES} minutes`;
 const CRYSTAL_CAT = [10,  25, 40, 55, 70];
-const TUTORIAL_TRIALS = 5;
-const BASE_TAX = 15; // TODO: change this to a better number
-const ENVTAX_NOISE = 50.;
-const NUM_TRIALS = 1;
-const POINT_VALUE = 0.001674361; // TODO: change
+const TUTORIAL_TRIALS = 3;
+const BASE_TAX = 20;
+const ENVTAX_NOISE = 15.;
+const NUM_TRIALS = 50;
+const POINT_VALUE = MAX_BONUS / 2852; // The max number of points (without considering luck) is around 2852
 const URLPARAMS = new URLSearchParams(window.location.search);
 
 var start_time = null;
@@ -55,7 +55,9 @@ function get_envtax(points) {
         mean_envtax += envtaxcoefs[i]*p;
         p *= points;
     }
-    return Math.round((mean_envtax + randn()*ENVTAX_NOISE)) - BASE_TAX;
+    let tax = Math.round((mean_envtax + randn()*ENVTAX_NOISE)) - BASE_TAX;
+    if (tax > 0) tax = 0; // The tax cannot be positive
+    return tax;
 }
 
 function get_envtax_prediction_points(prediction, envtax) {
@@ -76,13 +78,11 @@ window.onload = function() {
         "/crystalmining/img/sky.png",
         "/crystalmining/img/sky_planet.png",
         "/crystalmining/img/crystal_profit.jpg",
-        "/crystalmining/img/arrow_envtax.png",
-        "/crystalmining/img/arrow_envtax_prediction.png",
         "/crystalmining/img/arrow_collect.png",
         "/crystalmining/img/arrow_discard.png",
         "/crystalmining/img/arrow_score.png",
-        "/crystalmining/img/envtax_prediction_screen.png",
-        "/crystalmining/img/envtax_screen.png",
+        "/crystalmining/img/arrow_bonus.png",
+        "/crystalmining/img/arrow_bonus_prediction.png",
         "/crystalmining/img/taxofficer.png",
         "/crystalmining/img/crystal1.jpg",
         "/crystalmining/img/crystal2.jpg",
@@ -114,6 +114,8 @@ window.onload = function() {
         "/crystalmining/img/tax_outcome.png",
         "/crystalmining/img/mini_game.png",
         "/crystalmining/img/colleague_tax_prediction_results.png",
+        "/crystalmining/img/quiz_correct.png",
+        "/crystalmining/img/quiz_incorrect.png",
     );
     let start_button = document.querySelector("#start-button");
     start_button.innerHTML = "START";
@@ -136,6 +138,7 @@ function start_experiment() {
     document.addEventListener("contextmenu", event => event.preventDefault());
     document.querySelector("#ethics").remove();
     document.body.className = "running";
+    
     run_instructions(
         null,
         document.querySelector("#tutorial-instructions"),
@@ -144,7 +147,7 @@ function start_experiment() {
         });
     // run_trials(null, false, show_feedback);
     // show_feedback(100);
-    // game_maxtime_timeout = setTimeout(game_maxtime_exceeded, MAX_MINUTES*60*1000);
+    game_maxtime_timeout = setTimeout(game_maxtime_exceeded, MAX_MINUTES*60*1000);
 }
 
 function substitute_constants() {
@@ -277,9 +280,9 @@ function run_tutorial(oldscreen) {
     run_trials(oldscreen, true, function(score) {
         run_instructions(
             envtax_prediction_results_screen,
-            document.querySelector("#game-instructions"),
+            document.querySelector("#quiz-instructions"),
             function(last_page) {
-                run_trials(last_page, false, show_feedback);
+                run_quiz(last_page);
             });
     });
 }
@@ -541,7 +544,7 @@ function run_trials(oldscreen, tutorial, endfunction) {
         show_screen(colleague_prediction_screen, envtax_prediction_results_screen);
         
         let continue_button = envtax_prediction_results_screen.querySelector("button");
-        continue_button.onclick = function() {
+        continue_button.onclick = function () {
             envtax_prediction_results_screen.classList.remove(`colleague_taxes_prediction${minerno}`);
             trial += 1;
             if (trial < num_trials) {
@@ -554,4 +557,103 @@ function run_trials(oldscreen, tutorial, endfunction) {
         continue_button.style.display = "block";
     }
     run_flight(oldscreen);
+}
+
+function run_quiz(last_screen) {
+    const questions = document.querySelectorAll("#quiz > ol > li");
+    let answers = Array(questions.length).fill(0);
+    let current = 0;
+    let wrong = Array(questions.length).fill(true);
+    let answered = false;
+    // Find the correct answers and append feedback
+    for (let i = 0; i < questions.length; i++) {
+        let question = questions[i];
+        let choices = question.querySelectorAll("li");
+        for (let j = 0; j < choices.length; j++) {
+            let choice = choices[j];
+            if (choice.classList.contains("correct")) {
+                answers[i] = j + 1;
+            }
+        }
+        let wrong_feedback = document.createElement("div");
+        let right_feedback = document.createElement("div");
+        wrong_feedback.classList.add("answer-wrong");
+        right_feedback.classList.add("answer-correct");
+        wrong_feedback.innerHTML = `Incorrect! The answer is option ${answers[i]}. `;
+        let continue_link = document.createElement("span");
+        continue_link.classList.add("continue-link");
+        continue_link.innerHTML = 'Click here to continue.'
+        wrong_feedback.appendChild(continue_link);
+        right_feedback.innerHTML = 'Correct!';
+        question.appendChild(wrong_feedback);
+        question.appendChild(right_feedback);
+    }
+    for (let i = 0; i < questions.length; i++) {
+        let question = questions[i];
+        for (let answer of question.querySelectorAll("li")) {
+            answer.onclick = function () {
+                if (answered) return;
+                answered = true;
+                let answer_correct = answer.classList.contains("correct");
+                let correct_option = questions[current].querySelector(".correct");
+                if (answer_correct) {
+                    wrong[current] = false;
+                    add_results(`quiz ${current}`, 1, answer.innerHTML, 0);
+                    questions[current].querySelector(".answer-correct").style.display = "block";
+                }
+                else {
+                    questions[current].querySelector(".answer-wrong").style.display = "block";
+                    add_results(`quiz ${current}`, 0, answer.innerHTML, 0);
+                }
+                correct_option.classList.add("highlight-answer");
+                let foundwrong = false;
+                for (let j = current + 1; j < questions.length; j++) {
+                    if (wrong[j]) {
+                        current = j;
+                        foundwrong = true;
+                        break;
+                    }
+                }
+                if (!foundwrong) {
+                    for (let j = 0; j < current; j++) {
+                        if (wrong[j]) {
+                            current = j;
+                            foundwrong = true;
+                            break;
+                        }
+                    }
+                }
+                if (!foundwrong) {
+                    run_instructions(
+                        questions[i],
+                        document.querySelector("#game-instructions"),
+                        function(last_page) {
+                            run_trials(last_page, false, show_feedback);
+                        });
+                }
+                else {
+                    if (answer_correct) {
+                        set_game_timeout(function() {
+                            questions[current].querySelector(".answer-correct").style.display = "none";
+                            questions[current].querySelector(".answer-wrong").style.display = "none";
+                            answered = false;
+                            show_screen(questions[i], questions[current]);
+                        }, 1500);
+                    }
+                    else {
+                        questions[i].querySelector(".continue-link").onclick = function() {
+                            correct_option.classList.remove("highlight-answer");
+                            questions[current].querySelector(".answer-correct").style.display = "none";
+                            questions[current].querySelector(".answer-wrong").style.display = "none";
+                            answered = false;
+                            show_screen(questions[i], questions[current]);
+                        }
+                    }
+                }
+            }
+        }
+    }
+    questions[current].querySelector(".answer-correct").style.display = "none";
+    questions[current].querySelector(".answer-wrong").style.display = "none";
+    show_screen(last_screen, questions[current]);
 }
