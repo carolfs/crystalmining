@@ -5,10 +5,10 @@ const MAX_BONUS = 6;
 const MAX_MINUTES = 75;
 const MAX_TIME = `${MAX_MINUTES} minutes`;
 const CRYSTAL_CAT = [10,  25, 40, 55, 70];
-const TUTORIAL_TRIALS = 1; // TODO: Change it 3
+const TUTORIAL_TRIALS = 3;
 const BASE_TAX = 20;
 const ENVTAX_NOISE = 15.;
-const NUM_TRIALS = 2; // TODO: Change it to 50
+const NUM_TRIALS = 50;
 const POINT_VALUE = MAX_BONUS / 2852; // The max number of points (without considering luck) is around 2852
 const URLPARAMS = new URLSearchParams(window.location.search);
 
