@@ -5,10 +5,10 @@ const MAX_BONUS = 6;
 const MAX_MINUTES = 75;
 const MAX_TIME = `${MAX_MINUTES} minutes`;
 const CRYSTAL_CAT = [10,  25, 40, 55, 70];
-const TUTORIAL_TRIALS = 3;
+const TUTORIAL_TRIALS = 1; // TODO CHANGE
 const BASE_TAX = 20;
 const ENVTAX_NOISE = 15.;
-const NUM_TRIALS = 50;
+const NUM_TRIALS = 5; // TODO CHANGE
 const POINT_VALUE = MAX_BONUS / 2852; // The max number of points (without considering luck) is around 2852
 const URLPARAMS = new URLSearchParams(window.location.search);
 
@@ -464,7 +464,7 @@ function run_trials(oldscreen, tutorial, endfunction) {
         if (prediction_points != 1)
             envtax_prediction_points.innerHTML = `${prediction_points} points`;
         else
-        envtax_prediction_points.innerHTML = '1 point';
+            envtax_prediction_points.innerHTML = '1 point';
         add_results("own_envtax_prediction_points", prediction_points, null, score);
         envtax_prediction_results_screen.querySelector("#crystal_score_predresults").innerHTML = dailyscore.toString();
         envtax_prediction_results_screen.querySelector("#tax_payment_predresults").innerHTML = (-envtax).toString();
@@ -492,12 +492,7 @@ function run_trials(oldscreen, tutorial, endfunction) {
     }
     function run_colleague_envtax_prediction() {
         let colleague_crystalscore;
-        if (Math.random() < 0.9) {
-            colleague_crystalscore = Math.trunc(Math.random() * 150);
-        }
-        else {
-            colleague_crystalscore = 150 + Math.trunc(Math.random() * 100);
-        }
+        colleague_crystalscore = Math.trunc(Math.random() * 170); // Unlikely to pay more than 300 points in tax
         colleague_prediction_screen.querySelector("#colleague_crystal_score").innerHTML = colleague_crystalscore.toString();
         let taxpredictioninput = colleague_prediction_screen.querySelector("input");
         let taxpredictiondisplay = colleague_prediction_screen.querySelector("#colleague_envtax_prediction");
@@ -522,12 +517,14 @@ function run_trials(oldscreen, tutorial, endfunction) {
         let prediction_points = get_envtax_prediction_points(envtax_prediction, colleague_envtax);
         score += prediction_points;
         update_score(score);
-        envtax_prediction_points.innerHTML = prediction_points.toString();
+        if (prediction_points != 1)
+            envtax_prediction_points.innerHTML = `${prediction_points} points`;
+        else
+            envtax_prediction_points.innerHTML = '1 point';
         add_results("colleague_envtax_prediction_points", prediction_points, null, score);
         envtax_prediction_results_screen.querySelector("#crystal_score_predresults").innerHTML = colleague_crystalscore.toString();
         envtax_prediction_results_screen.querySelector("#tax_payment_predresults").innerHTML = (-colleague_envtax).toString();
         envtax_prediction_results_screen.querySelector("#prediction_predresults").innerHTML = (-envtax_prediction).toString();
-        envtax_prediction_results_screen.querySelector("#envtax_prediction_points").innerHTML = prediction_points.toString();
         envtax_prediction_results_screen.classList.add(`colleague_taxes_prediction${minerno}`);
         if (tutorial) {
             envtax_prediction_results_screen.querySelector("#whos_taxes").innerHTML = "your colleague’s";
@@ -596,14 +593,15 @@ function run_quiz(last_screen) {
                 answered = true;
                 let answer_correct = answer.classList.contains("correct");
                 let correct_option = questions[current].querySelector(".correct");
+                let escaped_answer = `"${answer.innerHTML}"`;
                 if (answer_correct) {
                     wrong[current] = false;
-                    add_results(`quiz ${current}`, 1, answer.innerHTML, 0);
+                    add_results(`quiz ${current}`, 1, escaped_answer, 0);
                     questions[current].querySelector(".answer-correct").style.display = "block";
                 }
                 else {
                     questions[current].querySelector(".answer-wrong").style.display = "block";
-                    add_results(`quiz ${current}`, 0, answer.innerHTML, 0);
+                    add_results(`quiz ${current}`, 0, escaped_answer, 0);
                 }
                 correct_option.classList.add("highlight-answer");
                 let foundwrong = false;
