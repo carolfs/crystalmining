@@ -139,11 +139,17 @@ function start_experiment() {
     document.querySelector("#ethics").remove();
     document.body.className = "running";
     
+    // run_instructions(
+    //     null,
+    //     document.querySelector("#tutorial-instructions"),
+    //     function(last_page) {
+    //         run_tutorial(last_page);
+    //     });
     run_instructions(
         null,
-        document.querySelector("#tutorial-instructions"),
+        document.querySelector("#game-instructions"),
         function(last_page) {
-            run_tutorial(last_page);
+            run_trials(last_page, false, show_feedback);
         });
     // run_trials(null, false, show_feedback);
     // show_feedback(100);
@@ -167,6 +173,10 @@ function substitute_constants() {
         else if (span.classList.contains("NUM_TRIALS")) {
             span.append(NUM_TRIALS.toString());
         }
+        else if (span.classList.contains("POINTS_WORTH")) {
+            span.append((Math.round(10000*POINT_VALUE)/100).toString());
+        }
+
     }
 }
 
