@@ -139,18 +139,18 @@ function start_experiment() {
     document.querySelector("#ethics").remove();
     document.body.className = "running";
     
-    // run_instructions(
-    //     null,
-    //     document.querySelector("#tutorial-instructions"),
-    //     function(last_page) {
-    //         run_tutorial(last_page);
-    //     });
     run_instructions(
         null,
-        document.querySelector("#game-instructions"),
+        document.querySelector("#tutorial-instructions"),
         function(last_page) {
-            run_trials(last_page, false, show_feedback);
+            run_tutorial(last_page);
         });
+    // run_instructions(
+    //     null,
+    //     document.querySelector("#game-instructions"),
+    //     function(last_page) {
+    //         run_trials(last_page, false, show_feedback);
+    //     });
     // run_trials(null, false, show_feedback);
     // show_feedback(100);
     // game_maxtime_timeout = setTimeout(game_maxtime_exceeded, MAX_MINUTES*60*1000);
