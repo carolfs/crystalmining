@@ -1,23 +1,23 @@
 // Settings
 
-const BASE_PAYMENT = 4; // Predicting the experiment will take 40 minutes
-const MAX_BONUS = 6;
-const MAX_MINUTES = 75;
+const BASE_PAYMENT = 4.5; // Predicting the experiment will take 45 minutes
+const MAX_BONUS = 5.5;
+const MAX_MINUTES = 90;
 const MAX_TIME = `${MAX_MINUTES} minutes`;
 const CRYSTAL_CAT = [10,  25, 40, 55, 70];
 const TUTORIAL_TRIALS = 3;
-const BASE_TAX = 20;
-const ENVTAX_NOISE = 15.;
+const ENVTAX_NOISE = 10.;
 const NUM_TRIALS = 50;
-const POINT_VALUE = MAX_BONUS / 2852; // The max number of points (without considering luck) is around 2852
+const POINT_VALUE = MAX_BONUS / 1913; // The max number of points (without considering luck) is around 1913
 const URLPARAMS = new URLSearchParams(window.location.search);
+const MAXCRYSTAL = 300;
 
 var start_time = null;
 
-var results = "time,event,points,input,score\n";
+var results = "time,event,points,value,score\n";
 
-function add_results(event, points, input, score) {
-    let text = `${Date.now()},${event},${points},${input},${score}\n`;
+function add_results(event, points, value, score) {
+    let text = `${Date.now()},${event},${points},${value},${score}\n`;
     results = results.concat(text);
 }
 
@@ -45,17 +45,17 @@ function randn() {
     return Math.sqrt( -2.0 * Math.log( u ) ) * Math.cos( 2.0 * Math.PI * v );
 }
 
-const envtaxcoefs = 
-    [-0.27023863, 0.00464154511, 0.00930406776, -0.000303943452, 1.62008257e-06, -2.57205892e-09];
-
+const envtaxcoefs = [-15.5232772, 0.167360366, -0.00274054077, -0.000139726622, 1.19468684e-06,
+    -3.70999034e-09, 4.08332221e-12];
+    
 function get_envtax(points) {
     let mean_envtax = 0.;
     let p = 1.;
     for (let i = 0; i < envtaxcoefs.length; i++) {
-        mean_envtax += envtaxcoefs[i]*p;
+        mean_envtax += envtaxcoefs[i] * p;
         p *= points;
     }
-    let tax = Math.round((mean_envtax + randn()*ENVTAX_NOISE)) - BASE_TAX;
+    let tax = Math.round((mean_envtax + randn() * ENVTAX_NOISE));
     if (tax > 0) tax = 0; // The tax cannot be positive
     return tax;
 }
@@ -67,55 +67,55 @@ function get_envtax_prediction_points(prediction, envtax) {
 window.onload = function() {
     substitute_constants();
     preload_images(
-        "/crystalmining/img/astronaut_small.png",
-        "/crystalmining/img/crystals.jpg",
-        "/crystalmining/img/planet.png",
-        "/crystalmining/img/spaceship.png",
-        "/crystalmining/img/ticket.png",
-        "/crystalmining/img/page_next.png",
-        "/crystalmining/img/page_previous.png",
-        "/crystalmining/img/greeting_astronaut.png",
-        "/crystalmining/img/sky.png",
-        "/crystalmining/img/sky_planet.png",
-        "/crystalmining/img/crystal_profit.jpg",
-        "/crystalmining/img/arrow_collect.png",
-        "/crystalmining/img/arrow_discard.png",
-        "/crystalmining/img/arrow_score.png",
-        "/crystalmining/img/arrow_bonus.png",
-        "/crystalmining/img/arrow_bonus_prediction.png",
-        "/crystalmining/img/taxofficer.png",
-        "/crystalmining/img/crystal1.jpg",
-        "/crystalmining/img/crystal2.jpg",
-        "/crystalmining/img/crystal3.jpg",
-        "/crystalmining/img/crystal4.jpg",
-        "/crystalmining/img/crystal5.jpg",
-        "/crystalmining/img/crystal6.jpg",
-        "/crystalmining/img/miner1.png",
-        "/crystalmining/img/miner2.png",
-        "/crystalmining/img/miner3.png",
-        "/crystalmining/img/miner4.png",
-        "/crystalmining/img/miner5.png",
-        "/crystalmining/img/miner6.png",
-        "/crystalmining/img/miner7.png",
-        "/crystalmining/img/miner8.png",
-        "/crystalmining/img/miner9.png",
-        "/crystalmining/img/miner10.png",
-        "/crystalmining/img/crystal_collect.png",
-        "/crystalmining/img/crystal_points.png",
-        "/crystalmining/img/crystals_unique.png",
-        "/crystalmining/img/disable_mining.png",
-        "/crystalmining/img/space_start.png",
-        "/crystalmining/img/spaceship_flying.png",
-        "/crystalmining/img/zyxlon.jpg",
-        "/crystalmining/img/own_tax_prediction.png",
-        "/crystalmining/img/crystal5_predict_taxes.png",
-        "/crystalmining/img/colleague_tax_prediction.png",
-        "/crystalmining/img/own_tax_prediction_results.png",
-        "/crystalmining/img/tax_outcome.png",
-        "/crystalmining/img/mini_game.png",
-        "/crystalmining/img/colleague_tax_prediction_results.png",
-        "/crystalmining/img/quiz_correct.png",
-        "/crystalmining/img/quiz_incorrect.png",
+        "/img/astronaut_small.png",
+        "/img/crystals.jpg",
+        "/img/planet.png",
+        "/img/spaceship.png",
+        "/img/ticket.png",
+        "/img/page_next.png",
+        "/img/page_previous.png",
+        "/img/greeting_astronaut.png",
+        "/img/sky.png",
+        "/img/sky_planet.png",
+        "/img/crystal_profit.jpg",
+        "/img/arrow_collect.png",
+        "/img/arrow_discard.png",
+        "/img/arrow_score.png",
+        "/img/arrow_bonus.png",
+        "/img/arrow_bonus_prediction.png",
+        "/img/taxofficer.png",
+        "/img/crystal1.jpg",
+        "/img/crystal2.jpg",
+        "/img/crystal3.jpg",
+        "/img/crystal4.jpg",
+        "/img/crystal5.jpg",
+        "/img/crystal6.jpg",
+        "/img/miner1.png",
+        "/img/miner2.png",
+        "/img/miner3.png",
+        "/img/miner4.png",
+        "/img/miner5.png",
+        "/img/miner6.png",
+        "/img/miner7.png",
+        "/img/miner8.png",
+        "/img/miner9.png",
+        "/img/miner10.png",
+        "/img/crystal_collect.png",
+        "/img/crystal_points.png",
+        "/img/crystals_unique.png",
+        "/img/disable_mining.png",
+        "/img/space_start.png",
+        "/img/spaceship_flying.png",
+        "/img/zyxlon.jpg",
+        "/img/own_tax_prediction.png",
+        "/img/crystal5_predict_taxes.png",
+        "/img/colleague_tax_prediction.png",
+        "/img/own_tax_prediction_results.png",
+        "/img/tax_outcome.png",
+        "/img/mini_game.png",
+        "/img/colleague_tax_prediction_results.png",
+        "/img/quiz_correct.png",
+        "/img/quiz_incorrect.png",
     );
     let start_button = document.querySelector("#start-button");
     start_button.innerHTML = "START";
@@ -147,7 +147,7 @@ function start_experiment() {
         });
     // run_trials(null, false, show_feedback);
     // show_feedback(100);
-    game_maxtime_timeout = setTimeout(game_maxtime_exceeded, MAX_MINUTES*60*1000);
+    // game_maxtime_timeout = setTimeout(game_maxtime_exceeded, MAX_MINUTES*60*1000);
 }
 
 function substitute_constants() {
@@ -231,8 +231,7 @@ function run_instructions(oldscreen, instructions, endfunction) {
 }
 
 function get_crystal_points() {
-    let val = Math.round(Math.exp(randn()*0.6 + 2.835));
-    return (val < 120) ? val : 120;
+    return Math.round(Math.exp(randn()*0.6 + 3.0));
 }
 
 function get_crystal_cat(val) {
@@ -289,10 +288,13 @@ function run_tutorial(oldscreen) {
 
 function finish_experiment() {
     let participant_feedback = document.querySelector("#participant_feedback");
-    add_results("feedback", JSON.stringify(participant_feedback.value), null, null);
+    add_results("feedback", 0, JSON.stringify(participant_feedback.value), 0);
     document.onkeydown = null;
     document.querySelector("#feedback_screen").style.display = "none";
     document.body.className = "finished";
+    document.querySelector("#results").href = 'data:text/plain;charset=utf-8,'.concat(
+        encodeURIComponent(results)
+    );
     send_results();
 }
 
@@ -307,7 +309,7 @@ function show_feedback(score) {
     else if (payment > BASE_PAYMENT + MAX_BONUS)
         payment = BASE_PAYMENT + MAX_BONUS;
     payment_text.innerHTML = payment.toFixed(2);
-    add_results("payment", payment, null, score);
+    add_results("payment", 0, payment, score);
     show_screen(envtax_prediction_results_screen, feedback_screen);
     document.onfullscreenchange = finish_experiment;
     submit_button.onclick = function() {
@@ -342,7 +344,7 @@ function run_trials(oldscreen, tutorial, endfunction) {
                 crystal_vals[i] = get_crystal_points();
             }
             let total = crystal_vals.reduce((a, b) => a + b, 0);
-            if (total <= 250) {
+            if (total <= MAXCRYSTAL) {
                 break;
             }
         }
@@ -425,14 +427,17 @@ function run_trials(oldscreen, tutorial, endfunction) {
         envtax_crystal5_points.innerHTML = crystal_val.toString();
         envtax_discard_points.innerHTML = dailyscore.toString();
         envtax_collect_points.innerHTML = (dailyscore + crystal_val).toString();
-        envtax_input.value = Math.trunc(Math.random() * 300);
+        envtax_input.value = Math.trunc(Math.random() * 350);
         current_envtax_prediction.innerHTML = `${envtax_input.value}`;
         show_screen(crystalscreen, envtax_prediction_screen);
         envtax_input.focus();
+        let predict_button = envtax_prediction_screen.querySelector(".predict");
+        predict_button.setAttribute("disabled", "disabled");
         envtax_input.oninput = function() {
             current_envtax_prediction.innerHTML = `${envtax_input.value}`;
+            predict_button.removeAttribute("disabled");
         }
-        envtax_prediction_screen.querySelector(".predict").onclick = function() {
+        predict_button.onclick = function() {
             envtax_prediction = -Number(envtax_input.value);
             envtax_predicted = true;
             crystal5info.classList.remove(`crystal${crystal_cat}`);
@@ -468,7 +473,6 @@ function run_trials(oldscreen, tutorial, endfunction) {
         add_results("own_envtax_prediction_points", prediction_points, null, score);
         envtax_prediction_results_screen.querySelector("#crystal_score_predresults").innerHTML = dailyscore.toString();
         envtax_prediction_results_screen.querySelector("#tax_payment_predresults").innerHTML = (-envtax).toString();
-        envtax_prediction_results_screen.querySelector("#prediction_predresults").innerHTML = (-envtax_prediction).toString();
         if (tutorial) {
             envtax_prediction_results_screen.querySelector("#whos_taxes").innerHTML = "your";
         }
@@ -484,28 +488,38 @@ function run_trials(oldscreen, tutorial, endfunction) {
         envtax_prediction_results_screen.classList.add("own_taxes_prediction");
         show_screen(envtax_screen, envtax_prediction_results_screen);
         let continue_button = envtax_prediction_results_screen.querySelector("button");
+        continue_button.style.display = "none";
         continue_button.onclick = function() {
             envtax_prediction_results_screen.classList.remove("own_taxes_prediction");
             run_colleague_envtax_prediction();
         }
-        continue_button.style.display = "block";
+        set_game_timeout(function() {
+            continue_button.style.display = "block";
+        }, 2000);
     }
     function run_colleague_envtax_prediction() {
         let colleague_crystalscore;
-        colleague_crystalscore = Math.trunc(Math.random() * 170); // Unlikely to pay more than 300 points in tax
+        do {
+            // This gives a reasonable number of points
+            colleague_crystalscore = Math.round(40*randn() + 60);
+        }
+        while (colleague_crystalscore < 0 || colleague_crystalscore > MAXCRYSTAL);
         colleague_prediction_screen.querySelector("#colleague_crystal_score").innerHTML = colleague_crystalscore.toString();
         let taxpredictioninput = colleague_prediction_screen.querySelector("input");
         let taxpredictiondisplay = colleague_prediction_screen.querySelector("#colleague_envtax_prediction");
         let minerno = Math.trunc(Math.random() * 10) + 1;
         colleague_prediction_screen.classList.add(`colleague_taxes_prediction${minerno}`);
-        taxpredictioninput.value = Math.trunc(Math.random() * 300);
+        taxpredictioninput.value = Math.trunc(Math.random() * 350);
         taxpredictiondisplay.innerHTML = `${taxpredictioninput.value}`;
         show_screen(envtax_prediction_results_screen, colleague_prediction_screen);
         taxpredictioninput.focus();
+        let predict_button = colleague_prediction_screen.querySelector(".predict");
+        predict_button.setAttribute("disabled", "disabled");
         taxpredictioninput.oninput = function() {
             taxpredictiondisplay.innerHTML = `${taxpredictioninput.value}`;
+            predict_button.removeAttribute("disabled");
         }
-        colleague_prediction_screen.querySelector(".predict").onclick = function() {
+        predict_button.onclick = function() {
             add_results("colleague_crystalscore", 0, colleague_crystalscore, score);
             add_results("colleague_envtax_prediction", 0, -Number(taxpredictioninput.value), score);
             colleague_prediction_screen.classList.remove(`colleague_taxes_prediction${minerno}`);
@@ -521,10 +535,9 @@ function run_trials(oldscreen, tutorial, endfunction) {
             envtax_prediction_points.innerHTML = `${prediction_points} points`;
         else
             envtax_prediction_points.innerHTML = '1 point';
-        add_results("colleague_envtax_prediction_points", prediction_points, null, score);
+        add_results("colleague_envtax", prediction_points, colleague_envtax, score);
         envtax_prediction_results_screen.querySelector("#crystal_score_predresults").innerHTML = colleague_crystalscore.toString();
         envtax_prediction_results_screen.querySelector("#tax_payment_predresults").innerHTML = (-colleague_envtax).toString();
-        envtax_prediction_results_screen.querySelector("#prediction_predresults").innerHTML = (-envtax_prediction).toString();
         envtax_prediction_results_screen.classList.add(`colleague_taxes_prediction${minerno}`);
         if (tutorial) {
             envtax_prediction_results_screen.querySelector("#whos_taxes").innerHTML = "your colleague’s";
@@ -541,6 +554,7 @@ function run_trials(oldscreen, tutorial, endfunction) {
         show_screen(colleague_prediction_screen, envtax_prediction_results_screen);
         
         let continue_button = envtax_prediction_results_screen.querySelector("button");
+        continue_button.style.display = "none";
         continue_button.onclick = function () {
             envtax_prediction_results_screen.classList.remove(`colleague_taxes_prediction${minerno}`);
             trial += 1;
@@ -551,7 +565,9 @@ function run_trials(oldscreen, tutorial, endfunction) {
                 endfunction(score);
             }
         }
-        continue_button.style.display = "block";
+        set_game_timeout(function() {
+            continue_button.style.display = "block";
+        }, 2000);
     }
     run_flight(oldscreen);
 }
@@ -593,7 +609,7 @@ function run_quiz(last_screen) {
                 answered = true;
                 let answer_correct = answer.classList.contains("correct");
                 let correct_option = questions[current].querySelector(".correct");
-                let escaped_answer = `"${answer.innerHTML}"`;
+                let escaped_answer = JSON.stringify(answer.innerHTML);
                 if (answer_correct) {
                     wrong[current] = false;
                     add_results(`quiz ${current}`, 1, escaped_answer, 0);
@@ -613,7 +629,7 @@ function run_quiz(last_screen) {
                     }
                 }
                 if (!foundwrong) {
-                    for (let j = 0; j < current; j++) {
+                    for (let j = 0; j <= current; j++) {
                         if (wrong[j]) {
                             current = j;
                             foundwrong = true;
