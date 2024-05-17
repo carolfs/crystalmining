@@ -1,0 +1,668 @@
+#start-button {
+    font-size: xx-large
+}
+
+#aborted,
+#finished {
+    display: none;
+    font-size: xx-large
+}
+
+#finished h1 {
+    font-weight: 700
+}
+
+.instructions li {
+    display: none
+}
+
+.expscreen {
+    width: 1280px;
+    height: 720px;
+    background-color: #191919;
+    color: #fff;
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: none;
+    user-select: none
+}
+
+body {
+    font-family: 'Open Sans', sans-serif
+}
+
+body.running {
+    background-color: #000
+}
+
+body.aborted,
+body.finished {
+    background-color: #fff
+}
+
+.instructions li {
+    color: #fff;
+    padding: 38px 50px;
+    font-size: 27px;
+}
+
+.instructions img.page_previous {
+    position: absolute;
+    left: 20px;
+    bottom: 20px;
+    cursor: pointer;
+    width: 52px;
+    height: 60px;
+    content: url("/ecocredits/img/page_previous.png")
+}
+
+.instructions img.page_next {
+    position: absolute;
+    right: 20px;
+    bottom: 20px;
+    cursor: pointer;
+    width: 52px;
+    height: 60px;
+    content: url("/ecocredits/img/page_next.png")
+}
+
+.instructions img.instructions_illustration {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translate(-50%, 0%);
+    max-height: 549px;
+    width: auto;
+    border: #666 solid 1px
+}
+
+.instructions button.start {
+    margin: 200px auto 0 auto;
+    color: black;
+    font-size: 250%;
+    display: block;
+    padding: 20px;
+}
+
+button.predict {
+    margin: 0 auto;
+    color: black;
+    font-size: 300%;
+    display: block;
+    padding: 10px;
+    height: auto;
+}
+
+.score {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    width: 180px;
+    height: 105px;
+    background-color: #b4c7dc;
+    border-radius: 25px;
+    padding: 10px;
+    color: #000
+}
+
+.score h2 {
+    font-size: 30px;
+    font-weight: 700;
+    text-align: center;
+    margin: 0
+}
+
+.score p {
+    font-size: 45px;
+    line-height: 50fpx;
+    text-align: center;
+    margin: 0
+}
+
+#crystal_collect h1 {
+    font-size: 100px;
+    margin: 120px 0 0 300px;
+    text-align: center
+}
+
+#crystal_collect #points {
+    font-size: 80px;
+    font-weight: 400;
+    margin: 20px 0 0 300px;
+    text-align: center
+}
+
+#discard, #collect {
+    cursor: pointer
+}
+
+#discard,
+#collect,
+#ecocrd_discard,
+#ecocrd_collect {
+    position: absolute;
+    top: 440px;
+    left: 580px;
+    width: 160px;
+    height: 120px;
+    background-color: #ccc;
+    border-radius: 25px;
+    padding: 10px;
+    color: #000
+}
+
+#collect,
+#ecocrd_collect {
+    left: 850px;
+    background-color: #9f9
+}
+
+#discard h2,
+#collect h2,
+#ecocrd_discard h2,
+#ecocrd_collect h2 {
+    font-size: 25px;
+    line-height: 35px;
+    text-align: center;
+    font-weight: 700;
+    margin: 0
+}
+
+#discard p,
+#collect p,
+#ecocrd_discard p,
+#ecocrd_collect p {
+    font-size: 60px;
+    line-height: 70px;
+    text-align: center;
+    margin: 0
+}
+
+div#crystal_collect {
+    background-repeat: no-repeat;
+    background-position: 5% 50%
+}
+
+.crystal1 {
+    background-image: url(/ecocredits/img/crystal1.jpg)
+}
+
+.crystal2 {
+    background-image: url(/ecocredits/img/crystal2.jpg)
+}
+
+.crystal3 {
+    background-image: url(/ecocredits/img/crystal3.jpg)
+}
+
+.crystal4 {
+    background-image: url(/ecocredits/img/crystal4.jpg)
+}
+
+.crystal5 {
+    background-image: url(/ecocredits/img/crystal5.jpg)
+}
+
+.crystal6 {
+    background-image: url(/ecocredits/img/crystal6.jpg)
+}
+
+#ecocrd_screen {
+    background-image: url(/ecocredits/img/auditor.png);
+    background-repeat: no-repeat;
+    background-position: -5% 50%;
+    background-size: 60%
+}
+
+#ecocrd_screen table {
+    margin: 250px 0 0 700px;
+    width: 300px;
+}
+
+#ecocrd_screen th {
+    color: #50938a;
+    background-color: #dee7e5;
+    text-align: center;
+    font-size: 40px;
+    font-weight: 700;
+    padding: 10px
+}
+
+#ecocrd_screen td {
+    background-color: #b3cac7;
+    text-align: center;
+    font-size: 40px;
+    font-weight: 400;
+    padding: 10px
+}
+
+#ecocrd_screen tr.ecocrd_points td {
+    font-size: 80px;
+    font-weight: 700
+}
+
+.positive {
+    color: #0b0 !important
+}
+
+.negative {
+    color: red !important
+}
+
+.zero {
+    color: black !important
+}
+
+input {
+    color: #000
+}
+
+#crystal5info {
+    position: absolute;
+    top: 10px;
+    right: 0;
+    width: 600px;
+    font-size: 30px;
+    text-align: center;
+    padding-left: 200px;
+    opacity: .4
+}
+
+#crystal5info #ecocrd_discard,
+#crystal5info #ecocrd_collect {
+    display: inline-block;
+    position: relative;
+    left: auto;
+    top: auto;
+    margin-top: 20px
+}
+
+#ecocrd_prediction, #colleague_ecocrd_prediction_form {
+    margin: 250px 0 0 0;
+    text-align: center
+}
+
+#ecocrd_prediction label, #colleague_ecocrd_prediction_form label {
+    font-size: 80px
+}
+
+#ecocrd_prediction input, #colleague_ecocrd_prediction_form input {
+    width: 900px;
+    display: block;
+    margin: 20px auto
+}
+
+#ecocrd_prediction input:focus-visible, #colleague_ecocrd_prediction_form input:focus-visible {
+    outline: none;
+}
+
+#ecocrd_prediction p, #colleague_ecocrd_prediction_form p {
+    margin-top: 30px;
+    font-size: 50px
+}
+
+button#ecocrd_continue, button#predresults_continue {
+    font-size: 200%;
+    text-align: center;
+    position: absolute;
+    display: block;
+    right: 50px;
+    top: 350px;
+    color: #000;
+    line-height: 100%;
+    padding: 10px 10px 0px 10px;
+}
+
+.symbol {
+    font-size: 400%;
+}
+
+#crystal5info {
+    background-size: 40%;
+    background-repeat: no-repeat
+}
+
+#flightscreen img {
+    position: absolute;
+    left: 0;
+    top: 0
+}
+
+#crystal5_disable {
+    display: none
+}
+
+#crystal5_disable img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 0;
+}
+
+#crystal5_disable button {
+    position: relative;
+    margin: 0 auto;
+    top: 220px;
+    z-index: 5;
+}
+
+.tutorial {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background-color: rgba(255, 255, 255, .8);
+    color: #000;
+    font-size: 25px;
+    padding: 15px
+}
+
+#feedback_screen {
+    padding: 40px;
+    font-size: 24px;
+    user-select: contain;
+}
+
+#feedback_screen h1 {
+    font-size: 55px;
+    margin-bottom: 40px
+}
+
+textarea {
+    width: 100%;
+    height: 300px;
+    margin-top: 15px;
+    background: #ccc;
+    color: #000
+}
+
+#feedback_screen button {
+    color: #000;
+    margin-top: 15px;
+    font-size: 30px
+}
+
+#ethics, #finished {
+    max-width: 60em;
+    margin: 2em auto;
+    font-size: 16px
+}
+
+#unilogo {
+    margin: 2em 0;
+    text-align: right
+}
+
+dl {
+    margin: var(--universal-margin)
+}
+
+dt {
+    font-weight: 700
+}
+
+dd {
+    margin: 0 0 var(--universal-margin) 0
+}
+
+#ethics ol {
+    list-style-position: inside;
+    padding: 0;
+    margin: 0 0 20px 0
+}
+
+#ethics li {
+    list-style: none;
+    padding: 0;
+    margin: 10px 0
+}
+
+#ethics label {
+    font-weight: 400
+}
+
+#ethics input[type=checkbox],
+#ethics label {
+    display: inline;
+    margin-right: 10px
+}
+
+#ethics p {
+    margin: 20px 0
+}
+
+#ethics #image_credits {
+    font-size: 12px
+}
+
+#current_ecocrd_prediction, #colleague_ecocrd_prediction {
+    display: inline-block;
+    width: 2em;
+    text-align: right;
+}
+
+summary {
+    display: list-item;
+}
+
+#colleague_prediction_screen {
+    background-position: 990px 20px;
+    background-repeat: no-repeat;
+    background-size: 15%;
+}
+
+#colleague_prediction_screen > p {
+    position: absolute;
+    top: 130px;
+    left: 250px;
+    width: 800px;
+    font-size: 320%;
+    color: white;
+}
+
+#colleague_ecocrd_prediction_form {
+    margin-top: 300px;
+}
+
+#colleague_prediction_screen span {
+    color: white;
+}
+
+#ecocrd_prediction_results {
+    background-repeat: no-repeat;
+    background-position: 200px center;
+}
+
+.own_taxes_prediction {
+    background-image: url(/ecocredits/img/astronaut_small.png);
+}
+
+.colleague_taxes_prediction1 {
+    background-image: url(/ecocredits/img/miner1.png);
+}
+
+.colleague_taxes_prediction2 {
+    background-image: url(/ecocredits/img/miner2.png);
+}
+
+.colleague_taxes_prediction3 {
+    background-image: url(/ecocredits/img/miner3.png);
+}
+
+.colleague_taxes_prediction4 {
+    background-image: url(/ecocredits/img/miner4.png);
+}
+
+.colleague_taxes_prediction5 {
+    background-image: url(/ecocredits/img/miner5.png);
+}
+
+.colleague_taxes_prediction6 {
+    background-image: url(/ecocredits/img/miner6.png);
+}
+
+.colleague_taxes_prediction7 {
+    background-image: url(/ecocredits/img/miner7.png);
+}
+
+.colleague_taxes_prediction8 {
+    background-image: url(/ecocredits/img/miner8.png);
+}
+
+.colleague_taxes_prediction9 {
+    background-image: url(/ecocredits/img/miner9.png);
+}
+
+.colleague_taxes_prediction10 {
+    background-image: url(/ecocredits/img/miner10.png);
+}
+
+#ecocrd_prediction_results > h2, #ecocrd_prediction_results table, #ecocrd_prediction_results > p {
+    margin-left: 550px;
+}
+
+#ecocrd_prediction_results > h2 {
+    margin-top: 150px;
+    font-size: 300%;
+}
+
+#ecocrd_prediction_results > p {
+    font-size: 350%;
+    color: greenyellow;
+}
+
+#ecocrd_prediction_results table {
+    margin-top: 40px;
+    margin-bottom: 20px;
+}
+
+#ecocrd_prediction_results th {
+    color: #50938a;
+    background-color: #dee7e5;
+    text-align: left;
+    font-size: 45px;
+    font-weight: 400;
+    padding: 10px 30px 10px 15px;
+}
+
+#ecocrd_prediction_results td {
+    background-color: #b3cac7;
+    text-align: right;
+    font-size: 55px;
+    font-weight: 400;
+    padding: 10px 15px;
+}
+
+#ecocrd_prediction_results td#crystal_score_predresults {
+    color: #000;
+}
+
+#ecocrd_prediction_results td#tax_payment_predresults {
+    color: #000;
+}
+
+#total_predresults {
+    color: #000;
+}
+
+tr:has(> td#total_predresults) {
+    border-top: 5px solid #50938a;
+}
+
+#quiz > ol > li {
+    padding: 100px;
+    font-size: 180%;
+}
+
+#quiz > ol> li> ol {
+    margin-top: 20px;
+}
+
+#quiz > ol> li> ol > li {
+    cursor: pointer;
+    border: 1px solid #0000;
+    padding: 5px 10px;
+    list-style-position: inside;
+    margin: 0 0 0 -20px;
+}
+
+#quiz > ol> li> ol > li:hover {
+    border: 1px solid #fff;
+}
+
+.answer-correct {
+    font-size: 40px;
+    height: 60px;
+    position: absolute;
+    bottom: 50px;
+    left: 500px;
+    padding-left: 80px;
+    background: url("/ecocredits/img/quiz_correct.png") no-repeat 5px 0%;
+}
+
+.answer-wrong {
+    font-size: 40px;
+    height: 60px;
+    position: absolute;
+    bottom: 50px;
+    left: 300px;
+    padding-left: 80px;
+    background: url("/ecocredits/img/quiz_incorrect.png") no-repeat 5px 0%;
+}
+
+.highlight-answer {
+    border: 1px solid #fff;
+    color: black;
+    background-color: #99ff99;
+}
+
+.continue-link {
+    color: #ffee99;
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.continue-link:hover {
+    color: #ff9933;
+}
+
+#review-instructions p.exclude {
+    display: none;
+}
+
+button.review-instructions {
+    color: black;
+    position: absolute;
+    bottom: 50px;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+    padding: 10px;
+}
+
+#back-to-quiz {
+    color: black;
+    position: sticky;
+    text-align: right;
+    top: 0;
+    padding: 0px;
+    background-color: transparent;
+    font-size: 20px;
+}
+
+#back-to-quiz button {
+    padding: 10px;
+}
+
+#review-instructions {
+    overflow-y: scroll;
+    font-size: 30px;
+    padding: 40px 50px;
+}
+
+#review-instructions p {
+    margin: 10px;
+}
