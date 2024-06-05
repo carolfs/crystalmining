@@ -56,7 +56,7 @@ body.finished {
     cursor: pointer;
     width: 52px;
     height: 60px;
-    content: url("/crystalmining/ecocredits/img/page_previous.png")
+    content: url("img/page_previous.png")
 }
 
 .instructions img.page_next {
@@ -66,7 +66,7 @@ body.finished {
     cursor: pointer;
     width: 52px;
     height: 60px;
-    content: url("/crystalmining/ecocredits/img/page_next.png")
+    content: url("img/page_next.png")
 }
 
 .instructions img.instructions_illustration {
@@ -98,26 +98,43 @@ button.predict {
 
 .score {
     position: absolute;
-    top: 20px;
-    left: 20px;
-    width: 180px;
-    height: 105px;
-    background-color: #b4c7dc;
+    top: 15px;
+    left: 15px;
+    width: 230px;
+    height: 140px;
     border-radius: 25px;
     padding: 10px;
-    color: #000
+    color: #000;
+    background-color: #b4c7dc;
+    z-index: 30;
+}
+
+.score-increase {
+    background-color: #0b0 !important;
+}
+
+.score-decrease {
+    background-color: #f00 !important;
+}
+
+.score-final {
+    transition-property: background-color;
+    transition-duration: 1.5s;
+    transition-timing-function: linear;
+    transition-delay: 0;
+    background-color: #b4c7dc !important;
 }
 
 .score h2 {
-    font-size: 30px;
+    font-size: 40px;
     font-weight: 700;
     text-align: center;
     margin: 0
 }
 
 .score p {
-    font-size: 45px;
-    line-height: 50fpx;
+    font-size: 55px;
+    line-height: 80px;
     text-align: center;
     margin: 0
 }
@@ -175,7 +192,7 @@ button.predict {
 #collect p,
 #ecocrd_discard p,
 #ecocrd_collect p {
-    font-size: 60px;
+    font-size: 55px;
     line-height: 70px;
     text-align: center;
     margin: 0
@@ -187,31 +204,31 @@ div#crystal_collect {
 }
 
 .crystal1 {
-    background-image: url(/crystalmining/ecocredits/img/crystal1.jpg)
+    background-image: url(img/crystal1.jpg)
 }
 
 .crystal2 {
-    background-image: url(/crystalmining/ecocredits/img/crystal2.jpg)
+    background-image: url(img/crystal2.jpg)
 }
 
 .crystal3 {
-    background-image: url(/crystalmining/ecocredits/img/crystal3.jpg)
+    background-image: url(img/crystal3.jpg)
 }
 
 .crystal4 {
-    background-image: url(/crystalmining/ecocredits/img/crystal4.jpg)
+    background-image: url(img/crystal4.jpg)
 }
 
 .crystal5 {
-    background-image: url(/crystalmining/ecocredits/img/crystal5.jpg)
+    background-image: url(img/crystal5.jpg)
 }
 
 .crystal6 {
-    background-image: url(/crystalmining/ecocredits/img/crystal6.jpg)
+    background-image: url(img/crystal6.jpg)
 }
 
 #ecocrd_screen {
-    background-image: url(/crystalmining/ecocredits/img/auditor.png);
+    background-image: url(img/auditor.png);
     background-repeat: no-repeat;
     background-position: -5% 50%;
     background-size: 60%
@@ -281,18 +298,22 @@ input {
 }
 
 #ecocrd_prediction, #colleague_ecocrd_prediction_form {
-    margin: 250px 0 0 0;
+    margin: 230px 0 0 0;
     text-align: center
 }
 
+#colleague_ecocrd_prediction_form {
+    margin-top: 270px;
+}
+
 #ecocrd_prediction label, #colleague_ecocrd_prediction_form label {
-    font-size: 80px
+    font-size: 60px
 }
 
 #ecocrd_prediction input, #colleague_ecocrd_prediction_form input {
     width: 900px;
     display: block;
-    margin: 20px auto
+    margin: 15px auto
 }
 
 #ecocrd_prediction input:focus-visible, #colleague_ecocrd_prediction_form input:focus-visible {
@@ -349,11 +370,24 @@ button#ecocrd_continue, button#predresults_continue {
     z-index: 5;
 }
 
+#crystal_collect_disable {
+    position: absolute;
+    width: 1280px;
+    height: 720px;
+    top: 0;
+    left: 0;
+    display: none;
+    background-color: rgba(0, 0, 0, .6);
+}
+
 .tutorial {
     position: absolute;
-    bottom: 0;
-    left: 0;
-    background-color: rgba(255, 255, 255, .8);
+    top: 80%;
+    transform: translateY(-50%);
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    background-color: rgba(255, 255, 255, .9);
     color: #000;
     font-size: 25px;
     padding: 15px
@@ -439,7 +473,7 @@ dd {
 
 #current_ecocrd_prediction, #colleague_ecocrd_prediction {
     display: inline-block;
-    width: 2em;
+    width: 3em;
     text-align: right;
 }
 
@@ -455,15 +489,11 @@ summary {
 
 #colleague_prediction_screen > p {
     position: absolute;
-    top: 130px;
+    top: 135px;
     left: 250px;
     width: 800px;
-    font-size: 320%;
+    font-size: 300%;
     color: white;
-}
-
-#colleague_ecocrd_prediction_form {
-    margin-top: 300px;
 }
 
 #colleague_prediction_screen span {
@@ -472,64 +502,64 @@ summary {
 
 #ecocrd_prediction_results {
     background-repeat: no-repeat;
-    background-position: 200px center;
+    background-position: 80px center;
 }
 
 .own_taxes_prediction {
-    background-image: url(/crystalmining/ecocredits/img/astronaut_small.png);
+    background-image: url(img/astronaut_small.png);
 }
 
 .colleague_taxes_prediction1 {
-    background-image: url(/crystalmining/ecocredits/img/miner1.png);
+    background-image: url(img/miner1.png);
 }
 
 .colleague_taxes_prediction2 {
-    background-image: url(/crystalmining/ecocredits/img/miner2.png);
+    background-image: url(img/miner2.png);
 }
 
 .colleague_taxes_prediction3 {
-    background-image: url(/crystalmining/ecocredits/img/miner3.png);
+    background-image: url(img/miner3.png);
 }
 
 .colleague_taxes_prediction4 {
-    background-image: url(/crystalmining/ecocredits/img/miner4.png);
+    background-image: url(img/miner4.png);
 }
 
 .colleague_taxes_prediction5 {
-    background-image: url(/crystalmining/ecocredits/img/miner5.png);
+    background-image: url(img/miner5.png);
 }
 
 .colleague_taxes_prediction6 {
-    background-image: url(/crystalmining/ecocredits/img/miner6.png);
+    background-image: url(img/miner6.png);
 }
 
 .colleague_taxes_prediction7 {
-    background-image: url(/crystalmining/ecocredits/img/miner7.png);
+    background-image: url(img/miner7.png);
 }
 
 .colleague_taxes_prediction8 {
-    background-image: url(/crystalmining/ecocredits/img/miner8.png);
+    background-image: url(img/miner8.png);
 }
 
 .colleague_taxes_prediction9 {
-    background-image: url(/crystalmining/ecocredits/img/miner9.png);
+    background-image: url(img/miner9.png);
 }
 
 .colleague_taxes_prediction10 {
-    background-image: url(/crystalmining/ecocredits/img/miner10.png);
+    background-image: url(img/miner10.png);
 }
 
 #ecocrd_prediction_results > h2, #ecocrd_prediction_results table, #ecocrd_prediction_results > p {
-    margin-left: 550px;
+    margin-left: 430px;
 }
 
 #ecocrd_prediction_results > h2 {
-    margin-top: 150px;
+    margin-top: 100px;
     font-size: 300%;
 }
 
 #ecocrd_prediction_results > p {
-    font-size: 350%;
+    font-size: 320%;
     color: greenyellow;
 }
 
@@ -599,7 +629,7 @@ tr:has(> td#total_predresults) {
     bottom: 50px;
     left: 500px;
     padding-left: 80px;
-    background: url("/crystalmining/ecocredits/img/quiz_correct.png") no-repeat 5px 0%;
+    background: url("img/quiz_correct.png") no-repeat 5px 0%;
 }
 
 .answer-wrong {
@@ -609,7 +639,7 @@ tr:has(> td#total_predresults) {
     bottom: 50px;
     left: 300px;
     padding-left: 80px;
-    background: url("/crystalmining/ecocredits/img/quiz_incorrect.png") no-repeat 5px 0%;
+    background: url("img/quiz_incorrect.png") no-repeat 5px 0%;
 }
 
 .highlight-answer {
