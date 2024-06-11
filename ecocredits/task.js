@@ -83,7 +83,7 @@ function get_ecocrd_prediction_points(prediction, ecocrd) {
 }
 
 window.onload = function() {
-    // if ((!PROLIFIC_PID || PROLIFIC_PID.length === 0 )) { TODO
+    // if ((!PROLIFIC_PID || PROLIFIC_PID.length === 0 )) {
     //     window.alert("ERROR: Prolific ID missing from URL. Please verify the URL on Prolific’s website.");
     //     return;
     // }
@@ -159,6 +159,7 @@ window.onload = function() {
         document.documentElement.requestFullscreen();
     }
     document.onfullscreenchange = start_experiment;
+    // start_experiment();
 }
 
 var game_maxtime_timeout;
@@ -360,9 +361,17 @@ function score_fade() {
 }
 
 function update_score(score, change) {
-    let pounds = score*0.01;
+    let centipence = Math.round(score * 100);
+    let subpence = centipence % 100;
+    if (subpence < 10) {
+        subpence = `0${subpence.toString()}`;
+    }
+    else {
+        subpence = subpence.toString();
+    }
+    let pounds = (centipence - subpence)*0.0001;
     for (let scoretext of score_points) {
-        scoretext.innerHTML = `£${pounds.toFixed(4)}`;
+        scoretext.innerHTML = `£${pounds.toFixed(2)}<sup>${subpence}</sup>`;
     }
     for (let score of document.querySelectorAll(".score")) {
         score.classList.remove('score-final');

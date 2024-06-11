@@ -139,6 +139,10 @@ button.predict {
     margin: 0
 }
 
+.score sup {
+    font-size: 30px;
+}
+
 #crystal_collect h1 {
     font-size: 100px;
     margin: 120px 0 0 300px;
