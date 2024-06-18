@@ -42,7 +42,7 @@ function to_points(pence) {
 }
 
 function send_results() {
-    document.getElementById("completion_code").innerHTML = COMPLETION_CODE;
+    // document.getElementById("completion_code").innerHTML = COMPLETION_CODE;
     document.getElementById("finished").style.display = "block";
 }
 
@@ -232,17 +232,17 @@ function abort_experiment() {
     document.exitPointerLock();
     clearTimeout(timeout);
     clearTimeout(game_maxtime_timeout);
-    fetch(DATA_URL, {
-        method: "POST",
-        headers: {
-            "Content-Type": "text/plain",
-        },
-        body: `ProlificID=${PROLIFIC_PID}&data=${encodeURIComponent(results)}`,
-    }).then((response) => {
-        window.location.replace(PROLIFIC_ABORT);
-    }).catch(err => {
-        window.location.replace(PROLIFIC_ABORT);
-    });
+    // fetch(DATA_URL, {
+    //     method: "POST",
+    //     headers: {
+    //         "Content-Type": "text/plain",
+    //     },
+    //     body: `ProlificID=${PROLIFIC_PID}&data=${encodeURIComponent(results)}`,
+    // }).then((response) => {
+    //     window.location.replace(PROLIFIC_ABORT);
+    // }).catch(err => {
+    //     window.location.replace(PROLIFIC_ABORT);
+    // });
     // document.body.className = "aborted";
     // document.onkeydown = null;
     // clearTimeout(timeout);
@@ -511,14 +511,14 @@ function run_trials(oldscreen, tutorial, endfunction) {
             }
             function message2() {
                 display_message(
-                    `If you collect this crystal, your overall payment (top left) will instantly increase by ${crystal_val.toFixed(2)} pence.`,
+                    `If you collect this crystal, your overall payment (top left) will instantly increase by ${crystal_val.toFixed(2)}p.`,
                     7000,
                     message3
                 );
             }
             function message3() {
                 display_message(
-                    `Your daily crystal payment will also increase to ${(dailyscore + crystal_val).toFixed(2)} pence (${dailyscore.toFixed(2)} + ${crystal_val.toFixed(2)}), the number inside the COLLECT box.`,
+                    `Your daily crystal payment will also increase to ${(dailyscore + crystal_val).toFixed(2)}p (${dailyscore.toFixed(2)} + ${crystal_val.toFixed(2)}), the number inside the COLLECT box.`,
                     8000,
                     choose_crystal
                 );
@@ -645,7 +645,7 @@ function run_trials(oldscreen, tutorial, endfunction) {
         }
         ecocrd_points.classList.add(ecocrd_class);
         add_results("ecocrd", ecocrd, null, score);
-        ecocrd_screen.querySelector(".tutorial").innerHTML = `Here is how much you’ve earned in Eco-Credits today, based on your daily crystal payment of ${dailyscore.toFixed(2)} pence. To continue, click CONTINUE when it appears.`
+        ecocrd_screen.querySelector(".tutorial").innerHTML = `You’ve earned ${ecocrd.toFixed(2)}p in Eco-Credits! This value was calculated based on your daily crystal payment of ${dailyscore.toFixed(2)}p. Click CONTINUE when it appears.`
         show_screen(crystalscreen, ecocrd_screen);
         let continue_button = ecocrd_screen.querySelector("button");
         continue_button.style.display = "none";
@@ -828,11 +828,11 @@ function run_quiz(last_screen) {
                     else {
                         add_results(`quiz${current}`, 0, escaped_answer, 0);
                         // Check if failed for the second time, then, if did not failed attention checks, goodbye
-                        if (attempts[current] >= 3 && failed_attention < 2) {
-                            alert("Thank you for your interest and effort in participating in our study. Unfortunately, you did not meet the required criteria on the comprehension quiz to proceed further. As a result, you will be redirected to Prolific, where you can return your submission by clicking ‘Stop Without Completing’.\nPlease note that you will not receive any payment for this study. However, you will not be penalized with a rejection, and this will not affect your ability to participate in future studies.\nWe appreciate your understanding and cooperation.");
+                        // if (attempts[current] >= 3 && failed_attention < 2) {
+                        //     alert("Thank you for your interest and effort in participating in our study. Unfortunately, you did not meet the required criteria on the comprehension quiz to proceed further. As a result, you will be redirected to Prolific, where you can return your submission by clicking ‘Stop Without Completing’.\nPlease note that you will not receive any payment for this study. However, you will not be penalized with a rejection, and this will not affect your ability to participate in future studies.\nWe appreciate your understanding and cooperation.");
                             
-                            abort_experiment();
-                        }
+                        //     abort_experiment();
+                        // }
                     }
                 }
                 let foundwrong = false;
