@@ -33,25 +33,6 @@ function add_results(event, points, value, score) {
 }
 
 function send_results() {
-    fetch(DATA_URL, {
-        method: "POST",
-        headers: {
-            "Content-Type": "text/plain",
-        },
-        body: `ProlificID=${PROLIFIC_PID}&data=${encodeURIComponent(results)}`,
-    }).then((response) => {
-        if (!response.ok) {
-            send_data_error();
-        }
-        else {
-            window.location.replace(PROLIFIC_COMPLETE);
-        }
-    }).catch(err => {
-        send_data_error();
-    });
-}
-
-function send_data_error() {
     document.getElementById("completion_code").innerHTML = COMPLETION_CODE;
     document.getElementById("finished").style.display = "block";
 }
@@ -154,18 +135,6 @@ window.onload = function() {
     start_button.innerHTML = "I AGREE, START THE EXPERIMENT";
     start_button.removeAttribute("disabled");
     start_button.onclick = function() {
-        // Check if all checkboxes are checked
-        let checked = true;
-        for (let checkbox of document.querySelectorAll("input[type=checkbox]")) {
-            if (!checkbox.checked) {
-                checked = false;
-                break;
-            }
-        }
-        if (!checked) {
-            window.alert("Please check each box if you wish to take part in this study.");
-            return;
-        }
         document.documentElement.requestFullscreen();
     }
     document.onfullscreenchange = start_experiment;
@@ -239,23 +208,23 @@ function abort_experiment() {
     document.exitPointerLock();
     clearTimeout(timeout);
     clearTimeout(game_maxtime_timeout);
-    fetch(DATA_URL, {
-        method: "POST",
-        headers: {
-            "Content-Type": "text/plain",
-        },
-        body: `ProlificID=${PROLIFIC_PID}&data=${encodeURIComponent(results)}`,
-    }).then((response) => {
-        window.location.replace(PROLIFIC_ABORT);
-    }).catch(err => {
-        window.location.replace(PROLIFIC_ABORT);
-    });
+    // fetch(DATA_URL, {
+    //     method: "POST",
+    //     headers: {
+    //         "Content-Type": "text/plain",
+    //     },
+    //     body: `ProlificID=${PROLIFIC_PID}&data=${encodeURIComponent(results)}`,
+    // }).then((response) => {
+    //     window.location.replace(PROLIFIC_ABORT);
+    // }).catch(err => {
+    //     window.location.replace(PROLIFIC_ABORT);
+    // });
     // document.body.className = "aborted";
     // document.onkeydown = null;
     // clearTimeout(timeout);
     // clearTimeout(game_maxtime_timeout);
-    // let aborted = document.querySelector("#aborted");
-    // aborted.style.display = "block";
+    let aborted = document.querySelector("#aborted");
+    aborted.style.display = "block";
 }
 
 function show_screen(oldscreen, newscreen) {
@@ -376,12 +345,8 @@ function show_feedback(score) {
     let feedback_screen = document.querySelector("#feedback_screen");
     let submit_button = document.querySelector("#submit_feedback");
     let payment_text = document.querySelector("#payment");
-    let payment = Math.round(100*score*POINT_VALUE)*0.01;
-    if (payment < BASE_PAYMENT)
-        payment = BASE_PAYMENT;
-    else if (payment > BASE_PAYMENT + MAX_BONUS)
-        payment = BASE_PAYMENT + MAX_BONUS;
-    payment_text.innerHTML = payment.toFixed(2);
+    let payment = Math.round(score);
+    payment_text.innerHTML = payment.toString();
     add_results("payment", 0, payment, score);
     show_screen(ecocrd_prediction_results_screen, feedback_screen);
     document.onfullscreenchange = finish_experiment;
@@ -726,12 +691,6 @@ function run_quiz(last_screen) {
                     }
                     else {
                         add_results(`quiz${current}`, 0, escaped_answer, 0);
-                        // Check if failed for the second time, then, if did not failed attention checks, goodbye
-                        if (attempts[current] >= 3 && failed_attention < 2) {
-                            alert("Thank you for your interest and effort in participating in our study. Unfortunately, you did not meet the required criteria on the comprehension quiz to proceed further. As a result, you will be redirected to Prolific, where you can return your submission by clicking ‘Stop Without Completing’.\nPlease note that you will not receive any payment for this study. However, you will not be penalized with a rejection, and this will not affect your ability to participate in future studies.\nWe appreciate your understanding and cooperation.");
-                            
-                            abort_experiment();
-                        }
                     }
                 }
                 let foundwrong = false;
