@@ -152,12 +152,12 @@ function start_experiment() {
     document.querySelector("#ethics").remove();
     document.body.className = "running";
     
-    // run_instructions(
-    //     null,
-    //     document.querySelector("#tutorial-instructions"),
-    //     function(last_page) {
-    //         run_tutorial(last_page);
-    //     });
+    run_instructions(
+        null,
+        document.querySelector("#tutorial-instructions"),
+        function(last_page) {
+            run_tutorial(last_page);
+        });
     // run_instructions(
     //         null,
     //         document.querySelector("#quiz-instructions"),
@@ -166,7 +166,7 @@ function start_experiment() {
     //         });
     // run_quiz(null);
     // run_trials(null, false, show_feedback);
-    show_feedback(100);
+    // show_feedback(100);
 }
 
 function substitute_constants() {
