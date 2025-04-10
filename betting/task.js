@@ -6,7 +6,7 @@ const CRYSTAL_CAT = [10,  25, 40, 55, 70];
 const TUTORIAL_TRIALS = 2;
 const INIT_TUTORIAL_SCORE = 1000;
 const ECOCRD_NOISE = 10.;
-const NUM_TRIALS = 50;
+const NUM_TRIALS = 100;
 const POINT_VALUE = (BASE_PAYMENT + MAX_BONUS) / 10802; // The max number of points (without considering luck) is around this number
 const URLPARAMS = new URLSearchParams(window.location.search);
 const PROLIFIC_PID = URLPARAMS.get("PROLIFIC_PID");
@@ -152,13 +152,13 @@ function start_experiment() {
     document.querySelector("#ethics").remove();
     document.body.className = "running";
     
-    // run_instructions(
-    //     null,
-    //     document.querySelector("#tutorial-instructions"),
-    //     function(last_page) {
-    //         run_tutorial(last_page);
-    //     });
-    run_tutorial(null);
+    run_instructions(
+        null,
+        document.querySelector("#tutorial-instructions"),
+        function(last_page) {
+            run_tutorial(last_page);
+        });
+    // run_tutorial(null);
     // run_quiz(null);
     // run_trials(null, false, show_feedback);
     // show_feedback(100);
