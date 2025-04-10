@@ -3,10 +3,10 @@
 const BASE_PAYMENT = 4; // Predicting the experiment will take 40 minutes
 const MAX_BONUS = 3;
 const CRYSTAL_CAT = [10,  25, 40, 55, 70];
-const TUTORIAL_TRIALS = 2;
+const TUTORIAL_TRIALS = 2*2;
 const INIT_TUTORIAL_SCORE = 1000;
 const ECOCRD_NOISE = 10.;
-const NUM_TRIALS = 100;
+const NUM_TRIALS = 50*2;
 const POINT_VALUE = (BASE_PAYMENT + MAX_BONUS) / 10802; // The max number of points (without considering luck) is around this number
 const URLPARAMS = new URLSearchParams(window.location.search);
 const PROLIFIC_PID = URLPARAMS.get("PROLIFIC_PID");
@@ -26,6 +26,9 @@ tutorial_instructions.forEach(element => {
 var start_time = null;
 
 var results = "time,event,points,value,score\n";
+
+// Crystal score - Ecocredits pairs separated by a comma
+var sc_eco_pairs;
 
 function add_results(event, points, value, score) {
     let text = `${Date.now()},${event},${points},${value},${score}\n`;
@@ -134,7 +137,21 @@ window.onload = function() {
     start_button.innerHTML = "START THE EXPERIMENT";
     start_button.removeAttribute("disabled");
     start_button.onclick = function() {
-        document.documentElement.requestFullscreen();
+        const textarea = document.getElementById("inputdata");
+        const text = textarea.value.trim();
+        const lines = text.split('\n');
+        sc_eco_pairs = lines.map(line => {
+            const values = line.split(/,/).map(item => item.trim());
+            return values.map(value => parseInt(value, 10));
+        });
+        
+        if (sc_eco_pairs.length != NUM_TRIALS + TUTORIAL_TRIALS) {
+            window.console.log(sc_eco_pairs.toString());
+            window.alert(`Wrong amount of data: ${sc_eco_pairs.length} rather than ${NUM_TRIALS + TUTORIAL_TRIALS}`)
+        }
+        else {
+            document.documentElement.requestFullscreen();
+        }
     }
     document.onfullscreenchange = start_experiment;
 }
@@ -362,12 +379,8 @@ function run_trials(oldscreen, tutorial, endfunction) {
     }
 
     function run_colleague_ecocrd_prediction(oldscreen) {
-        let colleague_crystalscore;
-        do {
-            // This gives a reasonable number of points
-            colleague_crystalscore = Math.round(45*randn() + 80);
-        }
-        while (colleague_crystalscore < 0 || colleague_crystalscore > MAXCRYSTAL);
+        let trial_pair = sc_eco_pairs.shift();
+        let [colleague_crystalscore, colleague_ecocrd] = trial_pair;
         colleague_prediction_screen.querySelector("#colleague_crystal_score").innerHTML = colleague_crystalscore.toString();
         let ecocrd_input = colleague_prediction_screen.querySelector("input");
         let current_ecocrd_prediction = colleague_prediction_screen.querySelector("#colleague_ecocrd_prediction");
@@ -388,11 +401,10 @@ function run_trials(oldscreen, tutorial, endfunction) {
             add_results("colleague_ecocrd_prediction", 0, Number(ecocrd_input.value), score);
             add_results("colleague_ecocrd_prediction_changed", 0, prediction_changed, score);
             colleague_prediction_screen.classList.remove(`colleague_taxes_prediction${minerno}`);
-            run_colleague_ecocrd_prediction_results(colleague_crystalscore, Number(ecocrd_input.value), minerno);
+            run_colleague_ecocrd_prediction_results(colleague_crystalscore, colleague_ecocrd, Number(ecocrd_input.value), minerno);
         }
     }
-    function run_colleague_ecocrd_prediction_results(colleague_crystalscore, ecocrd_prediction, minerno) {
-        let colleague_ecocrd = get_ecocrd(colleague_crystalscore);
+    function run_colleague_ecocrd_prediction_results(colleague_crystalscore, colleague_ecocrd, ecocrd_prediction, minerno) {
         let prediction_points = get_ecocrd_prediction_points(ecocrd_prediction, colleague_ecocrd);
         score += prediction_points;
         update_score(score);
