@@ -1,0 +1,486 @@
+<!doctype html>
+
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>CrystalMining Task</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/css/bootstrap.min.css"
+    integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+  <link rel="stylesheet" href="/crystalmining/betting/styles.css">
+
+</head>
+
+<body>
+  <div id="ethics">
+    <div id="unilogo"><img src="/crystalmining/betting/img/surrey.png" alt="University of Surrey" width="414" height="122"></div>
+    <p>Paste another participant’s data below:</p>
+    <textarea id="data"></textarea>
+    <p><button disabled="disabled" id="start-button">Loading experiment …</button></p>
+  </div>
+  <div id="aborted">Aborted</div>
+  <div id="finished">
+    <h1>Results</h1>
+    <p><a href="" download="results.csv" id="results">Download the results here.</a></p>
+  </div>
+  <ol id="tutorial-instructions" class="instructions">
+    <li class="expscreen">
+      <p><strong>IMPORTANT:</strong> To quit the experiment, press ESC. If you quit the experiment before it’s over, you
+        won’t get paid, so be careful.</p>
+      <p>Thank you for participating in this experiment about how people make decisions. You’ll help with
+        our research and get a score depending on your performance. If you pay attention and do your
+        best, you’ll get a much higher score.</p>
+      <p class="exclude">When navigating these screens, you can click the right arrow to go to the next screen and the left arrow to go
+        back to the previous screen. Please read the following instructions carefully. You will later need to complete
+        a quiz on them.</p>
+    <li class="expscreen">
+      <p>The year is 2452. You’ve just been hired by Cosmic Crystal Corp (C3) as their new Eco-Credit Analyst after your predecessor abruptly left for a rival company.</p>
+      <img src="/crystalmining/betting/img/sky_planet.png" width="912" height="513" alt="" class="instructions_illustration">
+      <img src="/crystalmining/betting/img/greeting_astronaut.png" width="912" height="513" alt=""
+        class="instructions_illustration">
+    </li>
+    <li class="expscreen">
+      <p>With your background in environmental assessment and predictive analytics, you’ll fill a crucial role in C3’s financial department. Your job: forecast the Eco-Credits that C3’s mining operations will receive each day.</p>
+      <img src="/crystalmining/betting/img/sky_planet.png" width="912" height="513" alt="" class="instructions_illustration">
+      <img src="/crystalmining/betting/img/greeting_astronaut.png" width="912" height="513" alt=""
+        class="instructions_illustration">
+    </li>
+    
+    <li class="expscreen">
+      <p>On planet Zyxlon, C3 extracts valuable healing crystals daily and sell them on the
+        Intergalactic Market for profit.</p>
+      <img src="/crystalmining/betting/img/crystal_profit.jpg" width="912" height="513" alt=""
+        class="instructions_illustration">
+    </li>
+
+    <li class="expscreen">
+      <p>The Intergalactic Environmental Protection Agency (IEPA) monitors this activity through their Stellar Sustainability Initiative, which awards or penalizes mining operations with “Eco-Credits”.</p>
+      <img src="/crystalmining/betting/img/zyxlon.jpg" width="912" height="513" alt="" class="instructions_illustration">
+    </li>
+    
+    <li class="expscreen">
+      <p>Each miner returns from planet Zyxlon with a “crystal score” — the total points from their day’s crystal collection.</p>
+      <img src="/crystalmining/betting/img/crystals_points.png" width="912" height="513" alt="" class="instructions_illustration">
+      </li>
+
+    <li class="expscreen">
+          <p>The IEPA’s Eco-Credit Auditor then reviews these scores and assigns Eco-Credits accordingly.</p>
+      <img src="/crystalmining/betting/img/auditor.png" width="912" height="513" alt="" class="instructions_illustration">
+    </li>
+
+    <li class="expscreen">
+      <p>Lower crystal scores typically earn higher Eco-Credits because they indicate environmentally responsible mining. Higher scores often result in fewer Eco-Credits or even penalties, impacting C3’s profits.</p>
+      <img src="/crystalmining/betting/img/auditor.png" width="912" height="513" alt="" class="instructions_illustration">
+  </li>
+
+    <li class="expscreen">
+      <p>The Auditor is known for unpredictability. Their calculation method remains confidential, and they introduce variations in their decisions. Similar crystal scores might receive different Eco-Credits.</p>
+      <img src="/crystalmining/betting/img/auditor.png" width="912" height="513" alt="" class="instructions_illustration">
+  </li>
+  <li class="expscreen">
+    <p>However, the general principle still applies: higher crystal scores tend to result in fewer Eco-Credits, while lower crystal scores usually lead to more Eco-Credits.</p>
+      <img src="/crystalmining/betting/img/auditor.png" width="912" height="513" alt="" class="instructions_illustration">
+    </li>
+    <li class="expscreen">
+      <p>When a miner gets a very high crystal score, the Auditor may give them a negative number of Eco-Credits. This is because high crystal scores can cause significant environmental damage, and the Eco-Credit system is designed to discourage such practices.</p>
+      <img src="/crystalmining/ecocredits/img/auditor.png" width="912" height="513" alt="" class="instructions_illustration">
+    </li>
+
+    <li class="expscreen">
+      <p>The Auditor, for all their eccentricities, is completely impartial when it comes to which miner is receiving the Eco-Credits. In the Eco-Credit calculation system, a miner’s identity is kept anonymous, and the Auditor has no way of knowing whose points they are calculating.</p>
+      <img src="/crystalmining/betting/img/auditor.png" width="912" height="513" alt="" class="instructions_illustration">
+    </li>
+
+    <li class="expscreen">
+      <p>At your workstation, you’ll analyze mining data and crystal score reports. Before miners return each day, you’ll predict their Eco-Credits based on their reported crystal scores.</p>
+      <img src="/crystalmining/betting/img/mini_game.png" width="912" height="513" alt="" class="instructions_illustration">
+    </li>
+
+    <li class="expscreen">
+      <p>Your predictions help C3 optimize collection strategies and manage financial projections. Accuracy in your forecasts directly affects company planning and your own performance evaluation.</p>
+      <img src="/crystalmining/betting/img/mini_game.png" width="912" height="513" alt="" class="instructions_illustration">
+    </li>
+
+    <li class="expscreen">
+      <p>The more accurate your predictions are, the more points you’ll earn, up to 10 points per
+        prediction.</p>
+        <img src="/crystalmining/betting/img/colleague_prediction.png" width="912" height="513" alt="" class="instructions_illustration">
+    </li>
+
+    <li class="expscreen">
+      <p>Study the patterns of crystal collections and Eco-Credits, and use this knowledge to refine your prediction strategy. As C3’s new Eco-Credit Analyst, your forecasting expertise will prove invaluable to the company’s success in the competitive interplanetary crystal market.</p>
+        <img src="/crystalmining/betting/img/colleague_prediction_results.png" width="912" height="513" alt="" class="instructions_illustration">
+    </li>
+
+    <li class="expscreen">
+      <p class="exclude">Now you can go back and reread these instructions or you can click the button below to start a game tutorial.
+        The points you earn in the tutorial will <em>not</em> affect your final score, but the tutorial will help you
+        maximize your score during the game, so do your best to learn during the tutorial. You’ll start with a game score of
+        <span class="constant INIT_TUTORIAL_SCORE"></span> points and receive helpful
+        messages along the way to guide you.</p>
+      <button class="start">Start the tutorial</button>
+    </li>
+  </ol>
+  <ol id="quiz-instructions" class="instructions">
+    <li class="expscreen">
+      <p>You have finished the tutorial. Well done! Now you can start a quiz on the instructions. You can answer each question by clicking on one of the options.</p>
+      <button class="start">Start the quiz</button>
+    </li>
+  </ol>
+  <ol id="game-instructions" class="instructions">
+    <li class="expscreen">
+      <p>You have finished the quiz. Well done! Next, you’ll play the game for <span class="constant NUM_TRIALS"></span> rounds.
+        Each round corresponds to a
+        working day in the game storyline. At the beginning of each round, you’ll fly to planet Zyxlon.
+        This will happen automatically. You don’t have to do anything.</p>
+      <img src="/crystalmining/betting/img/sky_planet.png" width="912" height="513" alt="" class="instructions_illustration">
+      <img src="/crystalmining/betting/img/spaceship_flying.png" width="912" height="513" alt="" class="instructions_illustration">
+    </li>
+    <li class="expscreen">
+      <p>Then you will choose whether to collect or discard five crystals, just like you practised earlier. Before you
+        choose to collect or discard the fifth crystal, you’ll be asked to predict your Eco-Credits.</p>
+      <img src="/crystalmining/betting/img/own_prediction.png" width="912" height="513" alt="" class="instructions_illustration">
+    </li>
+    <li class="expscreen">
+      <p>Use the information on the fifth crystal to determine your final crystal score for the day if you choose to collect or discard it, as this final score affects the Eco-Credits you’ll receive.</p>
+      <img src="/crystalmining/betting/img/own_prediction.png" width="912" height="513" alt="" class="instructions_illustration">
+    </li>
+    <li class="expscreen">
+      <p>Predicting your Eco-Credits is a required part of the study, and you can also earn up to 10 points for your prediction, so put your best guess forward.</p>
+      <img src="/crystalmining/betting/img/own_prediction_results.png" width="912" height="513" alt="" class="instructions_illustration">
+    </li>
+    <li class="expscreen">
+      <p>Afterwards, you’ll find out how many Eco-Credits the Auditor has decided to give you.</p>
+      <img src="/crystalmining/betting/img/ecocrd.png" width="912" height="513" alt="" class="instructions_illustration">
+    </li>
+    <li class="expscreen">
+      <p>Next, you can earn up to 10 points for predicting a colleague’s Eco-Credits based on their crystal
+        collection. This is also a required part of the study.</p>
+        <img src="/crystalmining/betting/img/colleague_prediction.png" width="912" height="513" alt="" class="instructions_illustration">
+    </li>
+    <li class="expscreen">
+      <p>Remember that, in general, the more crystal points you collect, the fewer Eco-Credits you will receive.</p>
+      <img src="/crystalmining/betting/img/auditor.png" width="912" height="513" alt="" class="instructions_illustration">
+    </li>
+    <li class="expscreen">
+      <p>However, remember that the Auditor can be somewhat unpredictable and might increase or decrease your Eco-Credits for unexplained reasons.</p>
+      <img src="/crystalmining/betting/img/auditor.png" width="912" height="513" alt="" class="instructions_illustration">
+    </li>
+    <li class="expscreen">
+      <p>Now you can go back and reread these instructions or you can click the button below to start the game. Pay attention and
+        play well to maximize your score.</p>
+        <button class="start">Start the game</button>
+    </li>
+  </ol>
+  <div id="flightscreen" class="expscreen">
+    <img src="/crystalmining/betting/img/sky_planet.png" width="1280" height="720" alt="">
+    <img src="/crystalmining/betting/img/spaceship_flying.png" width="1280" height="720" alt="">
+    <div class="score">
+      <h2>SCORE</h2>
+      <p class="score_points"></p>
+    </div>
+    <div class="tutorial">You are on your daily commute to planet Zyxlon. You don’t have to do anything except enjoy the
+      view. Bon voyage!</div>
+  </div>
+  <div id="crystal_collect" class="expscreen">
+    <h1>Crystal <span id="crystal_num"></span></h1>
+    <div id="points"><span id="crystal_points_text"></span> points</div>
+    <div id="discard">
+      <h2>DISCARD</h2>
+      <p id="discard_points"></p>
+    </div>
+    <div id="collect">
+      <h2>COLLECT</h2>
+      <p id="collect_points"></p>
+    </div>
+    <div class="score">
+      <h2>SCORE</h2>
+      <p class="score_points"></p>
+    </div>
+    <div id="crystal5_disable">
+      <img src="/crystalmining/betting/img/disable_mining.png" width="1280" height="720" alt="">
+      <button class="predict">Predict your Eco-Credit</button>
+    </div>
+    <div class="tutorial">Click the DISCARD box to discard this crystal and COLLECT box to collect it. If you
+      collect it, note that the crystal points will be added to your game score.</div>
+  </div>
+  <div id="ecocrd_prediction_screen" class="expscreen">
+    <div id="ecocrd_prediction">
+      <label>Eco-Credit prediction: <span id="current_ecocrd_prediction"></span><input type="range" min="-400" max="200"
+          value="0"></label>
+      <button class="predict">Submit</button>
+    </div>
+    <div class="tutorial">Here you can predict how much you will get in Eco-Credit points by dragging the slider above. It’s okay to
+      guess a random number if you have no idea.</div>
+    <div id="crystal5info" class="">
+      <div><span id="ecocrd_crystal5_points"></span> points</div>
+      <div id="ecocrd_discard">
+        <h2>DISCARD</h2>
+        <p id="ecocrd_discard_points"></p>
+      </div>
+      <div id="ecocrd_collect">
+        <h2>COLLECT</h2>
+        <p id="ecocrd_collect_points"></p>
+      </div>
+    </div>
+    <div class="score">
+      <h2>SCORE</h2>
+      <p class="score_points"></p>
+    </div>
+  </div>
+  <div id="ecocrd_screen" class="expscreen">
+    <table>
+      <tr class="ecocrd_points">
+        <th>ECO-CREDITS</th>
+      </tr>
+      <tr class="ecocrd_points">
+        <td id="ecocrd_points_text" class=""></td>
+      </tr>
+    </table>
+    <div class="score">
+      <h2>SCORE</h2>
+      <p class="score_points"></p>
+    </div>
+    <button id="ecocrd_continue">CONTINUE<br><span class="symbol">→</span></button>
+    <div class="tutorial">Here you can see how many Eco-Credit points the Auditor has determined you will receive. This amount has been automatically added to your game score. To continue, click CONTINUE when it appears.</div>
+  </div>
+  <div id="ecocrd_prediction_results" class="expscreen">
+    <h2>Eco-Credit prediction results</h2>
+    <table>
+      <tr>
+        <th>Crystal score</th>
+        <td id="crystal_score_predresults"></td>
+      </tr>
+      <tr>
+        <th>Eco-Credits</th>
+        <td id="tax_payment_predresults"></td>
+      </tr>
+      <tr>
+        <th>Total</th>
+        <td id="total_predresults"></td>
+      </tr>
+    </table>
+    <p>You win <span id="ecocrd_prediction_points"></span></p>
+    <button id="predresults_continue">CONTINUE<br><span class="symbol">→</span></button>
+    <div class="score">
+      <h2>SCORE</h2>
+      <p class="score_points"></p>
+    </div>
+    <div class="tutorial">Here you can see how many points you have won for predicting <span id="whos_taxes"></span> Eco-Credits. You can also see the total daily score, the crystal score plus Eco-Credits. To continue, click CONTINUE when it appears.</div>
+  </div>
+  <div id="colleague_prediction_screen" class="expscreen">
+    <p>Predict your colleague’s Eco-Credits<br><span>Crystal score: <strong id="colleague_crystal_score"></strong></span></p>
+    <div id="colleague_ecocrd_prediction_form">
+      <label>Eco-Credit prediction: <span id="colleague_ecocrd_prediction"></span><input type="range" min="-400" max="200"
+          value="0"></label>
+      <button class="predict">Submit</button>
+    </div>
+    <div class="tutorial" style="display: none;">Here you can predict how much your collegue will receive in Eco-Credits by
+      dragging the slider above. It’s okay to guess a random number if you have no idea.</div>
+    <div class="score">
+      <h2>SCORE</h2>
+      <p class="score_points"></p>
+    </div>
+    <div class="tutorial">Here you can predict how much your colleague will receive in Eco-Credit from their crystal score. It’s okay to
+      guess a random number if you have no idea.</div>
+  </div>
+  <div id="feedback_screen" class="expscreen">
+    <h1>FINISHED! Your final score was <span id="payment"></span>! Good job!</h1>
+    <p>Thank you for participating in this experiment! Please use the space below to describe your strategy during the
+      game and to tell us what you think about our experiment.</p>
+    <textarea id="participant_feedback"></textarea>
+    <button id="submit_feedback">Submit</button>
+  </div>
+  <div id="quiz">
+    <div id="review-instructions" class="expscreen">
+      <div id="back-to-quiz"><button>← Back to Quiz</button></div>
+    </div>
+    <ol>
+      <li class="expscreen">The number in the DISCARD box that appears after you’ve found a crystal shows you&nbsp;…
+        <ol>
+          <li>The total number of crystals you have discarded that day</li>
+          <li>Your daily crystal score if you choose to collect the crystal you found</li>
+          <li>Your overall game score if you choose to discard the crystal you found</li>
+          <li class="correct">Your daily crystal score if you choose to discard the crystal you found </li>
+        </ol>
+      </li>
+      <li class="expscreen">The number in the COLLECT box that appears after you’ve found a crystal shows you&nbsp;…
+        <ol>
+          <li>Your daily crystal score if you choose to discard the crystal you found </li>
+          <li>The number of crystals you collected</li>
+          <li>The overall game score for all working days</li>
+          <li class="correct">Your daily crystal score if you choose to collect the crystal you found</li>
+  
+        </ol>
+      </li>
+      <li class="expscreen">In a working day, you have so far collected 3 crystals worth 10, 30, and 20 points, and your
+        game score is 100. What is your current crystal score?
+        <ol>
+          <li><strong>20,</strong> the average of the point values of the crystals you have collected</li>
+          <li><strong>160,</strong> the sum of your game score and the point values of the crystals you have collected
+            that day</li>
+          <li class="correct"><strong>60,</strong> the sum of the point values of the crystals you have collected that day
+          </li>
+          <li><strong>3,</strong> the total number of crystals you have collected that day</li>
+        </ol>
+      </li>
+      <li class="expscreen">If your current crystal score is 50 points and the crystal you are considering collecting is
+        worth 20 points, what will the DISCARD box display?
+        <ol>
+          <li>30 points</li>
+          <li>20 points</li>
+          <li class="correct">50 points</li>
+          <li>70 points</li>
+        </ol>
+      </li>
+      <li class="expscreen">If your current crystal score is 30 points and the crystal you are considering collecting is
+        worth 15 points, what will the COLLECT box display?
+        <ol>
+          <li>30 points</li>
+          <li>15 points</li>
+          <li class="correct">45 points</li>
+          <li>The COLLECT box will not display any information in this scenario</li>
+  
+        </ol>
+      </li>
+      <li class="expscreen attention_check">Click on the last option below, which starts with the word
+        <strong>massive.</strong> This is an attention check.
+        <ol>
+          <li>Information about the fifth crystal helps you predict your Eco-Credits</li>
+          <li>Using your high-tech scanner to evaluate the point values of the coveted crystals</li>
+          <li>Strategically deciding whether to collect or discard each crystal to maximize your score while avoiding
+            excessive penalties</li>
+          <li class="correct">Massive crystal hauls that significantly impact the environment can actually trigger
+            negative Eco-Credits</li>
+        </ol>
+      </li>
+      <li class="expscreen">Your game score is 1000 points. How will it change if you collect a crystal worth
+        50 points?
+        <ol>
+          <li>Collecting a crystal doesn’t change your game score</li>
+          <li class="correct">Your game score will immediately increase by 50 to 1050</li>
+          <li>Your game score will immediately increase by 1 to 1001</li>
+          <li>The Auditor will decide how your game score will change at the end of the day</li>
+        </ol>
+      </li>
+      <li class="expscreen">What is the maximum number of points you can earn in the Eco-Credit prediction mini-game?
+        <ol>
+          <li>5 points</li>
+          <li class="correct">10 points</li>
+          <li>15 points</li>
+          <li>20 points</li>
+  
+        </ol>
+      </li>
+      <li class="expscreen">What action will <strong>NOT</strong> increase your game score by 10 points?
+        <ol>
+          <li>Collecting a crystal worth 10 points</li>
+          <li>Predicting your Eco-Credits exactly and getting the maximum number of points in the Eco-Credit prediction
+            mini-game</li>
+          <li class="correct">Collecting 10 crystals worth 10 points each</li>
+          <li>Receiving 10 points in Eco-Credits from the Intergalactic Environmental Protection Agency</li>
+        </ol>
+      </li>
+      <li class="expscreen">How does the Auditor calculate a miner’s Eco-Credits?
+        <ol>
+          <li>The Eco-Credits will be a fixed percentage (e.g., 10&percnt;) of the crystal score</li>
+          <li class="correct">The fewer crystal points the miner collects, the more Eco-Credits they tend to get
+          </li>
+          <li>The Eco-Credits are calculated from the number of collected crystals</li>
+          <li>The calculation is completely random and unpredictable without any set principles</li>
+  
+        </ol>
+      </li>
+      <li class="expscreen">Based on the general principle of the Eco-Credit system, which miner is likely to receive
+        <strong>fewer</strong> Eco-Credits for a given day?
+        <ol>
+          <li class="correct">Miner Zane Orion, who collected crystals worth a total of 100 points</li>
+          <li>Miner Avery Solstice, who collected crystals worth a total of 75 points</li>
+          <li>Miner Remy Nova, who collected crystals worth a total of 50 points</li>
+          <li>All miners will receive a random number of Eco-Credits, regardless of their daily crystal score</li>
+  
+        </ol>
+      </li>
+      <li class="expscreen">Based on the general principle of the Eco-Credits system, which miner is likely to receive
+        <strong>more</strong> Eco-Credits for a given day?
+        <ol>
+          <li>Miner Zane Orion, who collected crystals worth a total of 100 points</li>
+          <li>Miner Avery Solstice, who collected crystals worth a total of 75 points</li>
+          <li class="correct">Miner Remy Nova, who collected crystals worth a total of 50 points</li>
+          <li>All miners will receive a random number of Eco-Credits, regardless of their daily crystal score</li>
+  
+        </ol>
+      </li>
+      <li class="expscreen">If two miners, Celestine and Sirius, have the exact same crystal score for the day, will their
+        Eco-Credits be calculated differently?
+        <ol>
+          <li>The Auditor will definitely give Celestine and Sirius the exact same number of Eco-Credits because they
+            don’t play favourites</li>
+          <li>The Auditor will give Celestine more Eco-Credits than Sirius because Celestine has worked for C3 longer</li>
+          <li>The Auditor will purposely give one of them fewer Eco-Credits based on whose personal life they dislike more
+          </li>
+          <li class="correct">The Auditor has no way to tell Celestine and Sirius apart, but their Eco-Credits will likely
+            be
+            different because Eco-Credit calculations are a bit unpredictable</li>
+        </ol>
+      </li>
+      <li class="expscreen">Each working day, before collecting or discarding the fifth crystal, you must predict your Eco-Credits. What should you do before moving to the Eco-Credit prediction screen?
+        <ol>
+          <li class="correct">Decide whether you will collect or discard the fifth crystal</li>
+          <li>Calculate the average point value of the crystals collected that day</li>
+          <li>Determine the rarity of the fifth crystal</li>
+          <li>Think about how many crystal points your colleagues usually collect</li>
+        </ol>
+      </li>
+      <li class="expscreen">Why is it important to decide whether to collect or discard the fifth crystal before
+        predicting
+        your Eco-Credits?
+        <ol>
+          <li>Because the Auditor will ignore the fifth crystal when calculating your Eco-Credits</li>
+          <li class="correct">Because you need to know your final crystal score to estimate your Eco-Credits, and this
+            requires deciding if you’ll collect or discard the fifth crystal</li>
+          <li>Because the Auditor will base your Eco-Credits only on your decision to collect or discard the fifth
+            crystal</li>
+          <li>Because you need to know the rarity of the fifth crystal to predict your Eco-Credits</li>
+  
+        </ol>
+      </li>
+      <li class="expscreen">You have already collected four crystals, giving you a current crystal score of 100 points. The fifth crystal you’ve found is worth 30 points. Before collecting or discarding this crystal, you must predict your Eco-Credits for the day. If you decide to <strong>collect</strong> the fifth crystal, what crystal score should you use to predict your Eco-Credits?
+        <ol>
+          <li>100 points</li>
+          <li class="correct">130 points</li>
+          <li>30 points</li>
+          <li>The Eco-Credits are not based on your crystal score</li>
+        </ol>
+      </li>
+      <li class="expscreen attention_check">To demonstrate you are paying attention, click on the option that mentions the
+        <strong>Auditor:</strong>
+        <ol>
+          <li>Calculating your final crystal score after collecting the fifth crystal</li>
+          <li class="correct">Studying the prior rulings of the quirky, enigmatic Eco-Credit Auditor</li>
+          <li>Trying to maximize your Eco-Credits for a lighter environmental impact</li>
+          <li>Predicting how many Eco-Credits your colleague miners will receive</li>
+        </ol>
+      </li>
+
+      <li class="expscreen">Suppose your current crystal score is 80 points. You encounter the fifth crystal, which is worth 40 points. The DISCARD box shows 80 points, and the COLLECT box shows 120 points. Which of the following statements is true?
+        <ol>
+          <li>The decision to collect or discard the fifth crystal has no impact on the Eco-Credit calculation, as the Eco-Credits are solely based on the first four crystals you’ve encountered</li>
+          <li>If you collect the fifth crystal, you are likely to receive more Eco-Credits compared to discarding it because a crystal score of 120 points suggests eco-friendly mining practices</li>
+          <li>If you collect the fifth crystal, you are likely to receive more Eco-Credits compared to discarding it as a reward for your hard work</li>
+          <li class="correct">If you discard the fifth crystal, you are likely to receive more Eco-Credits compared to collecting it because a crystal score of 80 points is better for Zyxlon’s environment</li>
+        </ol>
+      </li>
+  
+    </ol>
+  </div>
+  <script src="/crystalmining/betting/task.js"></script>
+</body>
+
+</html>
