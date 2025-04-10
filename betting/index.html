@@ -261,10 +261,6 @@
         <th>Eco-Credits</th>
         <td id="tax_payment_predresults"></td>
       </tr>
-      <tr>
-        <th>Total</th>
-        <td id="total_predresults"></td>
-      </tr>
     </table>
     <p>You win <span id="ecocrd_prediction_points"></span></p>
     <button id="predresults_continue">CONTINUE<br><span class="symbol">→</span></button>
@@ -272,22 +268,20 @@
       <h2>SCORE</h2>
       <p class="score_points"></p>
     </div>
-    <div class="tutorial">Here you can see how many points you have won for predicting <span id="whos_taxes"></span> Eco-Credits. You can also see the total daily score, the crystal score plus Eco-Credits. To continue, click CONTINUE when it appears.</div>
+    <div class="tutorial">Here you can see how many points you have won for predicting this miner’s Eco-Credits. To continue, click CONTINUE when it appears.</div>
   </div>
   <div id="colleague_prediction_screen" class="expscreen">
-    <p>Predict your colleague’s Eco-Credits<br><span>Crystal score: <strong id="colleague_crystal_score"></strong></span></p>
+    <p>Predict this miner’s Eco-Credits<br><span>Crystal score: <strong id="colleague_crystal_score"></strong></span></p>
     <div id="colleague_ecocrd_prediction_form">
       <label>Eco-Credit prediction: <span id="colleague_ecocrd_prediction"></span><input type="range" min="-400" max="200"
           value="0"></label>
       <button class="predict">Submit</button>
     </div>
-    <div class="tutorial" style="display: none;">Here you can predict how much your collegue will receive in Eco-Credits by
-      dragging the slider above. It’s okay to guess a random number if you have no idea.</div>
     <div class="score">
       <h2>SCORE</h2>
       <p class="score_points"></p>
     </div>
-    <div class="tutorial">Here you can predict how much your colleague will receive in Eco-Credit from their crystal score. It’s okay to
+    <div class="tutorial">Here you can predict how much how much this miner will receive in Eco-Credit from their crystal score. It’s okay to
       guess a random number if you have no idea.</div>
   </div>
   <div id="feedback_screen" class="expscreen">
@@ -302,89 +296,13 @@
       <div id="back-to-quiz"><button>← Back to Quiz</button></div>
     </div>
     <ol>
-      <li class="expscreen">The number in the DISCARD box that appears after you’ve found a crystal shows you&nbsp;…
-        <ol>
-          <li>The total number of crystals you have discarded that day</li>
-          <li>Your daily crystal score if you choose to collect the crystal you found</li>
-          <li>Your overall game score if you choose to discard the crystal you found</li>
-          <li class="correct">Your daily crystal score if you choose to discard the crystal you found </li>
-        </ol>
-      </li>
-      <li class="expscreen">The number in the COLLECT box that appears after you’ve found a crystal shows you&nbsp;…
-        <ol>
-          <li>Your daily crystal score if you choose to discard the crystal you found </li>
-          <li>The number of crystals you collected</li>
-          <li>The overall game score for all working days</li>
-          <li class="correct">Your daily crystal score if you choose to collect the crystal you found</li>
-  
-        </ol>
-      </li>
-      <li class="expscreen">In a working day, you have so far collected 3 crystals worth 10, 30, and 20 points, and your
-        game score is 100. What is your current crystal score?
-        <ol>
-          <li><strong>20,</strong> the average of the point values of the crystals you have collected</li>
-          <li><strong>160,</strong> the sum of your game score and the point values of the crystals you have collected
-            that day</li>
-          <li class="correct"><strong>60,</strong> the sum of the point values of the crystals you have collected that day
-          </li>
-          <li><strong>3,</strong> the total number of crystals you have collected that day</li>
-        </ol>
-      </li>
-      <li class="expscreen">If your current crystal score is 50 points and the crystal you are considering collecting is
-        worth 20 points, what will the DISCARD box display?
-        <ol>
-          <li>30 points</li>
-          <li>20 points</li>
-          <li class="correct">50 points</li>
-          <li>70 points</li>
-        </ol>
-      </li>
-      <li class="expscreen">If your current crystal score is 30 points and the crystal you are considering collecting is
-        worth 15 points, what will the COLLECT box display?
-        <ol>
-          <li>30 points</li>
-          <li>15 points</li>
-          <li class="correct">45 points</li>
-          <li>The COLLECT box will not display any information in this scenario</li>
-  
-        </ol>
-      </li>
-      <li class="expscreen attention_check">Click on the last option below, which starts with the word
-        <strong>massive.</strong> This is an attention check.
-        <ol>
-          <li>Information about the fifth crystal helps you predict your Eco-Credits</li>
-          <li>Using your high-tech scanner to evaluate the point values of the coveted crystals</li>
-          <li>Strategically deciding whether to collect or discard each crystal to maximize your score while avoiding
-            excessive penalties</li>
-          <li class="correct">Massive crystal hauls that significantly impact the environment can actually trigger
-            negative Eco-Credits</li>
-        </ol>
-      </li>
-      <li class="expscreen">Your game score is 1000 points. How will it change if you collect a crystal worth
-        50 points?
-        <ol>
-          <li>Collecting a crystal doesn’t change your game score</li>
-          <li class="correct">Your game score will immediately increase by 50 to 1050</li>
-          <li>Your game score will immediately increase by 1 to 1001</li>
-          <li>The Auditor will decide how your game score will change at the end of the day</li>
-        </ol>
-      </li>
-      <li class="expscreen">What is the maximum number of points you can earn in the Eco-Credit prediction mini-game?
+      <li class="expscreen">What is the maximum number of points you can earn for predicting Eco-Credits?
         <ol>
           <li>5 points</li>
           <li class="correct">10 points</li>
           <li>15 points</li>
           <li>20 points</li>
   
-        </ol>
-      </li>
-      <li class="expscreen">What action will <strong>NOT</strong> increase your game score by 10 points?
-        <ol>
-          <li>Collecting a crystal worth 10 points</li>
-          <li>Predicting your Eco-Credits exactly and getting the maximum number of points in the Eco-Credit prediction
-            mini-game</li>
-          <li class="correct">Collecting 10 crystals worth 10 points each</li>
-          <li>Receiving 10 points in Eco-Credits from the Intergalactic Environmental Protection Agency</li>
         </ol>
       </li>
       <li class="expscreen">How does the Auditor calculate a miner’s Eco-Credits?
@@ -430,35 +348,6 @@
             different because Eco-Credit calculations are a bit unpredictable</li>
         </ol>
       </li>
-      <li class="expscreen">Each working day, before collecting or discarding the fifth crystal, you must predict your Eco-Credits. What should you do before moving to the Eco-Credit prediction screen?
-        <ol>
-          <li class="correct">Decide whether you will collect or discard the fifth crystal</li>
-          <li>Calculate the average point value of the crystals collected that day</li>
-          <li>Determine the rarity of the fifth crystal</li>
-          <li>Think about how many crystal points your colleagues usually collect</li>
-        </ol>
-      </li>
-      <li class="expscreen">Why is it important to decide whether to collect or discard the fifth crystal before
-        predicting
-        your Eco-Credits?
-        <ol>
-          <li>Because the Auditor will ignore the fifth crystal when calculating your Eco-Credits</li>
-          <li class="correct">Because you need to know your final crystal score to estimate your Eco-Credits, and this
-            requires deciding if you’ll collect or discard the fifth crystal</li>
-          <li>Because the Auditor will base your Eco-Credits only on your decision to collect or discard the fifth
-            crystal</li>
-          <li>Because you need to know the rarity of the fifth crystal to predict your Eco-Credits</li>
-  
-        </ol>
-      </li>
-      <li class="expscreen">You have already collected four crystals, giving you a current crystal score of 100 points. The fifth crystal you’ve found is worth 30 points. Before collecting or discarding this crystal, you must predict your Eco-Credits for the day. If you decide to <strong>collect</strong> the fifth crystal, what crystal score should you use to predict your Eco-Credits?
-        <ol>
-          <li>100 points</li>
-          <li class="correct">130 points</li>
-          <li>30 points</li>
-          <li>The Eco-Credits are not based on your crystal score</li>
-        </ol>
-      </li>
       <li class="expscreen attention_check">To demonstrate you are paying attention, click on the option that mentions the
         <strong>Auditor:</strong>
         <ol>
@@ -468,16 +357,6 @@
           <li>Predicting how many Eco-Credits your colleague miners will receive</li>
         </ol>
       </li>
-
-      <li class="expscreen">Suppose your current crystal score is 80 points. You encounter the fifth crystal, which is worth 40 points. The DISCARD box shows 80 points, and the COLLECT box shows 120 points. Which of the following statements is true?
-        <ol>
-          <li>The decision to collect or discard the fifth crystal has no impact on the Eco-Credit calculation, as the Eco-Credits are solely based on the first four crystals you’ve encountered</li>
-          <li>If you collect the fifth crystal, you are likely to receive more Eco-Credits compared to discarding it because a crystal score of 120 points suggests eco-friendly mining practices</li>
-          <li>If you collect the fifth crystal, you are likely to receive more Eco-Credits compared to discarding it as a reward for your hard work</li>
-          <li class="correct">If you discard the fifth crystal, you are likely to receive more Eco-Credits compared to collecting it because a crystal score of 80 points is better for Zyxlon’s environment</li>
-        </ol>
-      </li>
-  
     </ol>
   </div>
   <script src="/crystalmining/betting/task.js"></script>
