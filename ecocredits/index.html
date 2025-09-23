@@ -287,50 +287,24 @@
       view. Bon voyage!</div>
   </div>
   <div id="crystal_collect" class="expscreen">
-    <h1>Crystal <span id="crystal_num"></span></h1>
-    <div id="points"><span id="crystal_points_text"></span> points</div>
-    <div id="discard">
-      <h2>DISCARD</h2>
-      <p id="discard_points"></p>
-    </div>
-    <div id="collect">
-      <h2>COLLECT</h2>
-      <p id="collect_points"></p>
-    </div>
+    <h1>Collect crystals</h1>
+    <div id="collectedpoints"><span id="cpnum">0</span> points</div>
+    <ol>
+      <li id="crystal1"><label class="crystalpoints"></label></li>
+      <li id="crystal2"><label class="crystalpoints"></label></li>
+      <li id="crystal3"><label class="crystalpoints"></label></li>
+      <li id="crystal4"><label class="crystalpoints"></label></li>
+      <li id="crystal5"><label class="crystalpoints"></label></li>
+    </ol>
+    <div class="tutorial">Click on the crystals to select them for collection. Clicking on them again will deselect them.</div>
     <div class="score">
       <h2>SCORE</h2>
       <p class="score_points"></p>
     </div>
-    <div id="crystal5_disable">
-      <img src="/crystalmining/ecocredits/img/disable_mining.png" width="1280" height="720" alt="">
-      <button class="predict">Predict your Eco-Credit</button>
-    </div>
-    <div class="tutorial">Click the DISCARD box to discard this crystal and COLLECT box to collect it. If you
-      collect it, note that the crystal points will be added to your game score.</div>
-  </div>
-  <div id="ecocrd_prediction_screen" class="expscreen">
-    <div id="ecocrd_prediction">
-      <label>Eco-Credit prediction: <span id="current_ecocrd_prediction"></span><input type="range" min="-400" max="200"
-          value="0"></label>
-      <button class="predict">Submit</button>
-    </div>
-    <div class="tutorial">Here you can predict how much you will get in Eco-Credit points by dragging the slider above. It’s okay to
-      guess a random number if you have no idea.</div>
-    <div id="crystal5info" class="">
-      <div><span id="ecocrd_crystal5_points"></span> points</div>
-      <div id="ecocrd_discard">
-        <h2>DISCARD</h2>
-        <p id="ecocrd_discard_points"></p>
-      </div>
-      <div id="ecocrd_collect">
-        <h2>COLLECT</h2>
-        <p id="ecocrd_collect_points"></p>
-      </div>
-    </div>
-    <div class="score">
-      <h2>SCORE</h2>
-      <p class="score_points"></p>
-    </div>
+    <label>Predict your Eco-Credits<span id="current_ecocrd_prediction"></span><input type="range" min="-400" max="200"
+        value="0"></label>
+    <button class="predict">Submit</button>
+    <div class="tutorial">Predict how many Eco-Credit points the Auditor will give you.</div>
   </div>
   <div id="ecocrd_screen" class="expscreen">
     <table>
