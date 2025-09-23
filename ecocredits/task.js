@@ -371,18 +371,6 @@ function run_trials(oldscreen, tutorial, endfunction) {
     }
 
     function run_flight(oldscreen) {
-        crystal_num = 1;
-        dailyscore = 0;
-        ecocrd_predicted = false;
-        while (true) {
-            for (let i = 0; i < 5; i++) {
-                crystal_vals[i] = get_crystal_points();
-            }
-            let total = crystal_vals.reduce((a, b) => a + b, 0);
-            if (total <= MAXCRYSTAL) {
-                break;
-            }
-        }
         update_score(score);
         if (tutorial) flight_tutorial_message.style.display = "none";
         show_screen(oldscreen, flightscreen);
@@ -402,6 +390,7 @@ function run_trials(oldscreen, tutorial, endfunction) {
     function run_crystals() {
         update_score(score);
         dailyscore = 0;
+        let selected = Array(5).fill(false);
         while (true) {
             for (let i = 0; i < 5; i++) {
                 crystal_vals[i] = get_crystal_points();
@@ -409,6 +398,32 @@ function run_trials(oldscreen, tutorial, endfunction) {
             let total = crystal_vals.reduce((a, b) => a + b, 0);
             if (total <= MAXCRYSTAL) {
                 break;
+            }
+        }
+        let scoredisp = document.querySelector("#cpnum");
+        for (let i = 0; i < 5; i++) {
+            let li = document.querySelector(`#crystal${i + 1}`);
+            let lab = li.querySelector("label");
+            lab.innerHTML = `+${crystal_vals[i]}`;
+            let crystal_val = crystal_vals[i];
+            let crystal_cat = get_crystal_cat(crystal_val);
+            li.classList.add(`crystal${crystal_cat}`);
+            li.classList.add(`deselected`);
+            li.onclick = (event) => {
+                if (selected[i]) {
+                    selected[i] = false;
+                    li.classList.add("deselected");
+                    li.classList.remove("selected");
+                    dailyscore -= crystal_val;
+                    scoredisp.innerHTML = dailyscore.toString();
+                }
+                else {
+                    selected[i] = true;
+                    li.classList.add("selected");
+                    li.classList.remove("deselected");
+                    dailyscore += crystal_val;
+                    scoredisp.innerHTML = dailyscore.toString();
+                }
             }
         }
             // crystal_val = crystal_vals[crystal_num - 1];

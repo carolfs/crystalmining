@@ -187,27 +187,27 @@ div#crystal_collect {
 }
 
 .crystal1 {
-    background-image: url(/crystalmining/ecocredits/img/crystal1.jpg)
+    background-image: url(/crystalmining/ecocredits/img/crystal1.png)
 }
 
 .crystal2 {
-    background-image: url(/crystalmining/ecocredits/img/crystal2.jpg)
+    background-image: url(/crystalmining/ecocredits/img/crystal2.png)
 }
 
 .crystal3 {
-    background-image: url(/crystalmining/ecocredits/img/crystal3.jpg)
+    background-image: url(/crystalmining/ecocredits/img/crystal3.png)
 }
 
 .crystal4 {
-    background-image: url(/crystalmining/ecocredits/img/crystal4.jpg)
+    background-image: url(/crystalmining/ecocredits/img/crystal4.png)
 }
 
 .crystal5 {
-    background-image: url(/crystalmining/ecocredits/img/crystal5.jpg)
+    background-image: url(/crystalmining/ecocredits/img/crystal5.png)
 }
 
 .crystal6 {
-    background-image: url(/crystalmining/ecocredits/img/crystal6.jpg)
+    background-image: url(/crystalmining/ecocredits/img/crystal6.png)
 }
 
 #ecocrd_screen {
@@ -286,7 +286,7 @@ input {
 }
 
 #ecocrd_prediction label, #colleague_ecocrd_prediction_form label {
-    font-size: 80px
+    font-size: 60px
 }
 
 #ecocrd_prediction input, #colleague_ecocrd_prediction_form input {
@@ -665,4 +665,65 @@ button.review-instructions {
 
 #review-instructions p {
     margin: 10px;
+}
+#crystal_collect ol {
+    padding: 0;
+    margin: 0;
+}
+
+#crystal_collect li {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 0 0;
+    width: 250px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    background-size: contain;
+    background-position-y: -20px;
+    height: 240px;
+    background-repeat: no-repeat;
+    float: left;
+    font-size: 40px;
+    cursor: pointer;
+}
+#crystal_collect li:hover {
+    transform: translateY(-2px); /* slight lift */
+}
+#crystal_collect li.deselected {
+    filter: brightness(60%);
+}
+#crystal_collect li.selected {
+    filter: none;
+}
+#crystal_collect li:nth-child(1) {
+    margin-top: 0px;
+}
+#crystal_collect li:nth-child(2) {
+    margin-top: 40px;
+}
+#crystal_collect li:nth-child(3) {
+    margin-top: 60px;
+}
+#crystal_collect li:nth-child(4) {
+    margin-top: 40px;
+}
+#crystal_collect li:nth-child(5) {
+    margin-top: 0px;
+}
+#ecocrd_prediction {
+    clear: both;
+    font-size: 500%;
+}
+#crystal_collect h1 {
+    margin: 50px 0 0 0;
+    padding: 0 0 0 400px;
+    font-size: 60px;
+    font-weight: bold;
+    text-align: left;
+}
+#collectedpoints {
+    font-size: 40px;
+    font-weight: bold;
+    text-align: center;
 }
