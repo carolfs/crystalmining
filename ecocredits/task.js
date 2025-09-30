@@ -121,7 +121,6 @@ window.onload = function() {
         "/crystalmining/ecocredits/img/spaceship_flying.png",
         "/crystalmining/ecocredits/img/zyxlon.jpg",
         "/crystalmining/ecocredits/img/own_prediction.png",
-        "/crystalmining/ecocredits/img/crystal5_predict.png",
         "/crystalmining/ecocredits/img/colleague_prediction.png",
         "/crystalmining/ecocredits/img/own_prediction_results.png",
         "/crystalmining/ecocredits/img/ecocrd.png",
@@ -401,28 +400,54 @@ function run_trials(oldscreen, tutorial, endfunction) {
             }
         }
         let scoredisp = document.querySelector("#cpnum");
+        scoredisp.innerHTML = "0";
+        const minecocrd = parseInt(ecocrd_input.min, 10);
+        const maxecocrd = parseInt(ecocrd_input.max, 10);
+        ecocrd_input.value = Math.floor(Math.random() * (maxecocrd - minecocrd)) + minecocrd;
+        current_ecocrd_prediction.innerHTML = `${ecocrd_input.value}`;
+        let overallpred = ecocrd_input.value;
+        let dailydisp = document.querySelector("#predicted_daily_score span");
+        dailydisp.innerHTML = ``;
         for (let i = 0; i < 5; i++) {
             let li = document.querySelector(`#crystal${i + 1}`);
+            li.className = "";
             let lab = li.querySelector("label");
             lab.innerHTML = `+${crystal_vals[i]}`;
             let crystal_val = crystal_vals[i];
             let crystal_cat = get_crystal_cat(crystal_val);
             li.classList.add(`crystal${crystal_cat}`);
             li.classList.add(`deselected`);
+            add_results(`crystal_display${i + 1}`, 0, crystal_val, score);
             li.onclick = (event) => {
                 if (selected[i]) {
                     selected[i] = false;
                     li.classList.add("deselected");
                     li.classList.remove("selected");
                     dailyscore -= crystal_val;
+                    score -= crystal_val;
+                    update_score(score);
                     scoredisp.innerHTML = dailyscore.toString();
+                    overallpred = dailyscore + Number(ecocrd_input.value);
+                    if (prediction_changed) {
+                        dailydisp.innerHTML = `${overallpred}`;
+                        add_results("own_ecocrd_prediction_changed", 0, ecocrd_input.value, score);
+                    }
+                    add_results("crystal_deselect", crystal_val, `${i + 1}`, score);
                 }
                 else {
                     selected[i] = true;
                     li.classList.add("selected");
                     li.classList.remove("deselected");
                     dailyscore += crystal_val;
+                    score += crystal_val;
+                    update_score(score);
                     scoredisp.innerHTML = dailyscore.toString();
+                    overallpred = dailyscore + Number(ecocrd_input.value);
+                    if (prediction_changed) {
+                        dailydisp.innerHTML = `${overallpred}`;
+                        add_results("own_ecocrd_prediction_changed", 0, ecocrd_input.value, score);
+                    }
+                    add_results("crystal_select", 0, `${i + 1}`, score);
                 }
             }
         }
@@ -433,92 +458,23 @@ function run_trials(oldscreen, tutorial, endfunction) {
             // crystal_points.innerHTML = crystal_val.toString();
             // discard_points.innerHTML = dailyscore.toString();
             // collect_points.innerHTML = (dailyscore + crystal_val).toString();
-        const minecocrd = parseInt(ecocrd_input.min, 10);
-        const maxecocrd = parseInt(ecocrd_input.max, 10);
-        ecocrd_input.value = Math.floor(Math.random() * (maxecocrd - minecocrd)) + minecocrd;
-        current_ecocrd_prediction.innerHTML = `${ecocrd_input.value}`;
         show_screen(flightscreen, crystalscreen);
         ecocrd_input.focus();
         let prediction_changed = 0;
         ecocrd_input.oninput = function() {
             current_ecocrd_prediction.innerHTML = `${ecocrd_input.value}`;
             prediction_changed = 1;
+            overallpred = dailyscore + Number(ecocrd_input.value);
+            dailydisp.innerHTML = `${overallpred}`;
         }
         crystalscreen.querySelector(".predict").onclick = function() {
             ecocrd_prediction = Number(ecocrd_input.value);
             ecocrd_predicted = true;
+            score += dailyscore;
+            add_results("daily_score", 0, dailyscore, score);
             add_results("own_ecocrd_prediction", 0, ecocrd_prediction, score);
-            add_results("own_ecocrd_prediction_changed", 0, prediction_changed, score);
             // Add link to the next screen (ecocredits display)
-        }
-        function advancecrystal() {
-            if (crystal_num < 5) {
-                crystal_num += 1;
-                crystal_num_display.innerHTML = crystal_num.toString();
-                crystalscreen.classList.remove(`crystal${crystal_cat}`);
-                crystal_val = crystal_vals[crystal_num - 1];
-                crystalscreen.classList.remove(`crystal${crystal_cat}`);
-                crystal_cat = get_crystal_cat(crystal_val);
-                crystalscreen.classList.add(`crystal${crystal_cat}`);
-                crystal_num_display.innerHTML = crystal_num.toString();
-                crystal_points.innerHTML = crystal_val.toString();
-                discard_points.innerHTML = dailyscore.toString();
-                collect_points.innerHTML = (dailyscore + crystal_val).toString();
-                update_score(score);
-                if (crystal_num == 5) {
-                    crystal5_disable.style.display = "block";
-                    if (tutorial) crystal_tutorial_message.style.display = "none";
-                }
-            }
-            else {
-                crystalscreen.classList.remove(`crystal${crystal_cat}`);
-                document.onkeydown = null;
-                run_ecocrd_screen();
-            }
-        }
-        // collect.onclick = function() {
-        //     if (crystal_num < 5 || ecocrd_predicted) {
-        //         score += crystal_val;
-        //         dailyscore += crystal_val;
-        //         add_results("crystal", crystal_val, "collect", score);
-        //         advancecrystal();
-        //     }
-        // }
-        // discard.onclick = function() {
-        //     if (crystal_num < 5 || ecocrd_predicted) {
-        //         add_results("crystal", crystal_val, "discard", score);
-        //         advancecrystal();
-        //     }
-        // }
-        // crystal5_disable.querySelector("button").onclick = function() {
-        //     // Move to ecocrd prediction
-        //     crystal5_disable.style.display = "none";
-        //     if (tutorial) crystal_tutorial_message.style.display = "block";
-        //     run_own_ecocrd_prediction();
-        // }
-    }
-    function run_own_ecocrd_prediction() {
-        crystal5info.classList.add(`crystal${crystal_cat}`);
-        ecocrd_crystal5_points.innerHTML = crystal_val.toString();
-        ecocrd_discard_points.innerHTML = dailyscore.toString();
-        ecocrd_collect_points.innerHTML = (dailyscore + crystal_val).toString();
-        ecocrd_input.value = Math.trunc(Math.random() * (ecocrd_input.max - ecocrd_input.min)) + ecocrd_input.min;
-        current_ecocrd_prediction.innerHTML = `${ecocrd_input.value}`;
-        show_screen(crystalscreen, ecocrd_prediction_screen);
-        ecocrd_input.focus();
-        let prediction_changed = 0;
-        ecocrd_input.oninput = function() {
-            current_ecocrd_prediction.innerHTML = `${ecocrd_input.value}`;
-            prediction_changed = 1;
-        }
-        ecocrd_prediction_screen.querySelector(".predict").onclick = function() {
-            ecocrd_prediction = Number(ecocrd_input.value);
-            ecocrd_predicted = true;
-            crystal5info.classList.remove(`crystal${crystal_cat}`);
-            add_results("own_ecocrd_prediction", 0, ecocrd_prediction, score);
-            add_results("own_ecocrd_prediction_changed", 0, prediction_changed, score);
-            show_screen(ecocrd_prediction_screen, crystalscreen);
-            run_crystals();
+            run_ecocrd_screen();
         }
     }
     function run_ecocrd_screen() {

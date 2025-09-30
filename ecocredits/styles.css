@@ -260,26 +260,6 @@ input {
     color: #000
 }
 
-#crystal5info {
-    position: absolute;
-    top: 10px;
-    right: 0;
-    width: 600px;
-    font-size: 30px;
-    text-align: center;
-    padding-left: 200px;
-    opacity: .4
-}
-
-#crystal5info #ecocrd_discard,
-#crystal5info #ecocrd_collect {
-    display: inline-block;
-    position: relative;
-    left: auto;
-    top: auto;
-    margin-top: 20px
-}
-
 #ecocrd_prediction, #colleague_ecocrd_prediction_form {
     margin: 250px 0 0 0;
     text-align: center
@@ -320,33 +300,11 @@ button#ecocrd_continue, button#predresults_continue {
     font-size: 400%;
 }
 
-#crystal5info {
-    background-size: 40%;
-    background-repeat: no-repeat
-}
 
 #flightscreen img {
     position: absolute;
     left: 0;
     top: 0
-}
-
-#crystal5_disable {
-    display: none
-}
-
-#crystal5_disable img {
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 0;
-}
-
-#crystal5_disable button {
-    position: relative;
-    margin: 0 auto;
-    top: 220px;
-    z-index: 5;
 }
 
 .tutorial {
@@ -696,7 +654,7 @@ button.review-instructions {
 #crystal_collect li.selected {
     filter: none;
 }
-#crystal_collect li:nth-child(1) {
+/*#crystal_collect li:nth-child(1) {
     margin-top: 0px;
 }
 #crystal_collect li:nth-child(2) {
@@ -710,7 +668,7 @@ button.review-instructions {
 }
 #crystal_collect li:nth-child(5) {
     margin-top: 0px;
-}
+}*/
 #ecocrd_prediction {
     clear: both;
     font-size: 500%;

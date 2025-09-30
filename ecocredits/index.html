@@ -178,7 +178,7 @@
       <img src="/crystalmining/ecocredits/img/mini_game.png" width="912" height="513" alt="" class="instructions_illustration">
     </li>
 
-    <li class="expscreen">
+    <!--<li class="expscreen">
       <p>Before you choose to collect or discard the fifth crystal of the day, you will be asked to predict your Eco-Credits.</p>
       <img src="/crystalmining/ecocredits/img/crystal5_predict.png" width="912" height="513" alt="" class="instructions_illustration">
     </li>
@@ -188,7 +188,7 @@
         you choose
         to collect or discard it. When you see this screen, decide if you’ll collect this crystal or not. This is because you need to know your final end-of-day crystal score to accurately predict your Eco-Credits.</p>
         <img src="/crystalmining/ecocredits/img/crystal5_predict.png" width="912" height="513" alt="" class="instructions_illustration">
-    </li>
+    </li>-->
 
     <li class="expscreen">
       <p>Then, you’ll move to the Eco-Credit prediction screen. Information about the fifth crystal will be at the top right of
@@ -287,7 +287,11 @@
       view. Bon voyage!</div>
   </div>
   <div id="crystal_collect" class="expscreen">
-    <h1>Crystal score: <span id="cpnum">0</span></h1>
+    <div class="score">
+      <h2>SCORE</h2>
+      <p class="score_points"></p>
+    </div>
+    <h1>Crystal points: <span id="cpnum">0</span></h1>
     <ol>
       <li id="crystal1"><label class="crystalpoints"></label></li>
       <li id="crystal2"><label class="crystalpoints"></label></li>
@@ -296,12 +300,10 @@
       <li id="crystal5"><label class="crystalpoints"></label></li>
     </ol>
     <div class="tutorial">Click on the crystals to select them for collection. Clicking on them again will deselect them.</div>
-    <div class="score">
-      <h2>SCORE</h2>
-      <p class="score_points"></p>
-    </div>
+
     <div id="ecocrd_prediction"><label>Predict your Eco-Credits: <span id="current_ecocrd_prediction"></span><input type="range" min="-400" max="200"
         value="0"></label></div>
+    <div id="predicted_daily_score">Predicted Daily Score: <span></span> (Crystal points + Your guess)</div>
     <button class="predict">Submit</button>
     <div class="tutorial">Predict how many Eco-Credit points the Auditor will give you.</div>
   </div>
@@ -325,7 +327,7 @@
     <h2>Eco-Credit prediction results</h2>
     <table>
       <tr>
-        <th>Crystal score</th>
+        <th>Crystal total</th>
         <td id="crystal_score_predresults"></td>
       </tr>
       <tr>
@@ -333,7 +335,7 @@
         <td id="tax_payment_predresults"></td>
       </tr>
       <tr>
-        <th>Total</th>
+        <th>Daily total</th>
         <td id="total_predresults"></td>
       </tr>
     </table>
@@ -346,7 +348,7 @@
     <div class="tutorial">Here you can see how many points you have won for predicting <span id="whos_taxes"></span> Eco-Credits. You can also see the total daily score, the crystal score plus Eco-Credits. To continue, click CONTINUE when it appears.</div>
   </div>
   <div id="colleague_prediction_screen" class="expscreen">
-    <p>Predict your colleague’s Eco-Credits<br><span>Crystal score: <strong id="colleague_crystal_score"></strong></span></p>
+    <p>Predict your colleague’s Eco-Credits<br><span>Crystal total: <strong id="colleague_crystal_score"></strong></span></p>
     <div id="colleague_ecocrd_prediction_form">
       <label>Eco-Credit prediction: <span id="colleague_ecocrd_prediction"></span><input type="range" min="-400" max="200"
           value="0"></label>
