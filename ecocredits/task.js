@@ -433,8 +433,24 @@ function run_trials(oldscreen, tutorial, endfunction) {
             // crystal_points.innerHTML = crystal_val.toString();
             // discard_points.innerHTML = dailyscore.toString();
             // collect_points.innerHTML = (dailyscore + crystal_val).toString();
-
+        const minecocrd = parseInt(ecocrd_input.min, 10);
+        const maxecocrd = parseInt(ecocrd_input.max, 10);
+        ecocrd_input.value = Math.floor(Math.random() * (maxecocrd - minecocrd)) + minecocrd;
+        current_ecocrd_prediction.innerHTML = `${ecocrd_input.value}`;
         show_screen(flightscreen, crystalscreen);
+        ecocrd_input.focus();
+        let prediction_changed = 0;
+        ecocrd_input.oninput = function() {
+            current_ecocrd_prediction.innerHTML = `${ecocrd_input.value}`;
+            prediction_changed = 1;
+        }
+        crystalscreen.querySelector(".predict").onclick = function() {
+            ecocrd_prediction = Number(ecocrd_input.value);
+            ecocrd_predicted = true;
+            add_results("own_ecocrd_prediction", 0, ecocrd_prediction, score);
+            add_results("own_ecocrd_prediction_changed", 0, prediction_changed, score);
+            // Add link to the next screen (ecocredits display)
+        }
         function advancecrystal() {
             if (crystal_num < 5) {
                 crystal_num += 1;
