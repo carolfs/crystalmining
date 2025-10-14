@@ -611,7 +611,9 @@ function run_trials(oldscreen, tutorial, endfunction) {
             continue_button.style.display = "block";
         }, 2000);
     }
-    run_crystals(oldscreen);
+    // run_crystals(oldscreen);
+    // run_colleague_ecocrd_prediction();
+    run_flight(oldscreen);
 }
 
 function run_quiz(last_screen) {

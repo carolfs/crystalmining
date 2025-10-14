@@ -291,7 +291,7 @@
       <h2>SCORE</h2>
       <p class="score_points"></p>
     </div>
-    <h1>Crystal points: <span id="cpnum">0</span></h1>
+    <h1>Your Crystal Points: <span id="cpnum">0</span></h1>
     <ol>
       <li id="crystal1"><label class="crystalpoints"></label></li>
       <li id="crystal2"><label class="crystalpoints"></label></li>
@@ -300,10 +300,17 @@
       <li id="crystal5"><label class="crystalpoints"></label></li>
     </ol>
     <div class="tutorial">Click on the crystals to select them for collection. Clicking on them again will deselect them.</div>
+    <table>
+      <tr id="ecocrd_prediction">
+        <td><label>Predict Your Eco-Credits<input type="range" min="-400" max="200"
+        value="0"></label></td>
+        <td id="current_ecocrd_prediction"></td>
+      </tr>
+      <tr id="predicted_daily_score">
+        <td>Expected Daily Score<br><small>(Crystal Points + Your Prediction)</small></td>
+        <td><span></span></td>
+    </table>
 
-    <div id="ecocrd_prediction"><label>Predict your Eco-Credits: <span id="current_ecocrd_prediction"></span><input type="range" min="-400" max="200"
-        value="0"></label></div>
-    <div id="predicted_daily_score">Predicted Daily Score: <span></span> (Crystal points + Your guess)</div>
     <button class="predict">Submit</button>
     <div class="tutorial">Predict how many Eco-Credit points the Auditor will give you.</div>
   </div>
@@ -324,7 +331,7 @@
     <div class="tutorial">Here you can see how many Eco-Credit points the Auditor has determined you will receive. This amount has been automatically added to your game score. To continue, click CONTINUE when it appears.</div>
   </div>
   <div id="ecocrd_prediction_results" class="expscreen">
-    <h2>Eco-Credit prediction results</h2>
+    <h2>Results</h2>
     <table>
       <tr>
         <th>Crystal total</th>
@@ -339,7 +346,7 @@
         <td id="total_predresults"></td>
       </tr>
     </table>
-    <p>You win <span id="ecocrd_prediction_points"></span></p>
+    <p>Prediction bonus: <span id="ecocrd_prediction_points"></span></p>
     <button id="predresults_continue">CONTINUE<br><span class="symbol">→</span></button>
     <div class="score">
       <h2>SCORE</h2>
