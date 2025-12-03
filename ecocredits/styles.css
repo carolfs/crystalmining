@@ -287,16 +287,6 @@ button#ecocrd_continue, button#predresults_continue {
     top: 0
 }
 
-.tutorial {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    background-color: rgba(255, 255, 255, .8);
-    color: #000;
-    font-size: 25px;
-    padding: 15px
-}
-
 #feedback_screen {
     padding: 40px;
     font-size: 24px;
@@ -690,11 +680,11 @@ button.review-instructions {
 
 #crystal_collect table {
     margin: 30px auto 20px auto;
-    background-color: #b3cac7;
+/*     background-color: #b3cac7; */
 }
 
 #crystal_collect td {
-    color: #000;
+/*     color: #000; */
     text-align: right;
     font-size: 45px;
     font-weight: 400;
@@ -708,4 +698,38 @@ tr#predicted_daily_score {
 
 tr#predicted_daily_score td:first-child {
     font-size: 35px;
+}
+/* Base icon container */
+div.help {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 70px;
+    height: 70px;
+    overflow: hidden;
+    color: #191919;
+}
+
+/* Replace the visible content with the help icon */
+div.help::before {
+    content: "";
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 60px;
+    height: 60px;
+    background: url("img/help.png") no-repeat 0 0;
+    background-size: contain;
+    pointer-events: none; /* ensures hover still reaches the div */
+}
+
+/* Show content on hover, overlayed above all else */
+div.help:hover {
+    color: black;
+    z-index: 9999;     /* ensure it sits on top */
+    background: #ccc; /* optional for readability */
+    padding: 20px 80px 20px 20px;
+    width: 600px;
+    height: auto;
+    font-size: 24px;
 }
